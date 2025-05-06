@@ -5,138 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISU Dados | Método Ciclo VIS - Transformação Estratégica de Dados</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --azul-escuro: #032842;
-            --azul-claro: #209dc8;
-            --verde: #06db8b;
-            --fundo: #fffbed;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--fundo);
-            color: var(--azul-escuro);
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Header Moderno */
-        header {
-            background-color: white;
-            padding: 20px 5%;
-            position: fixed;
-            width: 90%;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        /* Seção Hero */
-        .hero {
-            padding: 180px 10% 100px;
-            text-align: center;
-            background: linear-gradient(to bottom, white 0%, var(--fundo) 100%);
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: var(--azul-escuro);
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        /* Seção Método VIS */
-        .metodo-section {
-            padding: 100px 10%;
-            background-color: white;
-        }
-
-        .ciclo-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 60px;
-        }
-
-        .etapa {
-            width: 30%;
-            padding: 30px;
-            border-radius: 15px;
-            background-color: var(--fundo);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .etapa h3 {
-            color: var(--azul-claro);
-            position: relative;
-            z-index: 2;
-        }
-
-        .etapa-numero {
-            position: absolute;
-            font-size: 5rem;
-            font-weight: 700;
-            color: rgba(3,40,66,0.05);
-            top: -20px;
-            right: 20px;
-            z-index: 1;
-        }
-
-        /* Seção Diferenciais */
-        .diferenciais {
-            padding: 100px 10%;
-            background-color: var(--fundo);
-        }
-
-        .diferencial-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-        }
-
-        /* Seção CTA */
-        .cta-section {
-            padding: 100px 10%;
-            text-align: center;
-            background-color: var(--azul-escuro);
-            color: white;
-        }
-
-        .cta-button {
-            background: var(--verde);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 30px;
-            transition: all 0.3s ease;
-        }
-    </style>
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <img src="logo-visu.png" alt="VISU Dados" class="logo">
-            <h2>VISU <span style="color: var(--verde);">•</span> Dados</h2>
+            <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+            <h2>VISU <span class="green-dot">•</span> Dados</h2>
         </div>
     </header>
 
@@ -207,9 +83,11 @@
             <p>Do diagnóstico à implementação, respeitamos seus processos e cultura organizacional.</p>
         </div>
     </section>
+        </div>
+    </section>
 
     <!-- Seção CTA -->
-    <section class="cta-section">
+    <section class="cta-section" id="contato">
         <h2>Pronto para transformar seus dados?</h2>
         <p>Agende uma consultoria gratuita de 30 minutos e receba um diagnóstico inicial do seu fluxo de dados.</p>
         <a href="#contato" class="cta-button">Quero meu diagnóstico</a>

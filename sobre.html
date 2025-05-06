@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISU Dados | Consultoria Boutique em Inteligência de Dados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .dna-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px auto;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        .dna-item {
+            margin-bottom: 30px;
+        }
+        .dna-icon {
+            color: var(--verde);
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header (Consistente com index.html) -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+                <h2>VISU <span class="green-dot">•</span> Dados</h2>
+            </div>
+    
+            <nav class="main-nav">
+                <ul class="header-links">
+                    <!-- Item simples -->
+                    <li>
+                        <a href="index.html" class="nav-link">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Dropdown para desktop (hidden em mobile) -->
+                    <li class="dropdown desktop-only">
+                        <a class="nav-link with-arrow" data-toggle="dropdown">
+                            <span>Serviços</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="servicos/automatizacao" class="dropdown-item">Automação de Planilhas</a></li>
+                            <li><a href="servicos/dashboards" class="dropdown-item">Dashboards em Power BI</a></li>
+                            <li><a href="servicos/etl" class="dropdown-item">Soluções ETL</a></li>
+                            <li><a href="servicos/consultoria" class="dropdown-item">Consultoria Estratégica</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Accordion para mobile (hidden em desktop) -->
+                    <li class="accordion mobile-only">
+                        <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                            <span>Serviços</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="collapse" id="servicosCollapse">
+                            <ul class="submenu">
+                                <li><a href="servicos/automatizacao" class="submenu-item">Automação</a></li>
+                                <li><a href="servicos/dashboards" class="submenu-item">Dashboards</a></li>
+                                <li><a href="servicos/etl" class="submenu-item">ETL</a></li>
+                                <li><a href="servicos/consultoria" class="submenu-item">Consultoria</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- Outros itens -->
+                    <li>
+                        <a href="sobre.html" class="nav-link">
+                            <span>Sobre Nós</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Segundo dropdown -->
+                    <li class="dropdown desktop-only">
+                        <a class="nav-link with-arrow" data-toggle="dropdown">
+                            <span>Tecnologias</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="tecnologias/python" class="dropdown-item">Python</a></li>
+                            <li><a href="tecnologias/powerbi" class="dropdown-item">Power BI</a></li>
+                            <li><a href="tecnologias/sql" class="dropdown-item">SQL</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="accordion mobile-only">
+                        <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                            <span>Tecnologias</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="collapse" id="tecnologiasCollapse">
+                            <ul class="submenu">
+                                <li><a href="tecnologias/python" class="submenu-item">Python</a></li>
+                                <li><a href="tecnologias/powerbi" class="submenu-item">Power BI</a></li>
+                                <li><a href="tecnologias/sql" class="submenu-item">SQL</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a href="contato.html" class="nav-link cta-link">
+                            <span>Contato</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Botão mobile -->
+            <button class="mobile-menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-claro) 100%); color: white;">
+        <h1 style="color: white;">Transformação estratégica de dados</h1>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem;">Visualizar. Idealizar. Solucionar.</p>
+    </section>
+
+    <!-- Seção DNA VISU -->
+    <section class="container">
+        <div class="dna-section">
+            <div class="dna-item">
+                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
+                    <span class="dna-icon">•</span> Nosso Posicionamento
+                </h3>
+                <p>Consultoria <strong>boutique</strong> em inteligência de dados que transforma tarefas manuais, construções morosas e planilhas complexas em soluções claras, automatizadas e estratégicas.</p>
+            </div>
+
+            <div class="dna-item">
+                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
+                    <span class="dna-icon">•</span> Metodologia Exclusiva
+                </h3>
+                <p>Aplicamos o <strong>Ciclo VIS</strong> para entender a dor do cliente, desenhar soluções inteligentes e entregar resultados com impacto real em 3 etapas:</p>
+                <ul style="margin-top: 15px; list-style-type: none;">
+                    <li style="margin-bottom: 10px;"><strong>VISUALIZAR:</strong> Diagnóstico preciso dos fluxos de dados</li>
+                    <li style="margin-bottom: 10px;"><strong>IDEALIZAR:</strong> Projeto customizado para seu negócio</li>
+                    <li><strong>SOLUCIONAR:</strong> Implementação com treinamento</li>
+                </ul>
+            </div>
+
+            <div class="dna-item">
+                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
+                    <span class="dna-icon">•</span> Como Entregamos Resultados
+                </h3>
+                <p>Atuamos com:</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: var(--fundo); padding: 15px; border-radius: 8px;">
+                        <strong>Automações em Python</strong>
+                        <p style="margin-top: 5px; font-size: 0.9rem;">Redução de tarefas repetitivas</p>
+                    </div>
+                    <div style="background: var(--fundo); padding: 15px; border-radius: 8px;">
+                        <strong>ETL e Power BI</strong>
+                        <p style="margin-top: 5px; font-size: 0.9rem;">Dashboards atualizados em tempo real</p>
+                    </div>
+                    <div style="background: var(--fundo); padding: 15px; border-radius: 8px;">
+                        <strong>Dados em Nuvem</strong>
+                        <p style="margin-top: 5px; font-size: 0.9rem;">Acesso seguro de qualquer lugar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Para Quem É -->
+    <section class="metodo-section" style="background-color: var(--fundo);">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 40px;">Para empresas que:</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="background: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <h3 style="color: var(--verde);">🕒 Perdem tempo</h3>
+                    <p>Com planilhas manuais e consolidação de dados</p>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <h3 style="color: var(--verde);">📊 Precisam de clareza</h3>
+                    <p>Para tomar decisões estratégicas com confiança</p>
+                </div>
+                <div style="background: white; padding: 25px; border-radius: 10px; text-align: center;">
+                    <h3 style="color: var(--verde);">🔄 Buscam eficiência</h3>
+                    <p>Em processos operacionais repetitivos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Igual ao index.html) -->
+</body>
+</html>
