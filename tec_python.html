@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISU Dados | Método Ciclo VIS - Transformação Estratégica de Dados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+            <div class="logo-container">
+                <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+                <h2>VISU <span class="green-dot">•</span> Dados</h2>
+            </div>
+            <nav class="main-nav">
+                <ul class="header-links">
+                    <!-- Item simples -->
+                    <li>
+                        <a href="index.html" class="nav-link">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Dropdown para desktop (hidden em mobile) -->
+                    <li class="dropdown desktop-only">
+                        <a class="nav-link with-arrow" data-toggle="dropdown">
+                            <span>Serviços</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                            <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
+                            <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
+                            <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Accordion para mobile (hidden em desktop) -->
+                    <li class="accordion mobile-only">
+                        <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                            <span>Serviços</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="collapse" id="servicosCollapse">
+                            <ul class="submenu">
+                                <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                                <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
+                                <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
+                                <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <!-- Outros itens -->
+                    <li>
+                        <a href="sobre.html" class="nav-link">
+                            <span>Sobre Nós</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Segundo dropdown -->
+                    <li class="dropdown desktop-only">
+                        <a class="nav-link with-arrow" data-toggle="dropdown">
+                            <span>Tecnologias</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
+                            <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
+                            <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="accordion mobile-only">
+                        <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                            <span>Tecnologias</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="collapse" id="tecnologiasCollapse">
+                            <ul class="submenu">
+                                <li><a href="tec_python.html" class="submenu-item">Python</a></li>
+                                <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
+                                <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <a href="contato.html" class="nav-link cta-link">
+                            <span>Contato</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Botão mobile -->
+            <button class="mobile-menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </header>
+<!-- Hero -->
+<section class="hero" style="background: var(--azul-escuro); text-align: center;">
+    <h1 style="color: white;">Por que Python muda o jogo</h1>
+    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem;">Python é uma linguagem que conecta sistemas, automatiza processos e transforma tarefas repetitivas em soluções inteligentes.</p>
+</section>
+
+<!-- Explicação sobre Python -->
+<section class="section-servico">
+    <h2>Uma tecnologia, infinitas possibilidades</h2>
+    <p>Python é hoje a linguagem mais usada no mundo para ciência de dados, automação e inteligência artificial. Mas ela não é apenas poderosa — ela é acessível, flexível e altamente adaptável ao dia a dia de pequenas e médias empresas.</p>
+    <p>Com Python, é possível:</p>
+    <ul style="margin-left: 20px;">
+    <li>Automatizar planilhas inteiras com velocidade e precisão</li>
+    <li>Conectar APIs e bancos de dados</li>
+    <li>Criar pipelines ETL robustos e reutilizáveis</li>
+    <li>Enviar relatórios automáticos por e-mail</li>
+    <li>Capturar dados da internet (scraping)</li>
+    </ul>
+</section>
+
+<!-- Aplicações na VISU -->
+<section class="section-servico" style="background: var(--cinza); border-radius: 12px;">
+    <h2>Como usamos Python na VISU Dados</h2>
+    <p>Python é o coração técnico das nossas soluções. A cada cliente, avaliamos o cenário e aplicamos a linguagem com propósito estratégico, dentro do nosso método exclusivo: o Ciclo VIS.</p>
+    <p>Em cada ciclo, Python é explorado para:</p>
+    <div class="cards-beneficios">
+    <div class="card-beneficio">
+        <h3>Ciclo VIS Leve</h3>
+        <p>Scripts para organizar planilhas, padronizar colunas e consolidar dados em poucos segundos.</p>
+    </div>
+    <div class="card-beneficio">
+        <h3>Ciclo VIS Intermediário</h3>
+        <p>Construção de fluxos ETL, automações entre sistemas e limpeza de dados com múltiplas fontes.</p>
+    </div>
+    <div class="card-beneficio">
+        <h3>Ciclo VIS Avançado</h3>
+        <p>Scraping, integrações com APIs, organização de pipelines em nuvem e envio de relatórios automáticos.</p>
+    </div>
+    </div>
+</section>
+
+<br>
+    <!--Seção para entrar em contato-->>
+    <section class="contato-section">
+        <h1>Vamos conversar?</h1>
+        <p>Se você deseja entender melhor como podemos transformar os dados da sua empresa em soluções estratégicas, entre em contato conosco:</p>
+        
+        <div class="contato-links">
+            <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
+            <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
+        </div>
+    </section>
+
+</body>
+</html>

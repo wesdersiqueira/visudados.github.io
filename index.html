@@ -14,7 +14,104 @@
             <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
             <h2>VISU <span class="green-dot">•</span> Dados</h2>
         </div>
-    </header>
+        <nav class="main-nav">
+            <ul class="header-links">
+                <!-- Item simples -->
+                <li>
+                    <a href="index.html" class="nav-link">
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <!-- Dropdown para desktop (hidden em mobile) -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Accordion para mobile (hidden em desktop) -->
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="servicosCollapse">
+                        <ul class="submenu">
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
+                            <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
+                            <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Outros itens -->
+                <li>
+                    <a href="sobre.html" class="nav-link">
+                        <span>Sobre Nós</span>
+                    </a>
+                </li>
+                
+                <!-- Segundo dropdown -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
+                        <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
+                        <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
+                    </ul>
+                </li>
+                
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="tecnologiasCollapse">
+                        <ul class="submenu">
+                            <li><a href="tec_python.html" class="submenu-item">Python</a></li>
+                            <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
+                            <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li>
+                    <a href="contato.html" class="nav-link cta-link">
+                        <span>Contato</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <!-- Botão mobile -->
+        <button class="mobile-menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+</header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -25,7 +122,7 @@
 
     <!-- Seção Método VIS -->
     <section class="metodo-section">
-        <h2 style="text-align: center;">O <span style="color: var(--verde);">Método Ciclo VIS</span></h2>
+        <h2 style="text-align: center;">O Método Ciclo<span style="color: var(--azul-claro);"> VIS</span></h2>
         <p style="text-align: center; max-width: 700px; margin: 0 auto 60px;">Um processo em 3 etapas para transformar seus dados em resultados mensuráveis</p>
         
         <div class="ciclo-container">
