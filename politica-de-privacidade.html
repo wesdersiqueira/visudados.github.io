@@ -53,6 +53,12 @@
             <li><a href="contato.html" class="nav-link cta-link">Contato</a></li>
         </ul>
         </nav>
+        <!-- Botão mobile -->
+        <button class="mobile-menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 <h1>Política de Privacidade – VISU Dados</h1>
 <p><strong>Última atualização:</strong> maio de 2025</p>
@@ -79,5 +85,17 @@
 <h3>Dúvidas?</h3>
 <p>📩 <a href="mailto:contato@visudados.com.br">contato@visudados.com.br</a><br>
     📍 Rua Visconde de Pirajá, 414 – sala 718 – Ipanema – RJ</p>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+    
+            toggleButton.addEventListener("click", () => {
+                nav.classList.toggle("active");
+                toggleButton.classList.toggle("active");
+            });
+        });
+    </script>
+
 </body>
 </html>

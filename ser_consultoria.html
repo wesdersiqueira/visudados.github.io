@@ -190,6 +190,17 @@
         <p style="text-align: center; font-size: 0.85rem;">
             © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
         </p>
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const toggleButton = document.querySelector(".mobile-menu-toggle");
+                const nav = document.querySelector(".main-nav");
+        
+                toggleButton.addEventListener("click", () => {
+                    nav.classList.toggle("active");
+                    toggleButton.classList.toggle("active");
+                });
+            });
+        </script>
+    
 </body>
 </html>
