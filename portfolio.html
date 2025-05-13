@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISU Dados | Portfólio Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+            <h2>VISU <span class="green-dot">•</span> Dados</h2>
+        </div>
+        <nav class="main-nav">
+            <ul class="header-links">
+                <!-- Item simples -->
+                <li>
+                    <a href="index.html" class="nav-link">
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+                <!-- Dropdown para desktop (hidden em mobile) -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Accordion para mobile (hidden em desktop) -->
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="servicosCollapse">
+                        <ul class="submenu">
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
+                            <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
+                            <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Outros itens -->
+                <li>
+                    <a href="sobre.html" class="nav-link">
+                        <span>Sobre Nós</span>
+                    </a>
+                </li>
+                
+                <!-- Segundo dropdown -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
+                        <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
+                        <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
+                    </ul>
+                </li>
+                
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="tecnologiasCollapse">
+                        <ul class="submenu">
+                            <li><a href="tec_python.html" class="submenu-item">Python</a></li>
+                            <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
+                            <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li>
+
+                <li>
+                    <a href="contato.html" class="nav-link cta-link">
+                        <span>Contato</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+                
+            </ul>
+        </nav>
+        
+        <button class="mobile-menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: var(--alerta-elegante); text-align: center;">
+        <h1>Portfólio VISU Dados</h1>
+        <p>Aplicações reais com mensuração de impacto utilizando o Método Ciclo VIS</p>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <main class="portfolio-container">
+        <div class="portfolio-intro">
+            <h2>Casos Reais Implementados</h2>
+            <p>Projetos testados em ambientes corporativos reais, com mensuração de impacto e uso das ferramentas que estruturam a proposta da VISU.</p>
+        </div>
+
+        <!-- Caso 1 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 1 - Automatização de relatórios financeiros</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Relatórios de CapEx e OpEx criados manualmente em Excel, com múltiplos PROCVs, suscetíveis a erros. Demandavam de <strong>1h30 a 3h por relatório</strong>, com revisão duplicada.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Criação de dashboards no Power BI com conexão ao SQL Server</li>
+                    <li>Scripts em Python para automatizar extração e transformação</li>
+                    <li>Aplicação do Ciclo VIS: diagnóstico → protótipo funcional → entrega final</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ Tempo reduzido de 3h para 5 minutos</span>
+                    <span class="impact-badge">📊 Geração automática de versões</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Automatização com Python</span>
+                    <span class="service-tag">Dashboards em Power BI</span>
+                    <span class="service-tag">ETL leve</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Intermediário</strong> - Integração de múltiplas fontes com dashboard refinado
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 2 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 2 - Consolidação de premissas no planejamento orçamentário</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>O time de controladoria precisava reunir dados de diversas áreas para montar cenários para Diretoria, com premissas inconsistentes.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Montagem de layouts personalizados para Resultados e Balanço</li>
+                    <li>Suporte técnico e estratégico na organização dos dados contábeis</li>
+                    <li>Aplicação do Ciclo VIS com foco em idealização colaborativa</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">🔄 Redução de retrabalho</span>
+                    <span class="impact-badge">📈 Melhoria na governança</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Integração com sistemas</span>
+                    <span class="service-tag">Organização de premissas</span>
+                    <span class="service-tag">Suporte a decisão</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Leve (com viés Intermediário)</strong> - Foco na padronização e clareza
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 3 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 3 - Monitoramento de dólar diário e impactos no fechamento contábil</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Relatório diário era preenchido manualmente com dados do Banco Central, sujeito a falhas e inconsistências nos fechamentos.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Criação de rotina automatizada com scraping e conexão web usando Python</li>
+                    <li>Relatório visual com DAX e Power Query para validação instantânea</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 15min para menos de 1min/dia</span>
+                    <span class="impact-badge">✅ Consistência garantida</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Automatização com Python</span>
+                    <span class="service-tag">Power Query</span>
+                    <span class="service-tag">Conformidade contábil</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Avançado</strong> - Uso de scraping de site externo e cálculos complexos
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 4 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 4 - Projeto estratégico de FP&A com indicadores críticos</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Falta de padronização e visão integrada de campanhas de vendas nas áreas do varejo.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Criação de 10+ dashboards no Power BI para monitoramento</li>
+                    <li>Modelagem em DAX com variáveis complexas</li>
+                    <li>Integração com Oracle, SharePoint e CSV</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">📈 48% mais adesão</span>
+                    <span class="impact-badge">🚀 Autonomia dos times</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Modelagem em Power BI</span>
+                    <span class="service-tag">KPIs estratégicos</span>
+                    <span class="service-tag">Identidade visual</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Avançado</strong> - Integração de múltiplas fontes e alto impacto estratégico
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 5 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 5 - Redução do tempo de lançamento de suprimentos</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Processo de lançamento de dados no sistema exigia retrabalho constante e gerava atrasos na consolidação de custos.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Padronização da extração de dados de suprimentos</li>
+                    <li>Automatização parcial com scripts de apoio</li>
+                    <li>Treinamento da equipe para input padronizado</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 30min para 1min</span>
+                    <span class="impact-badge">📊 Previsibilidade</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Organização de planilhas</span>
+                    <span class="service-tag">Modelo estruturado</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Leve</strong> - Foco na clareza e padronização operacional
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 6 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 6 - Dashboards para gestão orçamentária (CAPEX)</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Área de FP&A utilizava relatórios manuais para controle do CAPEX, com retrabalho e risco de erro nos valores.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Modelagem de dashboards no Power BI com três visões distintas</li>
+                    <li>Integração de dados via Power Query + filtros temporais</li>
+                    <li>Controle de versões</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 3h para 25min</span>
+                    <span class="impact-badge">📈 Confiabilidade</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Dashboards dinâmicos</span>
+                    <span class="service-tag">Automação com Power Query</span>
+                    <span class="service-tag">Identidade visual</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Intermediário</strong> - Integração de visões múltiplas
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 7 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 7 - Premissas de volume para planejamento</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Projeção de volume era feita com base em históricos desconectados e inputs subjetivos.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Consolidação de base histórica de consumo</li>
+                    <li>Estrutura de input padronizada para cenários</li>
+                    <li>Modelo de simulação simples com apoio visual</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 3h para 15min</span>
+                    <span class="impact-badge">🤝 Alinhamento entre áreas</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Organização de base</span>
+                    <span class="service-tag">Modelo de input</span>
+                    <span class="service-tag">Suporte à decisão</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Leve</strong> - Foco na idealização e clareza de inputs
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 8 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 8 - Transformação de razão contábil em relatórios visuais</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Relatórios gerados a partir do banco de dados não eram amigáveis e exigiam retrabalho para análises.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Script de transformação dos dados em Python</li>
+                    <li>Modelo de relatório dinâmico em Power BI</li>
+                    <li>Automatização de filtros e hierarquias</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 1h para 5min</span>
+                    <span class="impact-badge">📊 Acessibilidade</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">ETL com Python</span>
+                    <span class="service-tag">Power BI</span>
+                    <span class="service-tag">Hierarquia de contas</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Intermediário</strong> - Processamento técnico e visualização refinada
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 9 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 9 - Automatização do relatório de Dólar Diário</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Rotina de extração da cotação do dólar era feita manualmente no site do Banco Central.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Script de scraping com Python</li>
+                    <li>Integração com planilha contábil</li>
+                    <li>Log de execução diária</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 5min para 1min/dia</span>
+                    <span class="impact-badge">✅ Confiabilidade total</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Scraping com Python</span>
+                    <span class="service-tag">Integração de dados</span>
+                    <span class="service-tag">Suporte contábil</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Avançado</strong> - Uso de fontes externas e automação técnica
+                </div>
+            </div>
+        </div>
+
+        <!-- Caso 10 -->
+        <div class="case-card">
+            <div class="case-header">
+                <h2>🔹 Caso 10 - Relatório de Balanço ajustado</h2>
+            </div>
+            <div class="case-content">
+                <h3>Problema diagnosticado</h3>
+                <p>Relatório de balanço era ajustado manualmente no Excel com fórmulas frágeis, arriscando inconsistências.</p>
+                
+                <h3>Solução entregue</h3>
+                <ul>
+                    <li>Modelo estruturado de planilha com fórmulas bloqueadas</li>
+                    <li>Layout padronizado com validações</li>
+                </ul>
+                
+                <div>
+                    <span class="impact-badge">⏱️ De 25min para 1min</span>
+                    <span class="impact-badge">🛡️ Eliminação de erros</span>
+                </div>
+                
+                <h3>Serviços VISU aplicados</h3>
+                <div class="services-list">
+                    <span class="service-tag">Padronização</span>
+                    <span class="service-tag">Validação de dados</span>
+                </div>
+                
+                <div class="cycle-indicator">
+                    ➡️ <strong>Ciclo VIS Leve</strong> - Alto ganho em segurança e confiabilidade
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Casos Simulados -->
+        <section class="simulated-cases">
+            <div class="simulated-header">
+                <h2>Casos Simulados Estratégicos</h2>
+                <p>Estudos fictícios inspirados em problemas reais de mercado</p>
+            </div>
+            
+            <!-- Caso Simulado 1 -->
+            <div class="case-card simulated">
+                <div class="case-header">
+                    <h2 style="color: white;">📌 Clínica de Saúde - Automação de conciliação bancária</h2>
+                </div>
+                <div class="case-content">
+                    <h3>Problema diagnosticado</h3>
+                    <p>Equipe perdia até 10 horas semanais conciliando manualmente recebíveis e glosas. Fluxo de caixa desatualizado.</p>
+                    
+                    <h3>Solução entregue</h3>
+                    <ul>
+                        <li>Script Python com leitura de OFX e cruzamento com guias</li>
+                        <li>Dashboard com status de glosa no Power BI</li>
+                        <li>Alertas automáticos por e-mail</li>
+                    </ul>
+                    
+                    <div>
+                        <span class="impact-badge">⏱️ De 10h para 30min/semana</span>
+                        <span class="impact-badge">💰 Segurança financeira</span>
+                    </div>
+                    
+                    <h3>Serviços VISU aplicados</h3>
+                    <div class="services-list">
+                        <span class="service-tag">Scraping de arquivos</span>
+                        <span class="service-tag">Power BI</span>
+                        <span class="service-tag">Integração com Outlook</span>
+                    </div>
+                    
+                    <div class="cycle-indicator">
+                        ➡️ <strong>Ciclo VIS Avançado</strong> - Leitura de dados bancários e múltiplos formatos
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Caso Simulado 2 -->
+            <div class="case-card simulated">
+                <div class="case-header">
+                    <h2 style="color: white;">📌 Consultoria Jurídica - Apuração de horas e rentabilidade</h2>
+                </div>
+                <div class="case-content">
+                    <h3>Problema diagnosticado</h3>
+                    <p>Escritório apurava horas manualmente, sem visão clara da lucratividade por projeto.</p>
+                    
+                    <h3>Solução entregue</h3>
+                    <ul>
+                        <li>Dashboard integrado com dados de faturamento</li>
+                        <li>Sistema interno de registro de horas</li>
+                        <li>Visualização de margens por contrato</li>
+                    </ul>
+                    
+                    <div>
+                        <span class="impact-badge">👀 Visibilidade</span>
+                        <span class="impact-badge">📊 Base para decisões</span>
+                    </div>
+                    
+                    <h3>Serviços VISU aplicados</h3>
+                    <div class="services-list">
+                        <span class="service-tag">Estruturação de dados</span>
+                        <span class="service-tag">Visualização</span>
+                        <span class="service-tag">Suporte estratégico</span>
+                    </div>
+                    
+                    <div class="cycle-indicator">
+                        ➡️ <strong>Ciclo VIS Intermediário</strong> - Integra dados operacionais e contábeis
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Caso Simulado 3 -->
+            <div class="case-card simulated">
+                <div class="case-header">
+                    <h2 style="color: white;">📌 Escola Técnica - Evasão escolar e inadimplência</h2>
+                </div>
+                <div class="case-content">
+                    <h3>Problema diagnosticado</h3>
+                    <p>Diretoria enfrentava inadimplência crescente e evasão de alunos, sem ferramentas para intervenção.</p>
+                    
+                    <h3>Solução entregue</h3>
+                    <ul>
+                        <li>Relatório com alertas para mensalidades em risco</li>
+                        <li>Gráficos de taxa de evasão por turma</li>
+                        <li>Painel de inadimplência com filtros</li>
+                    </ul>
+                    
+                    <div>
+                        <span class="impact-badge">📉 12% menos evasão</span>
+                        <span class="impact-badge">💸 Recuperação de débitos</span>
+                    </div>
+                    
+                    <h3>Serviços VISU aplicados</h3>
+                    <div class="services-list">
+                        <span class="service-tag">Painel de indicadores</span>
+                        <span class="service-tag">Modelo visual</span>
+                        <span class="service-tag">ETL leve</span>
+                    </div>
+                    
+                    <div class="cycle-indicator">
+                        ➡️ <strong>Ciclo VIS Leve</strong> - Alta relevância estratégica
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Caso Simulado 4 -->
+            <div class="case-card simulated">
+                <div class="case-header">
+                    <h2 style="color: white;">📌 Varejo - Estoque e CRM desconectados</h2>
+                </div>
+                <div class="case-content">
+                    <h3>Problema diagnosticado</h3>
+                    <p>Vendas online geravam ruptura de estoque em lojas físicas. Dificuldade em cruzar comportamento de compra.</p>
+                    
+                    <h3>Solução entregue</h3>
+                    <ul>
+                        <li>Dashboards com giro de estoque por canal</li>
+                        <li>Alertas automáticos de ruptura</li>
+                        <li>Análise cruzada cliente x compra</li>
+                    </ul>
+                    
+                    <div>
+                        <span class="impact-badge">📦 30% menos perdas</span>
+                        <span class="impact-badge">🔄 Melhor reposição</span>
+                    </div>
+                    
+                    <h3>Serviços VISU aplicados</h3>
+                    <div class="services-list">
+                        <span class="service-tag">Integração multicanal</span>
+                        <span class="service-tag">Indicadores comerciais</span>
+                        <span class="service-tag">Comportamento do consumidor</span>
+                    </div>
+                    
+                    <div class="cycle-indicator">
+                        ➡️ <strong>Ciclo VIS Avançado</strong> - Alta complexidade e retorno direto
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Seção de Contato Padrão -->
+    <section class="contato-section">
+        <h1>Vamos conversar?</h1>
+        <p>Se você deseja entender melhor como podemos transformar os dados da sua empresa em soluções estratégicas, entre em contato conosco:</p>
+        
+        <div class="contato-links">
+            <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
+            <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- Footer Padrão -->
+    <footer>
+        <p style="text-align: center; font-size: 0.85rem;">
+            © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+    
+            toggleButton.addEventListener("click", () => {
+                nav.classList.toggle("active");
+                toggleButton.classList.toggle("active");
+            });
+            
+            // Destacar link ativo no menu
+            const currentPage = location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
