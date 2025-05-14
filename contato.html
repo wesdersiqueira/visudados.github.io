@@ -1,19 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-L8PV0HWVNS');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L8PV0HWVNS');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISU Dados | Contato</title>
+    <title>VISU Dados | Contato e Diagnóstico Gratuito</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
@@ -30,7 +28,6 @@ gtag('config', 'G-L8PV0HWVNS');
                 <li><a href="contato.html" class="nav-link active"><span>Contato</span></a></li>
             </ul>
         </nav>
-        <!-- Botão mobile -->
         <button class="mobile-menu-toggle" aria-label="Abrir menu">
             <span></span>
             <span></span>
@@ -38,23 +35,89 @@ gtag('config', 'G-L8PV0HWVNS');
         </button>
     </header>
 
-    <br>
-    <!--Seção para entrar em contato-->>
-    <section class="contato-section">
-        <h1>Vamos conversar?</h1>
-        <p>Se você deseja entender melhor como podemos transformar os dados da sua empresa em soluções estratégicas, entre em contato conosco:</p>
-        
-        <div class="contato-links">
-            <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
-            <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
-        </div>
+    <section class="hero" style="background: var(--fundo); text-align: center;">
+        <h1>Vamos transformar seus dados em resultados?</h1>
+            <p>Agende uma consultoria gratuita de 30 minutos ou envie sua dúvida:</p>
     </section>
-        <!-- Footer -->
-        <p style="text-align: center; font-size: 0.85rem;">
+
+    <!-- Seção de Contato Aprimorada -->
+    <main>
+        <section class="contato-section">
+            
+            <div class="lead-form-container">
+                <div class="form-header">
+                    <h2>📈 Diagnóstico Gratuito</h2>
+                    <p>Identificamos oportunidades de automação para seu negócio</p>
+                </div>
+                
+                <form id="contactForm" action="https://formsubmit.co/contato@visudados.com.br" method="POST">
+                    <input type="hidden" name="_subject" value="Novo Lead - Contato VISU">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" value="https://visudados.com.br/obrigado.html?source=contato">
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <div class="form-group">
+                        <label for="name">Nome Completo*</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail Corporativo*</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">WhatsApp (com DDD)</label>
+                        <input type="tel" id="phone" name="phone" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Serviço de Interesse</label>
+                        <select id="service" name="service" class="form-control">
+                            <option value="">Selecione...</option>
+                            <option value="automatizacao">Automação de Planilhas</option>
+                            <option value="dashboards">Dashboards em Power BI</option>
+                            <option value="etl">Soluções ETL</option>
+                            <option value="consultoria">Consultoria Estratégica</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Descreva seu desafio*</label>
+                        <textarea id="message" name="message" rows="4" class="form-control" required placeholder="Ex.: Preciso automatizar relatórios financeiros que hoje levam 3h/dia..."></textarea>
+                    </div>
+                    
+                    <div class="value-proposition">
+                        <p><strong>O que você recebe:</strong></p>
+                        <ul>
+                            <li>Análise personalizada do seu cenário atual</li>
+                            <li>Sugestão de soluções aplicáveis</li>
+                            <li>Estimativa de economia de tempo</li>
+                        </ul>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Solicitar Diagnóstico Gratuito</button>
+                </form>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <h3>Ou fale conosco diretamente:</h3>
+                <div class="contato-links">
+                    <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
+                    <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; margin-top: 3rem; background: #f8f9fa;">
+        <p style="font-size: 0.85rem;">
             © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
         </p>
+    </footer>
 
-    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.querySelector(".mobile-menu-toggle");
@@ -64,8 +127,17 @@ gtag('config', 'G-L8PV0HWVNS');
                 nav.classList.toggle("active");
                 toggleButton.classList.toggle("active");
             });
+            
+            // Tracking de conversão
+            const form = document.getElementById('contactForm');
+            if(form) {
+                form.addEventListener('submit', function() {
+                    gtag('event', 'conversion', {
+                        'send_to': 'G-L8PV0HWVNS/contact_form_submit'
+                    });
+                });
+            }
         });
     </script>
-
 </body>
 </html>
