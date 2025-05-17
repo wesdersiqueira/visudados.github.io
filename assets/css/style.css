@@ -35,14 +35,13 @@ body {
 
 /* HEADER */
 header {
-    background-color: white;
-    padding: 20px 5%;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    background: var(--blur-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.3s ease;
+    box-shadow: var(--sombra-parallax);
 }
+
 .logo-container {
     display: flex;
     align-items: center;
@@ -706,4 +705,49 @@ nav a.active::after {
     border-left: 4px solid #27ae60;
     padding: 1rem;
     margin: 1.5rem 0;
+}
+
+:root {
+    --parallax-fundo: linear-gradient(to bottom, #fffbed 0%, #e0f7fa 100%);
+    --blur-glass: rgba(255, 255, 255, 0.6);
+    --sombra-parallax: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Cards flutuantes */
+
+.case-card, .diferencial-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.case-card:hover, .diferencial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+}
+
+.form-control:focus {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    outline: none;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--verde), var(--azul-claro));
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    }
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+} 
+
+.mobile-menu-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+}
+
+.main-nav {
+    padding-top: 20px; /* espaço para o botão X */
 }
