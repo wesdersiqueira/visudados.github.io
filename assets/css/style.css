@@ -811,4 +811,46 @@ color: white;
 66%  { background-image: url('../img/visu3.jpg'); }
 100% { background-image: url('../img/visu1.jpg'); }
 }
-  
+
+.agenda-visu {
+    background: var(--verde);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(6, 219, 139, 0.3);
+transition: all 0.3s ease;
+}
+
+.agenda-visu:hover {
+background: var(--azul-claro);
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(6, 219, 139, 0.4);
+}
+
+.hero-slideshow-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--azul-claro);
+    height: 2em;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+}
+
+.slide-palavra::after {
+    content: "Planilhas em insights"; /* fallback inicial */
+    animation: slidePalavras 9s infinite;
+    display: inline-block;
+    position: relative; /* era absolute */
+}
+
+@keyframes slidePalavras {
+0%    { content: "Planilhas em insights"; }
+33%   { content: "Dados soltos em decisões"; }
+66%   { content: "Tarefas manuais em automações"; }
+100%  { content: "Planilhas em insights"; }
+}
