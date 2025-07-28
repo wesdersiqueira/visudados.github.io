@@ -225,5 +225,55 @@ gtag('config', 'G-L8PV0HWVNS');
             });
         });
     </script>
+    <!-- Aviso LGPD -->
+    <p style="text-align: center; font-size: 0.85rem;">
+        © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a><br>
+        <span style="font-size: 0.75rem; color: gray;">
+            Ao continuar com o Google, você autoriza a VISU Dados a coletar seu e-mail, cidade e país para fins de contato profissional.
+        </span>
+    </p>
+
+    <!-- Script do Login Google One Tap embutido -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "620876019035-raf7jk3m2ohtofugl5iq9cghdhfokk21.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.prompt();
+        };
+
+        function handleCredentialResponse(response) {
+            const token = response.credential;
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            const email = JSON.parse(jsonPayload).email;
+
+            fetch("https://ipinfo.io/json?token=8e6b18d163379f")
+                .then(res => res.json())
+                .then(local => {
+                    const cidade = local.city || "N/A";
+                    const pais = local.country || "N/A";
+
+                    fetch("https://script.google.com/macros/s/AKfycbxU0TNr7r4Qyng7c_6dzmEs6zlFOjtq34FJKPHu4Z38ZPaQY3NhqCV4YEz75V-vMhS9/exec", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            email: email,
+                            cidade: cidade,
+                            pais: pais,
+                            token: "visu123"
+                        })
+                    })
+                        .then(response => response.text())
+                        .then(text => console.log("Lead enviado:", text))
+                        .catch(error => console.error("Erro ao enviar:", error));
+                });
+        }
+    </script>
 </body>
 </html>
