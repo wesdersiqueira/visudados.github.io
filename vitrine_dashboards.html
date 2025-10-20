@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VISU Dados — Portfólio Interativo</title>
+<meta name="description" content="Portfólio-vitrine interativo da VISU Dados: protótipos navegáveis e dashboards reais (Power BI e Looker)." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --visu-navy:#032842;
+    --visu-blue-1:#209dc8; /* 20% opacidade será aplicada via rgba */
+    --visu-blue-2:#1b96db;
+    --visu-green:#06db8b;
+    --visu-warm:#fffbed;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; background:var(--visu-warm); color:var(--visu-navy)}
+a{color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,251,237,.85);backdrop-filter:saturate(180%) blur(6px);border-bottom:1px solid rgba(3,40,66,.08)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px}
+.brand .dot{color:var(--visu-green)}
+.nav{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(3,40,66,.12);padding:10px 14px;border-radius:12px;background:#fff;cursor:pointer;text-decoration:none;font-weight:500;transition:.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(3,40,66,.08)}
+.btn.primary{border-color:transparent;background:var(--visu-navy);color:#fff}
+.btn.ghost{background:transparent}
+.hero{position:relative;overflow:hidden;border-radius:20px;padding:36px;background:linear-gradient(135deg, rgba(32,157,200,.18), rgba(27,150,219,.12));border:1px solid rgba(3,40,66,.08)}
+.hero h1{margin:0 0 10px;font-size:clamp(26px,3.2vw,40px)}
+.hero p{margin:0 0 18px;max-width:800px;color:rgba(3,40,66,.8)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{font-size:12px;border:1px solid rgba(3,40,66,.15);padding:6px 10px;border-radius:999px;background:#fff}
+.filters{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;align-items:end;margin:22px 0}
+.field{display:flex;flex-direction:column;gap:6px}
+label{font-size:12px;color:rgba(3,40,66,.8)}
+input[type="search"], select{width:100%;border:1px solid rgba(3,40,66,.18);border-radius:12px;padding:12px 14px;background:#fff;color:var(--visu-navy)}
+.checks{display:flex;gap:10px;flex-wrap:wrap}
+.check{display:flex;gap:6px;align-items:center;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{grid-column:span 12; background:#fff;border:1px solid rgba(3,40,66,.08);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;transition:.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(3,40,66,.12)}
+.thumb{aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg, rgba(27,150,219,.16), rgba(32,157,200,.10));display:flex;align-items:center;justify-content:center;color:rgba(3,40,66,.6);font-weight:600;font-size:14px;border:1px dashed rgba(3,40,66,.2)}
+.badge{font-size:11px;padding:6px 10px;border-radius:999px;background:rgba(3,40,66,.06);border:1px solid rgba(3,40,66,.12);font-weight:600}
+.badge.proto{background:rgba(6,219,139,.10);border-color:rgba(6,219,139,.3)}
+.badge.pbi{background:rgba(3,40,66,.10);border-color:rgba(3,40,66,.22)}
+.badge.looker{background:rgba(32,157,200,.12);border-color:rgba(32,157,200,.34)}
+.card h3{margin:0;font-size:18px}
+.meta{display:flex;gap:8px;flex-wrap:wrap}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.btn.sm{padding:8px 12px;border-radius:10px;font-size:14px}
+footer{margin:36px auto 18px;color:rgba(3,40,66,.65);font-size:13px;text-align:center}
+@media (min-width:640px){.card{grid-column:span 6}}
+@media (min-width:1024px){.card{grid-column:span 4}}
+</style>
+</head>
+<body>
+<header>
+<div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+    <div class="brand" aria-label="VISU Dados">
+    <span style="font-size:20px">VIS<span class="dot">•</span>U <span style="font-weight:600;color:rgba(27,150,219,1)">Dados</span></span>
+    <span style="font-size:12px;font-weight:500;color:rgba(3,40,66,.6);margin-left:6px">Visualizar. Idealizar. Solucionar.</span>
+    </div>
+    <nav class="nav">
+    <a class="btn ghost" href="#catalogo">Catálogo</a>
+    <a class="btn ghost" href="#prototipos">Protótipos</a>
+    <a class="btn ghost" href="#reais">Dashboards Reais</a>
+    <a class="btn primary" id="ctaButton" href="#contato">Solicitar orçamento</a>
+    </nav>
+</div>
+</header>
+
+<main class="container">
+<section class="hero" aria-labelledby="herotitle">
+    <h1 id="herotitle">Vitrine Interativa — VISU Dados</h1>
+    <p>Explore <strong>protótipos navegáveis</strong> (média fidelidade) e <strong>dashboards reais</strong> (Power BI / Looker). Esta vitrine ajuda você a escolher o modelo ideal para sua empresa — e nós adaptamos tudo à sua realidade.</p>
+    <div class="chips" role="list" aria-label="Áreas atendidas">
+    <span class="chip">Financeiro</span>
+    <span class="chip">Vendas & Operações</span>
+    <span class="chip">Construção Civil</span>
+    <span class="chip">Saúde</span>
+    <span class="chip">Educação</span>
+    <span class="chip">Serviços & Escritórios</span>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:18px">
+    <a class="btn primary" href="#prototipos">Ver Protótipos</a>
+    <a class="btn" href="#reais">Ver Dashboards Reais</a>
+    </div>
+</section>
+
+<section id="catalogo" aria-labelledby="catalogotitle" style="margin-top:28px">
+    <h2 id="catalogotitle" style="margin:0 0 6px">Catálogo de Modelos</h2>
+    <p style="margin:0 0 10px;color:rgba(3,40,66,.7)">Filtre por categoria, tipo e pesquise por nome/descrição.</p>
+
+    <div class="filters">
+    <div class="field">
+        <label for="q">Pesquisar</label>
+        <input id="q" type="search" placeholder="Ex.: Vendas, Custos, SLA..." />
+    </div>
+    <div class="field">
+        <label for="cat">Categoria</label>
+        <select id="cat">
+        <option value="">Todas</option>
+        <option>Financeiro</option>
+        <option>Vendas & Operações</option>
+        <option>Construção Civil</option>
+        <option>Saúde</option>
+        <option>Educação</option>
+        <option>Serviços & Escritórios</option>
+        </select>
+    </div>
+    <div class="field">
+        <label>Tipo</label>
+        <div class="checks">
+        <label class="check"><input type="checkbox" value="protótipo" class="typecheck" checked> Protótipo</label>
+        <label class="check"><input type="checkbox" value="powerbi" class="typecheck" checked> Power BI</label>
+        <label class="check"><input type="checkbox" value="looker" class="typecheck" checked> Looker</label>
+        </div>
+    </div>
+    </div>
+
+    <div class="grid" id="grid" role="list"></div>
+</section>
+
+<section id="prototipos" aria-labelledby="prottitle" style="margin-top:34px">
+    <h2 id="prottitle" style="margin:0 0 6px">Protótipos Navegáveis (Média Fidelidade)</h2>
+    <p style="margin:0 0 12px;color:rgba(3,40,66,.7)">Experiência visual clicável (Figma / Framer / Notion). Ideal para explorar layouts e storytelling antes da implementação.</p>
+    <div class="grid" id="grid-protos"></div>
+</section>
+
+<section id="reais" aria-labelledby="realstitle" style="margin-top:34px">
+    <h2 id="realstitle" style="margin:0 0 6px">Dashboards Reais (Power BI & Looker)</h2>
+    <p style="margin:0 0 12px;color:rgba(3,40,66,.7)">Modelos publicados para demonstração. Alguns exigem abertura em nova aba.</p>
+    <div class="grid" id="grid-reais"></div>
+</section>
+
+<section id="contato" aria-labelledby="ctatitle" style="margin-top:40px">
+    <h2 id="ctatitle" style="margin:0 0 8px">Pronto para escolher seu dashboard?</h2>
+    <p style="margin:0 16px 16px 0;max-width:800px">Conte qual modelo chamou sua atenção. Adaptamos o visual, as métricas e integramos aos seus dados (Excel, ERP, SQL, SharePoint etc.).</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a class="btn primary" target="_blank" rel="noopener" href="https://forms.gle/SEU_FORM">Solicitar orçamento</a>
+    <a class="btn" target="_blank" rel="noopener" href="mailto:contato@visudados.com.br">Falar por e-mail</a>
+    <a class="btn" target="_blank" rel="noopener" href="https://wa.me/5521SEUNUMERO?text=Olá%20VISU!%20Quero%20um%20dashboard.">WhatsApp</a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">© <span id="year"></span> VISU Dados — Ipanema, RJ · CNPJ 60.663.084/0001‑75</div>
+</footer>
+
+<script>
+// ===== Dados do Catálogo (edite aqui) =====
+const MODELOS = [
+// Protótipos (média fidelidade)
+{id:'m1', tipo:'protótipo', categoria:'Financeiro', titulo:'DRE & Fluxo de Caixa', desc:'Visão mensal por centro de custo, caixa e projeções.', link:'https://figma.com/file/SEU_LINK', thumb:'DRE & Fluxo'},
+{id:'m2', tipo:'protótipo', categoria:'Vendas & Operações', titulo:'Vendas x Meta por Canal', desc:'KPIs por vendedor, ticket médio e funil.', link:'https://figma.com/file/SEU_LINK', thumb:'Vendas x Meta'},
+{id:'m3', tipo:'protótipo', categoria:'Construção Civil', titulo:'Custos por Obra', desc:'Medições, cronograma físico-financeiro e margem.', link:'https://figma.com/file/SEU_LINK', thumb:'Obras & Custos'},
+{id:'m4', tipo:'protótipo', categoria:'Saúde', titulo:'Recebíveis & Glosas', desc:'Conciliação e alertas de inadimplência.', link:'https://figma.com/file/SEU_LINK', thumb:'Financeiro Saúde'},
+{id:'m5', tipo:'protótipo', categoria:'Educação', titulo:'Inadimplência & Evasão', desc:'Dados de mensalidades e permanência.', link:'https://figma.com/file/SEU_LINK', thumb:'Educação'},
+{id:'m6', tipo:'protótipo', categoria:'Serviços & Escritórios', titulo:'Rentabilidade por Cliente', desc:'Horas x faturamento por projeto.', link:'https://figma.com/file/SEU_LINK', thumb:'Rentabilidade'},
+
+// Reais — Power BI (substitua pelos seus links públicos)
+{id:'r1', tipo:'powerbi', categoria:'Vendas & Operações', titulo:'Comercial — Pipeline & Conversão', desc:'Análise do funil e SLA de resposta.', link:'https://app.powerbi.com/view?r=SEU_TOKEN', thumb:'Power BI — Comercial'},
+{id:'r2', tipo:'powerbi', categoria:'Financeiro', titulo:'Financeiro — Receitas e Despesas', desc:'Consolidação mensal com DAX e KPIs.', link:'https://app.powerbi.com/view?r=SEU_TOKEN', thumb:'Power BI — Financeiro'},
+
+// Reais — Looker Studio
+{id:'l1', tipo:'looker', categoria:'Vendas & Operações', titulo:'Looker — Performance de Canais', desc:'Conversões por fonte e ROAS.', link:'https://lookerstudio.google.com/reporting/SEU_ID', thumb:'Looker — Canais'}
+];
+
+// ===== Utilidades =====
+const el = sel => document.querySelector(sel);
+const elAll = sel => Array.from(document.querySelectorAll(sel));
+const grid = el('#grid');
+const gridProtos = el('#grid-protos');
+const gridReais = el('#grid-reais');
+
+function badgeFor(tipo){
+const map = {
+    'protótipo': {cls:'proto', text:'Protótipo'},
+    'powerbi': {cls:'pbi', text:'Power BI'},
+    'looker': {cls:'looker', text:'Looker Studio'}
+};
+return map[tipo] || {cls:'', text:tipo};
+}
+
+function card(modelo){
+const b = badgeFor(modelo.tipo);
+const tag = `<span class="badge ${b.cls}" title="${b.text}">${b.text}</span>`;
+return `<article class="card" role="listitem">
+    <div class="thumb" aria-label="miniatura">${modelo.thumb || 'Preview 16:9'}</div>
+    <div class="meta">${tag}<span class="badge">${modelo.categoria}</span></div>
+    <h3>${modelo.titulo}</h3>
+    <p style="margin:0;color:rgba(3,40,66,.75)">${modelo.desc}</p>
+    <div class="actions">
+    <a class="btn sm" href="${modelo.link}" target="_blank" rel="noopener">Abrir</a>
+    <button class="btn sm" aria-label="copiar link" onclick="copyLink('${modelo.link}')">Copiar link</button>
+    </div>
+</article>`;
+}
+
+function render(list, mount){
+mount.innerHTML = list.map(card).join('');
+}
+
+// Render inicial
+render(MODELOS, grid);
+render(MODELOS.filter(m=>m.tipo==='protótipo'), gridProtos);
+render(MODELOS.filter(m=>m.tipo!=='protótipo'), gridReais);
+
+// Filtros do Catálogo
+const q = el('#q');
+const cat = el('#cat');
+const typeChecks = elAll('.typecheck');
+
+function applyFilters(){
+const text = (q.value||'').toLowerCase();
+const category = cat.value;
+const types = new Set(typeChecks.filter(c=>c.checked).map(c=>c.value));
+
+const filtered = MODELOS.filter(m => {
+    const byType = types.has(m.tipo);
+    const byCat = !category || m.categoria === category;
+    const hay = `${m.titulo} ${m.desc} ${m.categoria} ${m.tipo}`.toLowerCase();
+    const byText = !text || hay.includes(text);
+    return byType && byCat && byText;
+});
+
+render(filtered, grid);
+}
+
+q.addEventListener('input', applyFilters);
+cat.addEventListener('change', applyFilters);
+typeChecks.forEach(c => c.addEventListener('change', applyFilters));
+
+// Util: copiar link
+async function copyLink(url){
+try{
+    await navigator.clipboard.writeText(url);
+    toast('Link copiado!');
+}catch(e){ alert('Copie este link: '+url); }
+}
+
+// Toast simples
+const toastBox = document.createElement('div');
+toastBox.style.position='fixed';
+toastBox.style.inset='auto 0 22px 0';
+toastBox.style.display='grid';
+toastBox.style.placeItems='center';
+toastBox.style.pointerEvents='none';
+document.body.appendChild(toastBox);
+
+function toast(msg){
+const t = document.createElement('div');
+t.textContent = msg;
+t.style.background = 'var(--visu-navy)';
+t.style.color = '#fff';
+t.style.padding='10px 14px';
+t.style.borderRadius='12px';
+t.style.boxShadow='0 10px 24px rgba(3,40,66,.24)';
+t.style.pointerEvents='auto';
+t.style.fontWeight='600';
+toastBox.appendChild(t);
+setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .4s'; }, 1400);
+setTimeout(()=> t.remove(), 2000);
+}
+
+// Ano rodapé
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
