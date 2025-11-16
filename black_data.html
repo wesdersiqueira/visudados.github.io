@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);} gtag('js', new Date());
+        gtag('config', 'G-L8PV0HWVNS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Data Week | VISU Dados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Inclui o mesmo arquivo de estilos utilizado em outras páginas da VISU -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Estilos específicos para os cards de promoções da Black Data Week -->
+    <style>
+        .campanhas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            padding: 3rem 2rem;
+            background: var(--azul-escuro);
+        }
+        .campanha {
+            border: 1px solid var(--verde);
+            border-radius: 12px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .campanha h3 {
+            color: var(--verde);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+        .campanha p {
+            font-size: 0.95rem;
+            color: var(--fundo);
+            line-height: 1.5;
+        }
+        @media (max-width: 600px) {
+            .campanhas {
+                padding: 2rem 1rem;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body style="background: black;">
+    <!-- Header idêntico ao da página de contato -->
+    <header style="background: var(--fundo);">
+        <div class="logo-container">
+            <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+            <h2>VISU <span class="green-dot">•</span> Dados</h2>
+        </div>
+        <nav class="main-nav">
+            <ul class="header-links">
+                <!-- Item simples -->
+                <li><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                <!-- Dropdown para desktop (hidden em mobile) -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                    </ul>
+                </li>
+                <!-- Accordion para mobile (hidden em desktop) -->
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="servicosCollapse">
+                        <ul class="submenu">
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
+                            <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
+                            <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- Outros itens -->
+                <li><a href="sobre.html" class="nav-link"><span>Sobre Nós</span></a></li>
+                <!-- Segundo dropdown -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
+                        <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
+                        <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
+                    </ul>
+                </li>
+                <!-- Accordion para mobile (hidden em desktop) -->
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="tecnologiasCollapse">
+                        <ul class="submenu">
+                            <li><a href="tec_python.html" class="submenu-item">Python</a></li>
+                            <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
+                            <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
+                <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li>
+                <!-- Link de contato como CTA -->
+                <li><a href="contato.html" class="nav-link cta-link"><span>Contato</span></a></li>
+            </ul>
+        </nav>
+        <!-- Botão mobile -->
+        <button class="mobile-menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Hero adaptado para a Black Data Week -->
+    <section class="hero" style="background: linear-gradient(180deg, #000, #032842); text-align: center; color: white;">
+        <h1 style="color: var(--verde); font-size: 2.6rem; margin-bottom: 1rem;">Black Data Week VISU</h1>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 1.5rem;">A semana em que dados ganham vida. De 18 a 29 de novembro.</p>
+        <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem;">Descontos de até 50% em Ciclos VIS Leve para transformar suas planilhas em dashboards automatizados.</p>
+        <a href="#formulario" class="agenda-visu">Quero meu desconto</a>
+    </section>
+
+    <!-- Cards de promoções antes do formulário -->
+    <section class="campanhas">
+        <div class="campanha">
+            <h3>Menos Planilha, Mais Clareza</h3>
+            <p>Transforme suas planilhas caóticas em dashboards claros e automatizados. 50% de desconto em qualquer Ciclo VIS Leve.</p>
+        </div>
+        <div class="campanha">
+            <h3>Black Data Experience</h3>
+            <p>Ciclo VIS Leve entregue em 7 dias úteis, com relatório de impacto e 1 mês de manutenção grátis.</p>
+        </div>
+        <div class="campanha">
+            <h3>Upgrade Sem Custo</h3>
+            <p>Feche 2 Ciclos VIS Leves e ganhe um upgrade gratuito no segundo pacote (automação ou dashboard adicional).</p>
+        </div>
+        <div class="campanha">
+            <h3>Ciclo VIS em Dobro</h3>
+            <p>Contrate um Ciclo VIS e ganhe 50% de desconto no próximo. Ideal para quem quer continuar evoluindo com dados.</p>
+        </div>
+    </section>
+
+    <!-- Seção de formulário adaptada -->
+    <section class="contato-section" style="background: black;">
+        <div class="lead-form-container" id="formulario">
+            <div class="form-header">
+                <h2>Garanta sua condição especial da Black Data Week</h2>
+                <p>Preencha o formulário e receba seu desconto exclusivo.</p>
+            </div>
+            <form id="blackDataForm" action="https://formsubmit.co/blackdata@visudados.com.br" method="POST">
+                <!-- Campos ocultos para rastreamento da campanha -->
+                <input type="hidden" name="_subject" value="Novo Lead - Black Data Week VISU">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://visudados.com.br/obrigado.html?source=blackdata">
+                <input type="hidden" name="campanha" value="Black Data Week 2025">
+                <input type="hidden" name="oferta" value="Ciclo VIS Leve 50% OFF">
+                <input type="text" name="_honey" style="display:none">
+                <!-- Campos visíveis -->
+                <div class="form-group">
+                    <label for="name">Nome Completo*</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail Corporativo*</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="empresa">Nome da Empresa*</label>
+                    <input type="text" id="empresa" name="empresa" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="porte">Porte da Empresa</label>
+                    <select id="porte" name="porte" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="pequena">Pequena (até 20 colaboradores)</option>
+                        <option value="media">Média (21–100 colaboradores)</option>
+                        <option value="grande">Grande (100+ colaboradores)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interesse">Qual campanha te interessou mais?</label>
+                    <select id="interesse" name="interesse" class="form-control">
+                        <option value="">Selecione...</option>
+                        <option value="menos-planilha">Menos Planilha, Mais Clareza</option>
+                        <option value="black-experience">Black Data Experience</option>
+                        <option value="upgrade-sem-custo">Upgrade Sem Custo</option>
+                        <option value="ciclo-em-dobro">Ciclo VIS em Dobro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Descreva brevemente sua necessidade</label>
+                    <textarea id="mensagem" name="mensagem" rows="4" class="form-control" placeholder="Ex.: Quero automatizar relatórios financeiros e dashboards."></textarea>
+                </div>
+                <div class="value-proposition">
+                    <p><strong>O que você garante:</strong></p>
+                    <ul>
+                        <li>Link de desconto especial para Ciclo VIS Leve</li>
+                        <li>Análise rápida do seu cenário de dados</li>
+                        <li>Recomendações personalizadas</li>
+                    </ul>
+                </div>
+                <button type="submit" class="btn-primary">Enviar e Garantir Desconto</button>
+            </form>
+        </div>
+        <!-- Contato direto como no padrão VISU -->
+        <div style="text-align: center; margin-top: 2rem;">
+            <h3>Ou fale conosco diretamente:</h3>
+            <div class="contato-links">
+                <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
+                <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
+                <a href="https://www.instagram.com/visudados/" target="_blank">🔗 Acompanhar no Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção CTA para PDF gratuito -->
+    <section class="cta-section" id="contato">
+        <h2>Baixe nosso PDF gratuito</h2>
+        <p>Faça um check de como está sua operação hoje.</p>
+        <a href="pdf_gratuito.html" class="cta-button">Quero meu PDF</a>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem 0; margin-top: 3rem; background: #f8f9fa;">
+        <p style="font-size: 0.85rem;">© 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a></p>
+    </footer>
+
+    <!-- Script para menu mobile e tracking -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+            toggleButton.addEventListener("click", () => {
+                nav.classList.toggle("active");
+                toggleButton.classList.toggle("active");
+            });
+            // Tracking de conversão para a Black Data Week
+            const form = document.getElementById('blackDataForm');
+            if(form) {
+                form.addEventListener('submit', function() {
+                    gtag('event', 'conversion', {
+                        'send_to': 'G-L8PV0HWVNS/black_data_form_submit'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
