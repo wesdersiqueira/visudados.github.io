@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L8PV0HWVNS');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VISU Dados | Configurar Ciclo VIS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+
+  <style>
+    /* ====== Extras locais (não mexe no style.css) ====== */
+    main { padding: 120px 0 80px; }
+
+    .page-wrap {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-mini {
+      background: linear-gradient(180deg, #ffffff 0%, var(--fundo) 100%);
+      border-radius: 18px;
+      padding: 42px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 1px solid rgba(3,40,66,0.06);
+    }
+
+    .hero-mini h1 {
+      margin: 0 0 10px;
+      font-size: 2.1rem;
+      line-height: 1.15;
+    }
+
+    .hero-mini p {
+      margin: 0;
+      color: var(--texto-secundario);
+      max-width: 780px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(3,40,66,0.05);
+      font-size: 0.95rem;
+      color: var(--azul-escuro);
+      border: 1px solid rgba(3,40,66,0.08);
+    }
+
+    .section-title {
+      margin: 34px 0 14px;
+      font-size: 1.35rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(3,40,66,0.08);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.04);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+
+    .card.selected {
+      border-color: rgba(6,219,139,0.9);
+      box-shadow: 0 16px 36px rgba(6,219,139,0.12);
+    }
+
+    .card h3 { margin: 0 0 6px; color: var(--azul-escuro); }
+    .card p { margin: 0 0 12px; color: var(--texto-secundario); }
+
+    /* Preço é exibido apenas no resumo final (Etapa 5) */
+    .price { display: none !important; }
+
+    .mini-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--azul-escuro);
+    }
+
+    .mini-list li { margin: 6px 0; }
+
+    .card-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(3,40,66,0.12);
+      background: white;
+      color: var(--azul-escuro);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.06); }
+
+    .btn-primary {
+      border: none;
+      background: linear-gradient(135deg, var(--verde), var(--azul-claro));
+      color: white;
+    }
+
+    .btn-ghost {
+      background: rgba(3,40,66,0.04);
+      border: 1px solid rgba(3,40,66,0.08);
+    }
+
+    .wizard {
+      margin-top: 18px;
+      background: white;
+      border-radius: 18px;
+      border: 1px solid rgba(3,40,66,0.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .wizard-top {
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid rgba(3,40,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .wizard-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .wizard-title strong { font-size: 1.05rem; }
+    .wizard-title span { font-size: 0.95rem; color: var(--texto-secundario); }
+
+    .progress {
+      flex: 1;
+      min-width: 220px;
+      height: 10px;
+      background: rgba(3,40,66,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-left: auto;
+      max-width: 380px;
+    }
+
+    .progress > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--azul-claro), var(--verde));
+      transition: width .25s ease;
+    }
+
+    .wizard-body { padding: 18px; }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .step h4 { margin: 0 0 8px; font-size: 1.1rem; }
+    .step p { margin: 0 0 14px; color: var(--texto-secundario); }
+
+    /* ====== Preferências visuais (apenas quando escolher Dashboard) ====== */
+    .vis-pref { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(3,40,66,0.06); }
+    .vis-pref.hidden { display: none; }
+
+    .pref-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .proto-card {
+      border: 1px solid rgba(3,40,66,0.10);
+      border-radius: 14px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+    }
+
+    .proto-head { display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
+    .proto-title { margin: 0; font-weight: 700; color: var(--azul-escuro); font-size: 0.98rem; }
+    .proto-sub { margin: 4px 0 0; color: var(--texto-secundario); font-size: 0.9rem; }
+    .proto-actions { display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+    .chip {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(3,40,66,0.12);
+      background: rgba(3,40,66,0.03);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--azul-escuro);
+      user-select: none;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .chip:hover { transform: translateY(-1px); box-shadow: 0 10px 18px rgba(0,0,0,0.05); }
+    .chip.selected { background: rgba(6,219,139,0.12); border-color: rgba(6,219,139,0.75); }
+    .chip.disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+
+    .proto-preview { display:none; margin-top: 10px; }
+    .proto-preview.active { display:block; }
+
+    .theme-row { display:flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+
+    .swatches { display:flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .swatch {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 2px solid rgba(3,40,66,0.10);
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .swatch:hover { transform: translateY(-1px); }
+    .swatch.selected { border-color: rgba(6,219,139,0.95); box-shadow: 0 10px 22px rgba(6,219,139,0.12); }
+    .swatch::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 44px;
+      font-size: 11px;
+      color: var(--texto-secundario);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .pref-note { margin-top: 10px; color: var(--texto-secundario); font-size: 0.92rem; }
+    .pref-selected {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(6,219,139,0.10);
+      border: 1px solid rgba(6,219,139,0.35);
+      color: var(--azul-escuro);
+      font-weight: 600;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .opt {
+      border: 1px solid rgba(3,40,66,0.10);
+      background: rgba(3,40,66,0.02);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+      user-select: none;
+      min-height: 88px;
+    }
+
+    .opt:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.05); }
+    .opt.selected { border-color: rgba(6,219,139,0.9); background: rgba(6,219,139,0.08); }
+
+    
+
+/* ====== Opções travadas (cinza / inclicável) ====== */
+.opt.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  background: rgba(3,40,66,0.01);
+  border-color: rgba(3,40,66,0.10);
+  pointer-events: none; /* realmente inclicável */
+}
+.opt.disabled strong,
+.opt.disabled span {
+  color: rgba(3,40,66,0.45) !important;
+}
+.opt.disabled::after {
+  content: attr(data-lock-message);
+  display: block;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: rgba(3,40,66,0.55);
+}
+.opt.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.opt strong { display: block; margin-bottom: 4px; }
+    .opt span { color: var(--texto-secundario); font-size: 0.92rem; }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(3,40,66,0.12);
+      font-family: 'Poppins', sans-serif;
+      background: white;
+      outline: none;
+    }
+
+    .field textarea { min-height: 120px; resize: vertical; }
+
+    .hint {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(6,219,139,0.10);
+      border: 1px solid rgba(6,219,139,0.25);
+      color: var(--azul-escuro);
+    }
+
+    .wizard-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(3,40,66,0.06);
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: var(--texto-secundario);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .summary .card {
+      padding: 14px;
+      box-shadow: none;
+      background: rgba(3,40,66,0.02);
+    }
+
+    /* ====== Slider (estilo “arrastar bolinha”) ====== */
+    .range-card {
+      background: rgba(3,40,66,0.02);
+      border: 1px solid rgba(3,40,66,0.08);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .range-top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .range-title { margin: 0; font-size: 1rem; }
+    .range-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--azul-escuro);
+      line-height: 1;
+    }
+    .range-sub { margin: 6px 0 0; color: var(--texto-secundario); font-size: 0.95rem; }
+    .range {
+      width: 100%;
+      margin-top: 14px;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(3,40,66,0.10);
+      outline: none;
+    }
+    .range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--verde);
+      border: 4px solid white;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+      cursor: pointer;
+    }
+    .range::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--verde);
+      border: 4px solid white;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+      cursor: pointer;
+    }
+    .range-legend {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--texto-secundario);
+    }
+
+    /* ====== Guard/upgrade (evita “malandragem”) ====== */
+    .guard {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 193, 7, 0.12);
+      border: 1px solid rgba(255, 193, 7, 0.35);
+      color: var(--azul-escuro);
+      display: none;
+    }
+    .guard.show { display: block; }
+    .guard-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .guard small { color: var(--texto-secundario); }
+
+    .kv { margin: 0; }
+    .kv strong { display: block; font-size: 0.9rem; color: var(--texto-secundario); }
+    .kv span { display: block; font-weight: 600; }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 992px) {
+      .grid { grid-template-columns: 1fr; }
+      .option-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .progress { max-width: 100%; }
+      main { padding-top: 100px; }
+    }
+  
+  /* ====== Parâmetros (cards compactos) ====== */
+  .mini-divider{height:1px;background:rgba(3,40,66,.08);margin:14px 0;}
+  .option-grid-compact{grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap:10px;}
+  .opt.compact{padding:10px 12px; border-radius:12px; font-weight:600; font-size:14px; min-height:auto;}
+  .muted{color: var(--texto-secundario);}
+  .total-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(3,40,66,.10);font-size:16px;}
+  .money{font-weight:800;font-size:1.35rem;}
+</style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
+            <h2>VISU <span class="green-dot">•</span> Dados</h2>
+        </div>
+        <nav class="main-nav">
+            <ul class="header-links">
+                <!-- Item simples -->
+                <li>
+                    <a href="index.html" class="nav-link">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="contato.html" class="nav-link">
+                        <span>Contato</span>
+                    </a>
+                </li>
+                <li><a href="#" class="nav-link cta-link active" onclick="return false;"><span>Comprar</span></a></li>
+
+                <!-- Dropdown para desktop (hidden em mobile) -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Accordion para mobile (hidden em desktop) -->
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+                        <span>Serviços</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="servicosCollapse">
+                        <ul class="submenu">
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
+                            <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
+                            <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <!-- Outros itens -->
+                <li>
+                    <a href="sobre.html" class="nav-link">
+                        <span>Sobre Nós</span>
+                    </a>
+                </li>
+                
+                <!-- Segundo dropdown -->
+                <li class="dropdown desktop-only">
+                    <a class="nav-link with-arrow" data-toggle="dropdown">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
+                        <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
+                        <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
+                    </ul>
+                </li>
+                
+                <li class="accordion mobile-only">
+                    <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+                        <span>Tecnologias</span>
+                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <div class="collapse" id="tecnologiasCollapse">
+                        <ul class="submenu">
+                            <li><a href="tec_python.html" class="submenu-item">Python</a></li>
+                            <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
+                            <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
+                <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li>
+
+            </ul>
+        </nav>
+        
+        <!-- Botão mobile -->
+        <button class="mobile-menu-toggle" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+</header>
+
+  <main>
+    <div class="page-wrap">
+      <section class="hero-mini">
+        <h1>VISU Express — o Ciclo VIS em formato de produto</h1>
+        <p>
+          Inspirado na lógica do “Arquiteto de Bolso”: você escolhe um pacote, preenche um briefing guiado (com referências),
+          e entra numa call já com tudo pré-organizado. A diferença: em vez de 2D/3D, você recebe <strong>Diagnóstico + Protótipo + Plano de execução</strong>.
+        </p>
+
+        <div class="pill-row">
+          <div class="pill">✅ Briefing guiado (10–12 min)</div>
+          <div class="pill">✅ Call rápida (30 min)</div>
+          <div class="pill">✅ Entrega em até 48h</div>
+          <div class="pill">✅ Ciclo VIS (Visualizar → Idealizar → Solucionar)</div>
+        </div>
+      </section>
+
+      <h2 class="section-title">1) Escolha um pacote</h2>
+      <p class="muted" style="margin-top:-6px;">O preço será calculado no final com base nas escolhas do briefing (sem surpresas de escopo).</p>
+      <div class="grid" id="packageGrid">
+        <div class="card" role="button" tabindex="0" data-package="Leve">
+          <h3>Ciclo VIS — Leve</h3>
+          <p>Para organizar o básico e destravar o primeiro ganho de tempo.</p>
+          <ul class="mini-list">
+            <li>1 fonte principal (Excel/Sheets/SharePoint)</li>
+            <li>ETL leve e padronização</li>
+            <li>Dashboard simples ou automação pontual</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-primary" type="button">Selecionar</button>
+            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
+          </div>
+        </div>
+
+        <div class="card" role="button" tabindex="0" data-package="Intermediário">
+          <h3>Ciclo VIS — Intermediário</h3>
+          <p>Para conectar dados e tirar o time do modo “planilha infinita”.</p>
+          <ul class="mini-list">
+            <li>Múltiplas fontes (SQL/ERP/Drive)</li>
+            <li>Modelo de dados e métricas-chave</li>
+            <li>Dashboard refinado + alertas básicos</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-primary" type="button">Selecionar</button>
+            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
+          </div>
+        </div>
+
+        <div class="card" role="button" tabindex="0" data-package="Avançado">
+          <h3>Ciclo VIS — Avançado</h3>
+          <p>Para automações mais pesadas e governança de dados na prática.</p>
+          <ul class="mini-list">
+            <li>Scraping / integrações / API</li>
+            <li>Orquestração e rotinas automatizadas</li>
+            <li>Dashboards + estrutura em nuvem</li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-primary" type="button">Selecionar</button>
+            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="wizard" class="wizard" style="margin-top: 22px;">
+        <div class="wizard-top">
+          <div class="wizard-title">
+            <strong>2) Briefing guiado</strong>
+            <span>Você preenche e a VISU já chega “brifada” na call.</span>
+          </div>
+          <div class="progress" aria-label="Progresso do briefing"><div id="progressBar"></div></div>
+        </div>
+
+          <div class="wizard-body">
+          <!-- STEP 1 -->
+          <div class="step active" data-step="1">
+            <h4>Etapa 1/5 — Qual é o seu cenário hoje?</h4>
+            <p>Escolha o que mais se aproxima. Isso já direciona o tipo de solução.</p>
+
+            <div class="option-grid" data-group="scenario">
+              <div class="opt" data-value="Planilhas manuais e retrabalho">
+                <strong>Planilhas manuais</strong>
+                <span>Consolidação, PROCV, versões diferentes, retrabalho.</span>
+              </div>
+              <div class="opt" data-value="Dados desconectados entre sistemas">
+                <strong>Dados desconectados</strong>
+                <span>ERP, financeiro, CRM, e-commerce não conversam.</span>
+              </div>
+              <div class="opt" data-value="Falta de visibilidade em indicadores">
+                <strong>Sem visibilidade</strong>
+                <span>Indicadores não estão prontos na hora da decisão.</span>
+              </div>
+            </div>
+
+            <div class="hint">
+              <strong>Ciclo VIS:</strong> aqui é o <em>Visualizar</em> — entender o problema e o contexto real.
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="step" data-step="2">
+            <h4>Etapa 2/5 — Que tipo de “visual” você quer primeiro?</h4>
+            <p>Como no Arquiteto de Bolso (estilo): aqui você escolhe a <strong>forma</strong> do resultado.</p>
+
+            <div class="option-grid" data-group="output">
+              <div class="opt" data-value="Dashboard executivo (KPIs)" data-min="Leve" data-points="2">
+                <strong>Dashboard executivo</strong>
+                <span>KPIs, metas, visão geral (Power BI).</span>
+              </div>
+              <div class="opt" data-value="Rotina automatizada (Python/ETL)" data-min="Intermediário" data-points="5">
+                <strong>Automação</strong>
+                <span>Rotina que roda sozinha e entrega relatórios prontos.</span>
+              </div>
+              <div class="opt" data-value="Organização + governança (Drive/SharePoint)" data-min="Leve" data-points="2">
+                <strong>Organização</strong>
+                <span>Pastas, padrões, versões, fonte única da verdade.</span>
+              </div>
+            </div>
+
+            <div class="hint">
+              <strong>Ciclo VIS:</strong> ainda é <em>Visualizar</em> — mas já focando no que precisa ficar visível primeiro.
+            </div>
+
+            <!-- Preferências visuais (somente se escolher Dashboard) -->
+            <div class="vis-pref hidden" id="dashboardPrefs">
+              <h4 style="margin-top: 14px;">Preferências visuais do dashboard</h4>
+              <p>Escolha o que você acha mais bonito. Vamos salvar as <strong>2 referências</strong> mais próximas do seu gosto.</p>
+
+              <div class="pref-grid" id="protoGrid">
+                <!-- Opção 1 -->
+                <div class="proto-card" data-proto-id="opt1">
+                  <div class="proto-head">
+                    <div>
+                      <p class="proto-title">Monitor de Oportunidades Comerciais</p>
+                      <p class="proto-sub">Layout claro e executivo</p>
+                    </div>
+                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
+                  </div>
+                  <div class="proto-actions">
+                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
+                    <button class="chip" type="button" data-score="1">Ok</button>
+                    <button class="chip" type="button" data-score="2">Amei</button>
+                  </div>
+                  <div class="proto-preview" data-preview>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 60.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                    <a href="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?utm_content=DAHBCvtHY1A&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
+                  </div>
+                </div>
+
+                <!-- Opção 2 -->
+                <div class="proto-card" data-proto-id="opt2">
+                  <div class="proto-head">
+                    <div>
+                      <p class="proto-title">Dashboard Vendas — Dark Mode</p>
+                      <p class="proto-sub">Visual mais moderno e escuro</p>
+                    </div>
+                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
+                  </div>
+                  <div class="proto-actions">
+                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
+                    <button class="chip" type="button" data-score="1">Ok</button>
+                    <button class="chip" type="button" data-score="2">Amei</button>
+                  </div>
+                  <div class="proto-preview" data-preview>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                    <a href="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?utm_content=DAG2WohpjRM&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
+                  </div>
+                </div>
+
+                <!-- Opção 3 -->
+                <div class="proto-card" data-proto-id="opt3">
+                  <div class="proto-head">
+                    <div>
+                      <p class="proto-title">Indicadores de Saúde Financeira</p>
+                      <p class="proto-sub">Foco em leitura rápida e comparativos</p>
+                    </div>
+                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
+                  </div>
+                  <div class="proto-actions">
+                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
+                    <button class="chip" type="button" data-score="1">Ok</button>
+                    <button class="chip" type="button" data-score="2">Amei</button>
+                  </div>
+                  <div class="proto-preview" data-preview>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                    <a href="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?utm_content=DAG37YlGcOw&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
+                  </div>
+                </div>
+
+                <!-- Opção 4 -->
+                <div class="proto-card" data-proto-id="opt4">
+                  <div class="proto-head">
+                    <div>
+                      <p class="proto-title">Vendas x Meta por Canal</p>
+                      <p class="proto-sub">Crescimento por canal e metas</p>
+                    </div>
+                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
+                  </div>
+                  <div class="proto-actions">
+                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
+                    <button class="chip" type="button" data-score="1">Ok</button>
+                    <button class="chip" type="button" data-score="2">Amei</button>
+                  </div>
+                  <div class="proto-preview" data-preview>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                    <a href="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?utm_content=DAG6A8oTJ8I&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
+                  </div>
+                </div>
+
+                <!-- Opção 5 -->
+                <div class="proto-card" data-proto-id="opt5">
+                  <div class="proto-head">
+                    <div>
+                      <p class="proto-title">Indicadores de RH e Clima Organizacional</p>
+                      <p class="proto-sub">Painel de pessoas, clima e saúde do time</p>
+                    </div>
+                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
+                  </div>
+                  <div class="proto-actions">
+                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
+                    <button class="chip" type="button" data-score="1">Ok</button>
+                    <button class="chip" type="button" data-score="2">Amei</button>
+                  </div>
+                  <div class="proto-preview" data-preview>
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+                    </div>
+                    <a href="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?utm_content=DAG7rdcKM0w&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pref-selected" id="protoSelectedText">Selecione suas preferências para o site sugerir as 2 referências mais próximas.</div>
+
+              <h4 style="margin-top: 16px;">Tema</h4>
+              <p class="pref-note">Você prefere o dashboard em versão clara ou escura?</p>
+              <div class="theme-row" id="themeRow">
+                <button class="chip" type="button" data-theme="Claro">Claro</button>
+                <button class="chip" type="button" data-theme="Escuro">Escuro</button>
+              </div>
+
+              <h4 style="margin-top: 16px;">Cores predominantes</h4>
+              <p class="pref-note">Escolha <strong>3 cores</strong> para guiar a identidade do dashboard.</p>
+              <div class="swatches" id="swatches">
+                <div class="swatch" data-color="#032842" data-label="Azul" style="background:#032842"></div>
+                <div class="swatch" data-color="#06db8b" data-label="Verde" style="background:#06db8b"></div>
+                <div class="swatch" data-color="#1b96db" data-label="Ciano" style="background:#1b96db"></div>
+                <div class="swatch" data-color="#111827" data-label="Preto" style="background:#111827"></div>
+                <div class="swatch" data-color="#f97316" data-label="Laranja" style="background:#f97316"></div>
+                <div class="swatch" data-color="#a855f7" data-label="Roxo" style="background:#a855f7"></div>
+                <div class="swatch" data-color="#ef4444" data-label="Vermelho" style="background:#ef4444"></div>
+                <div class="swatch" data-color="#facc15" data-label="Amarelo" style="background:#facc15"></div>
+                <div class="swatch" data-color="#94a3b8" data-label="Cinza" style="background:#94a3b8"></div>
+              </div>
+              <br>
+              <div class="pref-note" id="colorsNote">0/3 cores selecionadas.</div>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="step" data-step="3">
+            <h4>Etapa 3/5 — Nível da intervenção</h4>
+            <p>Como “reforma superficial vs estrutural”, só que para dados.</p>
+
+            <div class="option-grid" data-group="intervention">
+              <div class="opt" data-value="Leve (ajuste rápido, sem mexer em sistemas)" data-min="Leve" data-points="1">
+                <strong>Leve</strong>
+                <span>Melhorias rápidas com o que já existe.</span>
+              </div>
+              <div class="opt" data-value="Intermediária (conectar fontes e padronizar)" data-min="Intermediário" data-points="3">
+                <strong>Intermediária</strong>
+                <span>Conectar fontes, criar modelo e métricas.</span>
+              </div>
+              <div class="opt" data-value="Estrutural (API/automação pesada/governança)" data-min="Avançado" data-points="6">
+                <strong>Estrutural</strong>
+                <span>Integrações, rotinas, segurança e governança.</span>
+              </div>
+            </div>
+
+            <div class="hint">
+              <strong>Ciclo VIS:</strong> aqui começa o <em>Idealizar</em> — decidir o caminho e o nível de mudança.
+            </div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="step" data-step="4">
+            <h4>Etapa 4/5 — Referências e detalhes</h4>
+            <p>Anexe o que tiver (prints, planilhas, PDF, PPT) e descreva o contexto. Se não tiver anexos, tudo bem.</p>
+
+            <div class="range-card" aria-label="Quantidade de fontes de dados">
+              <div class="range-top">
+                <div>
+                  <p class="range-title"><strong>Quantas fontes/conexões de dados você quer integrar?</strong></p>
+                  <p class="range-sub" id="sourcesSub">1 fonte • ideal para começar com um dashboard simples</p>
+                </div>
+                <div class="range-value" id="sourcesCountLabel">1</div>
+              </div>
+              <input id="sourcesCount" class="range" name="sourcesCount" type="range" min="1" max="11" step="1" value="1" />
+              <div class="range-legend">
+                <span>1</span><span>3</span><span>6</span><span>11+</span>
+              </div>
+              <div class="guard" id="guardBox">
+                <div class="guard-row">
+                  <div>
+                    <strong id="guardTitle">Essa combinação pede um pacote maior.</strong><br/>
+                    <small id="guardText">Para 2+ fontes ou automações, o mínimo recomendado é Intermediário.</small>
+                  </div>
+                  <button class="btn btn-primary" type="button" id="btnUpgrade">Atualizar para Intermediário</button>
+                </div>
+              </div>
+            </div>
+
+            <h4 style="margin-top: 18px;">Detalhes técnicos (opcional, mas ajuda muito)</h4>
+            <p>Marque apenas o que se aplica. Se algo exigir pacote maior, a página vai te sugerir upgrade.</p>
+
+            <div class="option-grid" data-group="features" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="opt" data-value="Alertas automáticos (e-mail/WhatsApp)" data-min="Intermediário" data-points="3">
+                <strong>Alertas automáticos</strong>
+                <span>Notificações e disparos (status, metas, atrasos).</span>
+              </div>
+              <div class="opt" data-value="Integração via API (CRM/ERP/Plataformas)" data-min="Intermediário" data-points="4">
+                <strong>Integração via API</strong>
+                <span>Conectar ferramentas e puxar dados em tempo real.</span>
+              </div>
+              <div class="opt" data-value="Web scraping / RPA" data-min="Avançado" data-points="7">
+                <strong>Web scraping / RPA</strong>
+                <span>Captura automatizada e rotinas mais pesadas.</span>
+              </div>
+            </div>
+
+            <div class="mini-divider"></div>
+
+            <h5 style="margin: 0 0 6px 0;">Parâmetros para compor o valor</h5>
+            <p class="muted" style="margin: 0 0 14px 0;">Isso ajusta o valor final conforme complexidade, perfil e urgência (o preço só aparece no final).</p>
+
+            <div class="range-card" aria-label="Quantidade de ciclos" style="margin-top: 10px;">
+              <div class="range-top">
+                <div>
+                  <p class="range-title"><strong>Quantos Ciclos VIS você quer contratar agora?</strong></p>
+                  <p class="range-sub" id="cyclesSub">1 ciclo • ideal para começar e validar o ganho de tempo</p>
+                </div>
+                <div class="range-value" id="cyclesCountLabel">1</div>
+              </div>
+              <input id="cyclesCount" class="range" name="cyclesCount" type="range" min="1" max="6" step="1" value="1" />
+              <div class="range-legend"><span>1</span><span>2</span><span>3</span><span>6</span></div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label>Tipo de cliente</label>
+                <div class="option-grid option-grid-compact" data-group="clientType">
+                  <div class="opt compact" data-value="Autônomo">Autônomo</div>
+                  <div class="opt compact" data-value="MEI">MEI</div>
+                  <div class="opt compact" data-value="Micro">Micro</div>
+                  <div class="opt compact selected" data-value="PME">PME</div>
+                  <div class="opt compact" data-value="Corporativo">Corporativo</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label>Urgência</label>
+                <div class="option-grid option-grid-compact" data-group="urgency">
+                  <div class="opt compact selected" data-value="Normal">Normal</div>
+                  <div class="opt compact" data-value="Alta">Alta</div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>Pacote de manutenção (opcional)</label>
+                <div class="option-grid option-grid-compact" data-group="maintenance">
+                  <div class="opt compact selected" data-value="Sem manutenção">Sem manutenção</div>
+                  <div class="opt compact" data-value="Básico">Básico</div>
+                  <div class="opt compact" data-value="Estendido">Estendido</div>
+                  <div class="opt compact" data-value="Premium">Premium</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="company">Empresa</label>
+                <input id="company" name="company" type="text" placeholder="Ex.: Loja X / Clínica Y" />
+              </div>
+              <div class="field">
+                <label for="role">Seu cargo</label>
+                <input id="role" name="role" type="text" placeholder="Ex.: Dono(a), Financeiro, Operações" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="sourcesTypes">Onde estão seus dados hoje? (selecione o principal)</label>
+                <select id="sourcesTypes" name="sourcesTypes">
+                  <option value="">Selecione...</option>
+                  <option>Excel/Sheets</option>
+                  <option>Drive/SharePoint/OneDrive</option>
+                  <option>ERP / Sistema interno</option>
+                  <option>SQL / Banco de dados</option>
+                  <option>Mix de tudo</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="files">Anexos (opcional)</label>
+                <input id="files" name="files" type="file" multiple />
+              </div>
+            </div>
+
+            <div class="field" style="margin-top: 12px;">
+              <label for="context">Conte sobre o desafio (em 5–10 linhas)</label>
+              <textarea id="context" name="context" placeholder="Ex.: Hoje eu fecho o mês juntando 6 planilhas, demora 2 dias e sempre dá divergência de CMV..."></textarea>
+            </div>
+
+            <div class="hint">
+              <strong>Ciclo VIS:</strong> fechar o <em>Idealizar</em> com contexto e restrições reais (pra não virar “projeto genérico”).
+            </div>
+          </div>
+
+          <!-- STEP 5 -->
+          <div class="step" data-step="5">
+            <h4>Etapa 5/5 — Resumo e valor estimado</h4>
+            <p>O valor aparece só aqui no final e é calculado a partir do seu briefing. Depois disso, você agenda a call.</p>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="name">Nome</label>
+                <input id="name" name="name" type="text" placeholder="Seu nome" />
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" placeholder="voce@empresa.com" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="whats">WhatsApp</label>
+                <input id="whats" name="whats" type="tel" placeholder="(21) 99999-9999" />
+              </div>
+              <div class="field">
+                <label for="date">Melhor data</label>
+                <input id="date" name="date" type="date" />
+              </div>
+            </div>
+
+            <div class="summary">
+              <div class="card">
+                <p class="kv"><strong>Pacote</strong><span id="sumPackage">—</span></p>
+                <p class="kv"><strong>Fontes</strong><span id="sumSources">—</span></p>
+                <p class="kv"><strong>Nível</strong><span id="sumIntervention">—</span></p>
+                <p class="kv"><strong>Ciclos</strong><span id="sumCycles">—</span></p>
+              </div>
+              <div class="card">
+                <p class="kv"><strong>Preço base (por ciclo)</strong><span id="sumBase">—</span></p>
+                <p class="kv"><strong>Fator complexidade</strong><span id="sumFxComplex">—</span></p>
+                <p class="kv"><strong>Fator cliente</strong><span id="sumFxClient">—</span></p>
+                <p class="kv"><strong>Fator urgência</strong><span id="sumFxUrgency">—</span></p>
+                <p class="kv"><strong>Manutenção (1º mês, por ciclo)</strong><span id="sumMaintenance">—</span></p>
+                <p class="kv"><strong>Total estimado (por ciclo)</strong><span id="sumPerCycle">—</span></p>
+                <p class="kv"><strong>Desconto por pacote</strong><span id="sumDiscount">—</span></p>
+                <div class="total-row">
+                  <strong>Total estimado (final)</strong>
+                  <span id="sumTotal">—</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hint">
+              <strong>Ciclo VIS:</strong> o próximo passo é o <em>Solucionar</em> — a call + protótipo + plano (entregas rápidas e objetivas).
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button class="btn" id="btnBack" type="button">Voltar</button>
+            <div class="note" id="stepNote">Selecione uma opção para continuar.</div>
+            <button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
+          </div>
+
+          <!-- Form oculto (simulação) -->
+          <form id="leadForm" class="hidden" action="https://formsubmit.co/contato@visudados.com.br" method="POST" enctype="multipart/form-data">
+              <input type="hidden" id="hiddenTotal" name="preco_total_estimado" value="" />
+              <input type="hidden" id="hiddenBreakdown" name="preco_memoria_calculo" value="" />
+
+            <input type="hidden" name="_subject" value="Novo Lead - Compra VISU Express" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="https://visudados.com.br/obrigado.html?source=compra" />
+            <input type="text" name="_honey" style="display:none" />
+
+            <input type="hidden" name="pacote" id="f_pacote" />
+            <!-- preço só aparece no final; referência removida -->
+            <input type="hidden" name="cenario" id="f_cenario" />
+            <input type="hidden" name="resultado_desejado" id="f_output" />
+            <input type="hidden" name="dashboard_referencias_top2" id="f_dash_top2" />
+            <input type="hidden" name="dashboard_tema" id="f_dash_theme" />
+            <input type="hidden" name="dashboard_cores" id="f_dash_colors" />
+            <input type="hidden" name="nivel_intervencao" id="f_intervention" />
+            <input type="hidden" name="empresa" id="f_company" />
+            <input type="hidden" name="cargo" id="f_role" />
+            <input type="hidden" name="fontes_tipo" id="f_sourcesTypes" />
+            <input type="hidden" name="fontes_quantidade" id="f_sourcesCount" />
+            <input type="hidden" name="features" id="f_features" />
+            <input type="hidden" name="complexidade_score" id="f_score" />
+            <input type="hidden" name="pacote_recomendado" id="f_recommended" />
+            <input type="hidden" name="contexto" id="f_context" />
+
+            <input type="hidden" name="nome" id="f_name" />
+            <input type="hidden" name="email" id="f_email" />
+            <input type="hidden" name="whatsapp" id="f_whats" />
+            <input type="hidden" name="data" id="f_date" />
+          </form>
+        </div>
+      </div>
+
+      <section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
+        <h2>Preferindo falar direto?</h2>
+        <p>Sem problema. Se quiser, já agenda uma conversa de 30 minutos.</p>
+        <a href="https://cal.com/visudados" target="_blank" class="cta-button">Agendar diagnóstico gratuito</a>
+      </section>
+    </div>
+  </main>
+
+  <footer style="text-align:center; padding: 2rem 0; margin-top: 3rem; background: #f8f9fa;">
+    <p style="font-size: 0.85rem;">
+      © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
+    </p>
+  </footer>
+
+  <script>
+    (function(){
+      // ===== Mobile menu (igual ao contato.html) =====
+      document.addEventListener("DOMContentLoaded", function(){
+        const toggleButton = document.querySelector(".mobile-menu-toggle");
+        const nav = document.querySelector(".main-nav");
+        if(toggleButton && nav){
+          toggleButton.addEventListener("click", () => {
+            nav.classList.toggle("active");
+            toggleButton.classList.toggle("active");
+          });
+        }
+      });
+
+      // ===== Helpers =====
+      const $ = (sel, root=document) => root.querySelector(sel);
+      const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+      const state = {
+        pacote: null,
+        preco: null,
+        scenario: null,
+        output: null,
+        intervention: null,
+        dashTop2: [],
+        dashTheme: null,
+        dashColors: [],
+        dashProtoScores: { opt1: null, opt2: null, opt3: null, opt4: null, opt5: null },
+        sourcesCount: 1,
+        cyclesCount: 1,
+        sourcesTypes: null,
+        features: [],
+        clientType: 'PME',
+        urgency: 'Normal',
+        maintenance: 'Sem manutenção',
+        score: 0,
+        required: 'Leve',
+        recommended: 'Leve',
+      };
+
+      const pkgOrder = { 'Leve': 1, 'Intermediário': 2, 'Avançado': 3 };
+      const pkgByOrder = { 1: 'Leve', 2: 'Intermediário', 3: 'Avançado' };
+
+      function maxPackage(a, b){
+        return (pkgOrder[a] >= pkgOrder[b]) ? a : b;
+      }
+
+      function clampRecommended(score){
+        if(score >= 10) return 'Avançado';
+        if(score >= 5) return 'Intermediário';
+        return 'Leve';
+      }
+
+      // ===== Preferências visuais (dashboard) =====
+      const dashPrefsEl = document.getElementById('dashboardPrefs');
+      const protoSelectedText = document.getElementById('protoSelectedText');
+      const colorsNote = document.getElementById('colorsNote');
+
+      function isDashboardSelected(){
+        return (state.output || '').toLowerCase().includes('dashboard');
+      }
+
+      function showDashboardPrefs(show){
+        if(!dashPrefsEl) return;
+        dashPrefsEl.classList.toggle('hidden', !show);
+      }
+
+      function computeTop2FromScores(){
+        const entries = Object.entries(state.dashProtoScores)
+          .map(([id, score]) => ({ id, score: (score === null ? -1 : Number(score)) }));
+        entries.sort((a,b) => {
+          if(b.score !== a.score) return b.score - a.score;
+          // desempate: ordem fixa opt1..opt5
+          return a.id.localeCompare(b.id);
+        });
+        const top = entries.filter(e => e.score >= 1).slice(0,2).map(e => e.id);
+        state.dashTop2 = top;
+      }
+
+      function protoTitleById(id){
+        const map = {
+          opt1: 'Monitor de Oportunidades Comerciais',
+          opt2: 'Dashboard Vendas — Dark Mode',
+          opt3: 'Indicadores de Saúde Financeira',
+          opt4: 'Vendas x Meta por Canal',
+          opt5: 'Indicadores de RH e Clima Organizacional'
+        };
+        return map[id] || id;
+      }
+
+      function updateDashUI(){
+        if(protoSelectedText){
+          if(state.dashTop2.length === 2){
+            protoSelectedText.textContent = `Referências sugeridas (Top 2): ${protoTitleById(state.dashTop2[0])} • ${protoTitleById(state.dashTop2[1])}`;
+          } else {
+            protoSelectedText.textContent = 'Selecione suas preferências para o site sugerir as 2 referências mais próximas.';
+          }
+        }
+        if(colorsNote){
+          colorsNote.textContent = `${state.dashColors.length}/3 cores selecionadas.`;
+        }
+      }
+
+
+function applyOptionLocks(){
+  const opts = Array.from(document.querySelectorAll('.opt[data-min]'));
+  opts.forEach(opt => {
+    const minPkg = (opt.dataset.min || 'Leve').trim();
+    // Sem pacote selecionado: não trava visualmente (a validação já bloqueia avanço)
+    if(!state.pacote){
+      opt.classList.remove('disabled');
+      opt.removeAttribute('aria-disabled');
+      opt.dataset.lockMessage = '';
+      return;
+    }
+    const locked = (pkgOrder[state.pacote] || 0) < (pkgOrder[minPkg] || 0);
+    if(locked){
+      opt.classList.add('disabled');
+      opt.setAttribute('aria-disabled','true');
+      opt.dataset.lockMessage = `Requer Ciclo VIS — ${minPkg}`;
+      opt.classList.remove('selected'); // se estava marcado, desmarca
+    } else {
+      opt.classList.remove('disabled');
+      opt.removeAttribute('aria-disabled');
+      opt.dataset.lockMessage = '';
+    }
+  });
+
+  // Sincroniza o state caso algo tenha sido desmarcado
+  const outSel = document.querySelector('[data-group="output"] .opt.selected');
+  state.output = outSel ? outSel.dataset.value : state.output;
+
+  const intSel = document.querySelector('[data-group="intervention"] .opt.selected');
+  state.intervention = intSel ? intSel.dataset.value : state.intervention;
+
+  state.features = Array.from(document.querySelectorAll('[data-group="features"] .opt.selected'))
+    .map(el => el.dataset.value);
+}
+
+
+      function computeRequirements(){
+        let required = 'Leve';
+        let score = 0;
+
+        // 1) Slider de fontes (conexões)
+        const n = Number(state.sourcesCount || 1);
+        if(n <= 1){ required = maxPackage(required, 'Leve'); score += 1; }
+        else if(n <= 3){ required = maxPackage(required, 'Intermediário'); score += 4; }
+        else { required = maxPackage(required, 'Avançado'); score += 8; }
+
+        // 2) Saída desejada (output)
+        const outEl = document.querySelector('[data-group="output"] .opt.selected');
+        if(outEl){
+          required = maxPackage(required, outEl.dataset.min || 'Leve');
+          score += Number(outEl.dataset.points || 0);
+        }
+
+        // 3) Nível de intervenção
+        const intEl = document.querySelector('[data-group="intervention"] .opt.selected');
+        if(intEl){
+          required = maxPackage(required, intEl.dataset.min || 'Leve');
+          score += Number(intEl.dataset.points || 0);
+        }
+
+        // 4) Features (multi)
+        const featEls = Array.from(document.querySelectorAll('[data-group="features"] .opt.selected'));
+        featEls.forEach(el => {
+          required = maxPackage(required, el.dataset.min || 'Leve');
+          score += Number(el.dataset.points || 0);
+        });
+
+        state.score = score;
+        state.required = required;
+        state.recommended = clampRecommended(score);
+
+        // Trava visualmente opções que exigem pacote maior (cinza/inclicável)
+        applyOptionLocks();
+
+        
+        // 5) Parâmetros de preço (cliente/urgência/manutenção)
+        state.clientType = groupValue('clientType') || state.clientType || 'PME';
+        state.urgency = groupValue('urgency') || state.urgency || 'Normal';
+        state.maintenance = groupValue('maintenance') || state.maintenance || 'Sem manutenção';
+        state.cyclesCount = Number(document.getElementById('cyclesCount')?.value || state.cyclesCount || 1);
+
+updateGuard();
+        updateSummary();
+      }
+
+      function updateGuard(){
+        const guardBox = document.getElementById('guardBox');
+        const guardTitle = document.getElementById('guardTitle');
+        const guardText = document.getElementById('guardText');
+        const btnUpgrade = document.getElementById('btnUpgrade');
+
+        if(!guardBox || !guardTitle || !guardText || !btnUpgrade) return;
+
+        if(!state.pacote){
+          guardBox.classList.remove('show');
+          return;
+        }
+
+        const needsUpgrade = pkgOrder[state.pacote] < pkgOrder[state.required];
+        if(!needsUpgrade){
+          guardBox.classList.remove('show');
+          return;
+        }
+
+        guardBox.classList.add('show');
+        guardTitle.textContent = 'Essa combinação pede um pacote maior.';
+        guardText.textContent = `Pelo seu briefing, o mínimo recomendado é ${state.required}.`;
+        btnUpgrade.textContent = `Atualizar para ${state.required}`;
+        btnUpgrade.onclick = () => {
+          // Seleciona o card do pacote requerido
+          const card = document.querySelector(`#packageGrid .card[data-package="${state.required}"]`);
+          if(card) selectPackage(card);
+          computeRequirements();
+          validateStep();
+        };
+      }
+
+      // ===== Pacotes =====
+      const pkgGrid = $('#packageGrid');
+      function selectPackage(card){
+        $$('.card', pkgGrid).forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        state.pacote = card.dataset.package;
+        state.preco = null; // preço só aparece no final
+
+        // Recalcula regras/guardrails sempre que trocar pacote
+        computeRequirements();
+
+        // Tracking
+        try { gtag('event', 'select_item', { item_list_name: 'VISU - Pacotes', items: [{ item_name: state.pacote }] }); } catch(e) {}
+
+        // Atualiza resumo se já estiver no fim
+        updateSummary();
+
+        // Auto scroll pro wizard
+        const w = $('#wizard');
+        if(w){ w.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      }
+
+      if(pkgGrid){
+        $$('.card', pkgGrid).forEach(card => {
+          const btn = $('.btn-primary', card);
+          const see = $('[data-scroll-to="wizard"]', card);
+
+          card.addEventListener('click', (e) => {
+            if(e.target && (e.target.tagName === 'BUTTON' || e.target.closest('button'))) return;
+            selectPackage(card);
+          });
+
+          card.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' || e.key === ' '){
+              e.preventDefault();
+              selectPackage(card);
+            }
+          });
+
+          if(btn){ btn.addEventListener('click', (e) => { e.preventDefault(); selectPackage(card); }); }
+          if(see){ see.addEventListener('click', (e) => { e.preventDefault(); const w=$('#wizard'); if(w) w.scrollIntoView({behavior:'smooth'}); }); }
+        });
+      }
+
+      // ===== Wizard =====
+      const steps = $$('.step');
+      const progressBar = $('#progressBar');
+      const btnBack = $('#btnBack');
+      const btnNext = $('#btnNext');
+      const stepNote = $('#stepNote');
+
+      let currentStep = 1;
+      const totalSteps = steps.length;
+
+      function setProgress(){
+        const pct = Math.round(((currentStep-1) / (totalSteps-1)) * 100);
+        if(progressBar) progressBar.style.width = pct + '%';
+      }
+
+      function showStep(n){
+        currentStep = n;
+        steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === n));
+        setProgress();
+
+        if(btnBack) btnBack.disabled = (n === 1);
+
+        if(btnNext){
+          btnNext.textContent = (n === totalSteps) ? 'Finalizar (simular compra)' : 'Continuar';
+        }
+
+        validateStep();
+      }
+
+      function markSelected(groupEl, optEl){
+        const group = groupEl.dataset.group;
+        if(group === 'features'){
+          optEl.classList.toggle('selected');
+          return;
+        }
+        $$('.opt', groupEl).forEach(o => o.classList.remove('selected'));
+        optEl.classList.add('selected');
+      }
+
+      function groupValue(groupName){
+        const groupEl = document.querySelector(`[data-group="${groupName}"]`);
+        if(!groupEl) return null;
+        const sel = $('.opt.selected', groupEl);
+        return sel ? sel.dataset.value : null;
+      }
+
+      
+      function calcPricing(){
+        // Base (Simulador Excel): Leve=6000, Intermediário=10000, Avançado=15000
+        const baseMap = { 'Leve': 6000, 'Intermediário': 10000, 'Avançado': 15000 };
+
+        // Fatores (Simulador Excel)
+        const fxComplexMap = { 'Baixa': 0.5, 'Média': 0.75, 'Alta': 1 };
+        const fxClientMap = {
+          'Autônomo': 0.73334,
+          'MEI': 0.73334,
+          'Micro': 0.73334,
+          'PME': 1,
+          'Corporativo': 1.1
+        };
+        const fxUrgencyMap = { 'Normal': 1, 'Alta': 1.2 };
+
+        const maintBaseMap = { 'Sem manutenção': 0, 'Básico': 180, 'Estendido': 420, 'Premium': 600 };
+
+        const pacote = state.pacote || state.required || 'Leve';
+        const base = baseMap[pacote] || 0;
+
+        // Deriva complexidade pelo score (simples e transparente)
+        // 0–3: Baixa | 4–6: Média | 7+: Alta
+        let complexLabel = 'Baixa';
+        if(state.score >= 7) complexLabel = 'Alta';
+        else if(state.score >= 4) complexLabel = 'Média';
+
+        const fxComplex = fxComplexMap[complexLabel];
+        const fxClient = fxClientMap[state.clientType] ?? 1;
+        const fxUrgency = fxUrgencyMap[state.urgency] ?? 1;
+
+        const maintBase = maintBaseMap[state.maintenance] ?? 0;
+        const maintFirstMonth = maintBase * fxComplex * fxClient * fxUrgency;
+
+        // Total por ciclo (equivalente ao L4 do Excel): (Base * fatores) + manutenção
+        const perCycle = (base * fxComplex * fxClient * fxUrgency) + maintFirstMonth;
+
+        // Quantidade de ciclos (equivalente ao I7 do Excel)
+        const cycles = Number(state.cyclesCount || 1);
+
+        // Desconto por pacote (equivalente ao J7 do Excel)
+        const discountPack = (cycles === 2) ? 0.10 : (cycles >= 3 ? 0.15 : 0);
+
+        // Desconto extra (equivalente ao K7 do Excel) — mantido como 0 por padrão
+        const discountExtra = 0;
+
+        // Preço Total Final (equivalente ao L7 do Excel):
+        // (perCycle * cycles) - ((discountExtra + discountPack) * perCycle)
+        const totalFinal = (perCycle * cycles) - ((discountExtra + discountPack) * perCycle);
+
+        return {
+          pacote,
+          base,
+          complexLabel,
+          fxComplex,
+          fxClient,
+          fxUrgency,
+          maintFirstMonth,
+          perCycle,
+          cycles,
+          discountPack,
+          discountExtra,
+          totalFinal
+        };
+      }
+
+      function updateSummary(){
+        const sumPkg = $('#sumPackage');
+        const sumSources = $('#sumSources');
+        const sumIntervention = $('#sumIntervention');
+        const sumCycles = $('#sumCycles');
+
+        const sumBase = $('#sumBase');
+        const sumFxComplex = $('#sumFxComplex');
+        const sumFxClient = $('#sumFxClient');
+        const sumFxUrgency = $('#sumFxUrgency');
+        const sumMaintenance = $('#sumMaintenance');
+        const sumPerCycle = $('#sumPerCycle');
+        const sumDiscount = $('#sumDiscount');
+        const sumTotal = $('#sumTotal');
+
+        const pricing = calcPricing();
+
+        if(sumPkg) sumPkg.textContent = pricing.pacote ? `Ciclo VIS — ${pricing.pacote}` : '—';
+        if(sumSources) sumSources.textContent = state.sourcesCount ? `${state.sourcesCount} fonte(s)` : '—';
+        if(sumIntervention) sumIntervention.textContent = state.intervention || '—';
+        if(sumCycles) sumCycles.textContent = `${pricing.cycles} ciclo(s)`;
+
+        const brl = (v) => `R$ ${Number(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        if(sumBase) sumBase.textContent = brl(pricing.base);
+        if(sumFxComplex) sumFxComplex.textContent = `${pricing.complexLabel} (${pricing.fxComplex.toFixed(2)})`;
+        if(sumFxClient) sumFxClient.textContent = `${state.clientType} (${pricing.fxClient.toFixed(2)})`;
+        if(sumFxUrgency) sumFxUrgency.textContent = `${state.urgency} (${pricing.fxUrgency.toFixed(2)})`;
+        if(sumMaintenance) sumMaintenance.textContent = pricing.maintFirstMonth ? brl(pricing.maintFirstMonth) : '—';
+        if(sumPerCycle) sumPerCycle.textContent = brl(pricing.perCycle);
+        if(sumDiscount) sumDiscount.textContent = pricing.discountPack ? `${Math.round(pricing.discountPack*100)}%` : '—';
+        if(sumTotal) sumTotal.textContent = brl(pricing.totalFinal);
+
+        // Campos escondidos para envio
+        const hiddenTotal = $('#hiddenTotal');
+        const hiddenBreakdown = $('#hiddenBreakdown');
+        if(hiddenTotal) hiddenTotal.value = pricing.totalFinal;
+        if(hiddenBreakdown) hiddenBreakdown.value = JSON.stringify({
+          pacote: pricing.pacote,
+          base: pricing.base,
+          complexidade: pricing.complexLabel,
+          fator_complexidade: pricing.fxComplex,
+          tipo_cliente: state.clientType,
+          fator_cliente: pricing.fxClient,
+          urgencia: state.urgency,
+          fator_urgencia: pricing.fxUrgency,
+          manutencao: state.maintenance,
+          manutencao_primeiro_mes: pricing.maintFirstMonth,
+          total_por_ciclo: pricing.perCycle,
+          ciclos: pricing.cycles,
+          desconto_pacote: pricing.discountPack,
+          desconto_extra: pricing.discountExtra,
+          total_final: pricing.totalFinal,
+          score: state.score,
+          fontes: state.sourcesCount,
+          intervention: state.intervention,
+          scenario: state.scenario,
+          output: state.output,
+          features: state.features
+        });
+      }
+
+
+      function validateStep(){
+        let ok = true;
+
+        // Bloqueia avançar sem pacote em qualquer etapa
+        if(!state.pacote){
+          ok = false;
+          if(stepNote) stepNote.textContent = 'Selecione um pacote acima para começar.';
+        } else {
+          if(stepNote) stepNote.textContent = '';
+        }
+
+        // Guardrail: se o briefing exigir pacote maior, bloqueia avanço até ajustar
+        if(ok && state.pacote && pkgOrder[state.pacote] < pkgOrder[state.required]){
+          ok = false;
+          if(stepNote) stepNote.textContent = `Seu briefing pede, no mínimo, o pacote ${state.required}. Clique em “Atualizar” no aviso acima.`;
+        }
+
+        // Regras por etapa
+        if(ok){
+          if(currentStep === 1){
+            ok = Boolean(groupValue('scenario'));
+            if(stepNote) stepNote.textContent = ok ? '' : 'Selecione uma opção.';
+          }
+          if(currentStep === 2){
+            ok = Boolean(groupValue('output'));
+            if(!ok){
+              if(stepNote) stepNote.textContent = 'Selecione uma opção.';
+            } else {
+              // Se escolheu dashboard, exige preferências visuais mínimas
+              if(isDashboardSelected()){
+                computeTop2FromScores();
+                const hasTop2 = state.dashTop2.length === 2;
+                const hasTheme = Boolean(state.dashTheme);
+                const hasColors = state.dashColors.length === 3;
+                ok = hasTop2 && hasTheme && hasColors;
+                if(stepNote){
+                  stepNote.textContent = ok ? '' : 'Para dashboard: selecione 2 referências (Ok/Amei), escolha o tema e 3 cores.';
+                }
+              } else {
+                if(stepNote) stepNote.textContent = '';
+              }
+            }
+          }
+          if(currentStep === 3){
+            ok = Boolean(groupValue('intervention'));
+            if(stepNote) stepNote.textContent = ok ? '' : 'Selecione uma opção.';
+          }
+          if(currentStep === 4){
+            // Etapa 4 pode avançar sem anexos, mas pede contexto mínimo
+            const ctx = ($('#context')?.value || '').trim();
+            ok = ctx.length >= 10;
+            if(stepNote) stepNote.textContent = ok ? '' : 'Conte um pouco mais do desafio (mínimo 10 caracteres).';
+          }
+          if(currentStep === 5){
+            const nm = ($('#name')?.value || '').trim();
+            const em = ($('#email')?.value || '').trim();
+            ok = nm.length >= 2 && em.includes('@');
+            if(stepNote) stepNote.textContent = ok ? '' : 'Preencha nome e e-mail para finalizar.';
+          }
+        }
+
+        if(btnNext) btnNext.disabled = !ok;
+        return ok;
+      }
+
+      // Clique nas opções
+      $$('.option-grid').forEach(grid => {
+        grid.addEventListener('click', (e) => {
+          const opt = e.target.closest('.opt');
+          if(!opt) return;
+          if(opt.classList.contains('disabled')) return;
+          markSelected(grid, opt);
+
+          const group = grid.dataset.group;
+          const val = opt.dataset.value;
+
+          if(group === 'scenario') state.scenario = val;
+          if(group === 'output') {
+            state.output = val;
+            const dash = isDashboardSelected();
+            showDashboardPrefs(dash);
+            if(!dash){
+              // reseta preferências se a pessoa não quiser dashboard
+              state.dashTop2 = [];
+              state.dashTheme = null;
+              state.dashColors = [];
+              state.dashProtoScores = { opt1: null, opt2: null, opt3: null, opt4: null, opt5: null };
+              // limpa UI
+              document.querySelectorAll('.proto-card [data-score]').forEach(b => b.classList.remove('selected'));
+              document.querySelectorAll('#themeRow [data-theme]').forEach(b => b.classList.remove('selected'));
+              document.querySelectorAll('#swatches .swatch').forEach(s => s.classList.remove('selected'));
+              updateDashUI();
+            }
+          }
+          if(group === 'intervention') state.intervention = val;
+          if(group === 'features'){
+            // atualiza array de features
+            state.features = Array.from(document.querySelectorAll('[data-group="features"] .opt.selected')).map(el => el.dataset.value);
+          }
+
+          // recalcula exigências
+          computeRequirements();
+
+          updateSummary();
+          validateStep();
+
+          // Tracking por etapa
+          try { gtag('event', 'select_content', { content_type: 'briefing_option', item_id: `${group}:${val}` }); } catch(e) {}
+        });
+      });
+
+      // Dashboard: protótipos (rating + preview)
+      const protoGrid = document.getElementById('protoGrid');
+      if(protoGrid){
+        protoGrid.addEventListener('click', (e) => {
+          const card = e.target.closest('.proto-card');
+          if(!card) return;
+
+          // Preview
+          const actionBtn = e.target.closest('[data-action="togglePreview"]');
+          if(actionBtn){
+            const pv = card.querySelector('[data-preview]');
+            if(pv) pv.classList.toggle('active');
+            return;
+          }
+
+          // Score
+          const scoreBtn = e.target.closest('[data-score]');
+          if(scoreBtn){
+            const pid = card.dataset.protoId;
+            const score = Number(scoreBtn.dataset.score);
+            state.dashProtoScores[pid] = score;
+
+            // UI selected state: deixa só 1 score marcado por card
+            const all = Array.from(card.querySelectorAll('[data-score]'));
+            all.forEach(b => b.classList.remove('selected'));
+            scoreBtn.classList.add('selected');
+
+            computeTop2FromScores();
+            updateDashUI();
+            validateStep();
+          }
+        });
+      }
+
+      // Dashboard: tema (claro/escuro)
+      const themeRow = document.getElementById('themeRow');
+      if(themeRow){
+        themeRow.addEventListener('click', (e) => {
+          const btn = e.target.closest('[data-theme]');
+          if(!btn) return;
+          const theme = btn.dataset.theme;
+          state.dashTheme = theme;
+          Array.from(themeRow.querySelectorAll('[data-theme]')).forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          validateStep();
+        });
+      }
+
+      // Dashboard: cores (máx 3)
+      const swatches = document.getElementById('swatches');
+      if(swatches){
+        swatches.addEventListener('click', (e) => {
+          const sw = e.target.closest('.swatch');
+          if(!sw) return;
+          const color = (sw.dataset.color || '').trim();
+          if(!color) return;
+          const idx = state.dashColors.indexOf(color);
+          if(idx >= 0){
+            state.dashColors.splice(idx, 1);
+            sw.classList.remove('selected');
+          } else {
+            if(state.dashColors.length >= 3) return;
+            state.dashColors.push(color);
+            sw.classList.add('selected');
+          }
+          updateDashUI();
+          validateStep();
+        });
+      }
+
+      // Inputs que influenciam validação
+      ['context','name','email'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el){ el.addEventListener('input', validateStep); }
+      });
+
+      // Slider: quantidade de fontes/conexões
+      const sourcesCount = document.getElementById('sourcesCount');
+      const sourcesCountLabel = document.getElementById('sourcesCountLabel');
+      const sourcesSub = document.getElementById('sourcesSub');
+
+      function sourcesSubText(n){
+        if(n <= 1) return '1 fonte • ideal para começar com um dashboard simples';
+        if(n <= 3) return `${n} fontes • recomendado para consolidar e comparar dados (mínimo Intermediário)`;
+        return `${n}+ fontes • cenário com integrações e rotinas (mínimo Avançado)`;
+      }
+
+      if(sourcesCount){
+        sourcesCount.addEventListener('input', () => {
+          const n = Number(sourcesCount.value || 1);
+          state.sourcesCount = n;
+          if(sourcesCountLabel) sourcesCountLabel.textContent = String(n >= 11 ? '11+' : n);
+          if(sourcesSub) sourcesSub.textContent = sourcesSubText(n);
+          computeRequirements();
+          validateStep();
+        });
+        // inicial
+        state.sourcesCount = Number(sourcesCount.value || 1);
+        if(sourcesCountLabel) sourcesCountLabel.textContent = '1';
+        if(sourcesSub) sourcesSub.textContent = sourcesSubText(1);
+      }
+
+      // Slider: quantidade de ciclos
+      const cyclesCount = document.getElementById('cyclesCount');
+      const cyclesCountLabel = document.getElementById('cyclesCountLabel');
+      const cyclesSub = document.getElementById('cyclesSub');
+
+      function cyclesSubText(n){
+        if(n <= 1) return '1 ciclo • ideal para começar e validar o ganho de tempo';
+        if(n === 2) return '2 ciclos • desconto automático de 10% (pacote)';
+        if(n >= 3) return `${n} ciclos • desconto automático de 15% (pacote)`;
+        return `${n} ciclos`;
+      }
+
+      if(cyclesCount){
+        cyclesCount.addEventListener('input', () => {
+          const n = Number(cyclesCount.value || 1);
+          state.cyclesCount = n;
+          if(cyclesCountLabel) cyclesCountLabel.textContent = String(n);
+          if(cyclesSub) cyclesSub.textContent = cyclesSubText(n);
+          updateSummary();
+        });
+        // inicial
+        state.cyclesCount = Number(cyclesCount.value || 1);
+        if(cyclesCountLabel) cyclesCountLabel.textContent = String(state.cyclesCount);
+        if(cyclesSub) cyclesSub.textContent = cyclesSubText(state.cyclesCount);
+      }
+
+      // Select: tipo de fonte
+      const sourcesTypes = document.getElementById('sourcesTypes');
+      if(sourcesTypes){
+        sourcesTypes.addEventListener('change', () => {
+          state.sourcesTypes = (sourcesTypes.value || '').trim();
+          validateStep();
+        });
+      }
+
+      // Botões
+      if(btnBack){
+        btnBack.addEventListener('click', () => {
+          if(currentStep > 1) showStep(currentStep - 1);
+        });
+      }
+
+      if(btnNext){
+        btnNext.addEventListener('click', () => {
+          if(!validateStep()) return;
+
+          // salva inputs do step 4 e 5 quando existirem
+          updateSummary();
+
+          if(currentStep < totalSteps){
+            showStep(currentStep + 1);
+            // Se for passo 5, atualiza resumo final
+            if(currentStep === totalSteps) updateSummary();
+            return;
+          }
+
+          // Finaliza: preenche form oculto e envia
+          const form = document.getElementById('leadForm');
+          if(!form) return;
+
+          // Campos do wizard
+          document.getElementById('f_pacote').value = state.pacote || '';
+          // referência de preço removida (preço é calculado no final)
+          document.getElementById('f_cenario').value = state.scenario || '';
+          document.getElementById('f_output').value = state.output || '';
+          document.getElementById('f_dash_top2').value = (state.dashTop2 && state.dashTop2.length) ? state.dashTop2.map(protoTitleById).join(' | ') : '';
+          document.getElementById('f_dash_theme').value = state.dashTheme || '';
+          document.getElementById('f_dash_colors').value = (state.dashColors && state.dashColors.length) ? state.dashColors.join(' | ') : '';
+          document.getElementById('f_intervention').value = state.intervention || '';
+
+          document.getElementById('f_company').value = (document.getElementById('company')?.value || '').trim();
+          document.getElementById('f_role').value = (document.getElementById('role')?.value || '').trim();
+          document.getElementById('f_sourcesTypes').value = (document.getElementById('sourcesTypes')?.value || '').trim();
+          document.getElementById('f_sourcesCount').value = String(state.sourcesCount || 1);
+          document.getElementById('f_features').value = (state.features && state.features.length) ? state.features.join(' | ') : '';
+          document.getElementById('f_score').value = String(state.score || 0);
+          document.getElementById('f_recommended').value = state.recommended || '';
+          document.getElementById('f_context').value = (document.getElementById('context')?.value || '').trim();
+
+          document.getElementById('f_name').value = (document.getElementById('name')?.value || '').trim();
+          document.getElementById('f_email').value = (document.getElementById('email')?.value || '').trim();
+          document.getElementById('f_whats').value = (document.getElementById('whats')?.value || '').trim();
+          document.getElementById('f_date').value = (document.getElementById('date')?.value || '').trim();
+
+          // Tracking
+          try {
+            const pricing = calcPricing();
+            gtag('event', 'purchase', {
+              currency: 'BRL',
+              value: Number(pricing.totalFinal || 0),
+              items: [{ item_name: `Ciclo VIS — ${state.pacote}`, price: Number(pricing.totalFinal || 0) }]
+            });
+          } catch(e) {}
+
+          form.submit();
+        });
+      }
+
+      // valida em tempo real
+      document.addEventListener('change', (e) => {
+        if(['sourcesTypes','date'].includes(e.target?.id)) validateStep();
+      });
+
+      // inicial
+      setProgress();
+      computeRequirements();
+      validateStep();
+
+      // Sempre mantém resumo atualizado quando entrar no passo 5
+      const observer = new MutationObserver(() => {
+        if(currentStep === 5) updateSummary();
+      });
+      observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+
+    })();
+  </script>
+</body>
+</html>
