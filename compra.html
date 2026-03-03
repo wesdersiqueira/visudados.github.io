@@ -1526,7 +1526,6 @@
 <input id="f_email" name="email" type="hidden"/>
 <input id="f_whats" name="whatsapp" type="hidden"/>
 <input id="f_date" name="data" type="hidden"/>
-<button type="submit" form="leadForm">Finalizar</button>
 </form>
 </div>
 </div>
@@ -1883,10 +1882,6 @@ function applyOptionLocks(){
 
 }
 
-function applyPackageLocks(){
-  // compatibilidade com versões anteriores do arquivo
-  return applyOptionLocks();
-}
 
       function computeRequirements(){
         let required = 'Leve';
@@ -2831,7 +2826,7 @@ if(!state.pacote){
             });
           } catch(e) {}
 
-          form.submit();
+          document.getElementById('leadForm').submit();
         });
       }
 
