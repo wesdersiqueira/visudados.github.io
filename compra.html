@@ -1,23 +1,80 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
-  <script>
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-L8PV0HWVNS');
   </script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VISU Dados | Configurar Ciclo VIS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VISU Dados | Configurar Ciclo VIS</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<style>
     /* ====== Extras locais (não mexe no style.css) ====== */
+/* ====== Toggle (Sim/Não) — Trilha de Organização ====== */
+    .yn-hidden { display: none !important; }
+    .yn-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(3,40,66,0.10);
+      background: rgba(3,40,66,0.03);
+      width: fit-content;
+    }
+    .yn-toggle .yn-label {
+      font-size: 0.95rem;
+      color: var(--texto-secundario);
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 54px;
+      height: 28px;
+      flex: 0 0 auto;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      background-color: rgba(3,40,66,0.20);
+      border-radius: 999px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: .25s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: .25s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+    .switch input:checked + .slider {
+      background-color: var(--verde);
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
     main { padding: 120px 0 80px; }
 
     .page-wrap {
@@ -498,655 +555,993 @@
   .muted{color: var(--texto-secundario);}
   .total-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(3,40,66,.10);font-size:16px;}
   .money{font-weight:800;font-size:1.35rem;}
+
+    /* ====== Preferências de automação (apenas quando escolher Automação) ====== */
+    .auto-pref { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(3,40,66,0.06); }
+    .auto-pref.hidden { display: none; }
+
+    .auto-row { margin-top: 10px; }
+    .auto-row h4 { margin: 14px 0 6px; font-size: 1.02rem; }
+    .auto-row p { margin: 0 0 10px; color: var(--texto-secundario); font-size: 0.95rem; }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .tool-card {
+      border: 1px solid rgba(3,40,66,0.10);
+      background: rgba(3,40,66,0.02);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease, background .15s ease;
+      user-select: none;
+      min-height: 110px;
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .tool-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.05); }
+    .tool-card.selected { border-color: rgba(6,219,139,0.9); background: rgba(6,219,139,0.08); }
+    .tool-card.disabled { opacity: .45; cursor:not-allowed; pointer-events:none; }
+
+    .tool-top { display:flex; align-items:flex-start; justify-content:space-between; gap: 10px; }
+    .tool-name { margin:0; font-weight:800; color: var(--azul-escuro); font-size: 0.98rem; }
+    .tool-tag {
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 6px 10px; border-radius: 999px;
+      font-weight:700; font-size: 0.82rem;
+      border: 1px solid rgba(3,40,66,0.12);
+      background: rgba(3,40,66,0.03);
+      color: var(--azul-escuro);
+      white-space: nowrap;
+    }
+    .tool-desc { margin: 6px 0 0; color: var(--texto-secundario); font-size: 0.92rem; }
+    .tool-cost { margin: 0; font-weight: 800; color: var(--azul-escuro); }
+    .tool-cost small { font-weight: 600; color: var(--texto-secundario); }
+
+    .auto-selected {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(6,219,139,0.10);
+      border: 1px solid rgba(6,219,139,0.35);
+      color: var(--azul-escuro);
+      font-weight: 600;
+    }
+
+    @media (max-width: 992px) {
+      .tool-grid { grid-template-columns: 1fr; }
+    }
+
+
+
+    /* ====== UX Organização (apenas layout, sem mexer na lógica) ====== */
+    .org-panels{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .org-panel{
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(3,40,66,0.08);
+      border-radius: 16px;
+      padding: 14px 14px 6px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+    }
+    .org-panel-head{
+      display:flex;
+      flex-direction:column;
+      gap: 2px;
+      margin-bottom: 10px;
+    }
+    .org-panel-title{
+      font-weight: 700;
+      color: var(--azul-escuro);
+      font-size: 1.02rem;
+    }
+    .org-panel-sub{
+      color: var(--texto-secundario);
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+    .org-subblock{
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(3,40,66,0.03);
+      border: 1px dashed rgba(3,40,66,0.12);
+    }
+    .org-subtitle{
+      font-weight: 700;
+      color: var(--azul-escuro);
+      font-size: 0.95rem;
+      margin: 0 0 8px;
+    }
+    .option-grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    @media (max-width: 720px){
+      .option-grid-2{ grid-template-columns: 1fr; }
+    }
+    .org-chips{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
 </style>
 </head>
-
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
-            <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
-            <h2>VISU <span class="green-dot">•</span> Dados</h2>
-        </div>
-        <nav class="main-nav">
-            <ul class="header-links">
-                <!-- Item simples -->
-                <li>
-                    <a href="index.html" class="nav-link">
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="contato.html" class="nav-link">
-                        <span>Contato</span>
-                    </a>
-                </li>
-                <li><a href="#" class="nav-link cta-link active" onclick="return false;"><span>Comprar</span></a></li>
-
-                <!-- Dropdown para desktop (hidden em mobile) -->
-                <li class="dropdown desktop-only">
-                    <a class="nav-link with-arrow" data-toggle="dropdown">
-                        <span>Serviços</span>
-                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
-                        <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
-                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
-                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
-                    </ul>
-                </li>
-                
-                <!-- Accordion para mobile (hidden em desktop) -->
-                <li class="accordion mobile-only">
-                    <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
-                        <span>Serviços</span>
-                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <div class="collapse" id="servicosCollapse">
-                        <ul class="submenu">
-                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
-                            <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
-                            <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
-                            <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
-                        </ul>
-                    </div>
-                </li>
-                
-                <!-- Outros itens -->
-                <li>
-                    <a href="sobre.html" class="nav-link">
-                        <span>Sobre Nós</span>
-                    </a>
-                </li>
-                
-                <!-- Segundo dropdown -->
-                <li class="dropdown desktop-only">
-                    <a class="nav-link with-arrow" data-toggle="dropdown">
-                        <span>Tecnologias</span>
-                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="tec_python.html" class="dropdown-item">Python</a></li>
-                        <li><a href="tec_powerbi.html" class="dropdown-item">Power BI</a></li>
-                        <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
-                    </ul>
-                </li>
-                
-                <li class="accordion mobile-only">
-                    <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
-                        <span>Tecnologias</span>
-                        <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <div class="collapse" id="tecnologiasCollapse">
-                        <ul class="submenu">
-                            <li><a href="tec_python.html" class="submenu-item">Python</a></li>
-                            <li><a href="tec_powerbi.html" class="submenu-item">Power BI</a></li>
-                            <li><a href="tec_sql.html" class="submenu-item">SQL</a></li>
-                        </ul>
-                    </div>
-                </li>
-                
-                <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
-                <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li>
-
-            </ul>
-        </nav>
-        
-        <!-- Botão mobile -->
-        <button class="mobile-menu-toggle" aria-label="Abrir menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
+<!-- Header -->
+<header>
+<div class="logo-container">
+<img alt="VISU Dados" class="logo" src="assets/img/logo-visu.png"/>
+<h2>VISU <span class="green-dot">•</span> Dados</h2>
+</div>
+<nav class="main-nav">
+<ul class="header-links">
+<!-- Item simples -->
+<li>
+<a class="nav-link" href="index.html">
+<span>Home</span>
+</a>
+</li>
+<li>
+<a class="nav-link" href="contato.html">
+<span>Contato</span>
+</a>
+</li>
+<li><a class="nav-link cta-link active" href="#" onclick="return false;"><span>Comprar</span></a></li>
+<!-- Dropdown para desktop (hidden em mobile) -->
+<li class="dropdown desktop-only">
+<a class="nav-link with-arrow" data-toggle="dropdown">
+<span>Serviços</span>
+<svg class="dropdown-arrow" fill="none" height="8" viewbox="0 0 12 8" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="ser_automatizacao.html">Automação de Planilhas</a></li>
+<li><a class="dropdown-item" href="ser_dashboards.html">Dashboards em Power BI</a></li>
+<li><a class="dropdown-item" href="ser_etl.html">Soluções ETL</a></li>
+<li><a class="dropdown-item" href="ser_consultoria.html">Consultoria Estratégica</a></li>
+</ul>
+</li>
+<!-- Accordion para mobile (hidden em desktop) -->
+<li class="accordion mobile-only">
+<a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
+<span>Serviços</span>
+<svg class="dropdown-arrow" fill="none" height="8" viewbox="0 0 12 8" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<div class="collapse" id="servicosCollapse">
+<ul class="submenu">
+<li><a class="submenu-item" href="ser_automatizacao.html">Automação</a></li>
+<li><a class="submenu-item" href="ser_dashboards.html">Dashboards</a></li>
+<li><a class="submenu-item" href="ser_etl.html">ETL</a></li>
+<li><a class="submenu-item" href="ser_consultoria.html">Consultoria</a></li>
+</ul>
+</div>
+</li>
+<!-- Outros itens -->
+<li>
+<a class="nav-link" href="sobre.html">
+<span>Sobre Nós</span>
+</a>
+</li>
+<!-- Segundo dropdown -->
+<li class="dropdown desktop-only">
+<a class="nav-link with-arrow" data-toggle="dropdown">
+<span>Tecnologias</span>
+<svg class="dropdown-arrow" fill="none" height="8" viewbox="0 0 12 8" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="tec_python.html">Python</a></li>
+<li><a class="dropdown-item" href="tec_powerbi.html">Power BI</a></li>
+<li><a class="dropdown-item" href="tec_sql.html">SQL</a></li>
+</ul>
+</li>
+<li class="accordion mobile-only">
+<a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
+<span>Tecnologias</span>
+<svg class="dropdown-arrow" fill="none" height="8" viewbox="0 0 12 8" width="12" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<div class="collapse" id="tecnologiasCollapse">
+<ul class="submenu">
+<li><a class="submenu-item" href="tec_python.html">Python</a></li>
+<li><a class="submenu-item" href="tec_powerbi.html">Power BI</a></li>
+<li><a class="submenu-item" href="tec_sql.html">SQL</a></li>
+</ul>
+</div>
+</li>
+<li><a class="nav-link" href="trabalhe_conosco.html"><span>Trabalhe Conosco</span></a></li>
+<li><a class="nav-link" href="portfolio.html"><span>Portfólio</span></a></li>
+</ul>
+</nav>
+<!-- Botão mobile -->
+<button aria-label="Abrir menu" class="mobile-menu-toggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
 
 </header>
-
-  <main>
-    <div class="page-wrap">
-      <section class="hero-mini">
-        <h1>VISU Express — o Ciclo VIS em formato de produto</h1>
-        <p>
-          Inspirado na lógica do “Arquiteto de Bolso”: você escolhe um pacote, preenche um briefing guiado (com referências),
-          e entra numa call já com tudo pré-organizado. A diferença: em vez de 2D/3D, você recebe <strong>Diagnóstico + Protótipo + Plano de execução</strong>.
+<main>
+<div class="page-wrap">
+<section class="hero-mini">
+<h1>VISU Express — o Ciclo VIS em formato de produto</h1>
+<p>
+          A Lógica é simples: você escolhe um pacote, preenche um briefing guiado (com referências), e entra numa call com um dos nossos consultores já com tudo pré-organizado. A agilidade da etapa Visualizar do Ciclo VIS faz com que você receba Diagnóstico + Protótipo + Plano de execução.
         </p>
+<div class="pill-row">
+<div class="pill">✅ Briefing guiado (10–12 min)</div>
+<div class="pill">✅ Call rápida (30 min)</div>
+<div class="pill">✅ Entrega em até 48h</div>
+<div class="pill">✅ Ciclo VIS (Visualizar → Idealizar → Solucionar)</div>
+</div>
+</section>
+<h2 class="section-title">1) Escolha um pacote</h2>
+<p class="muted" style="margin-top:-6px;">O preço será calculado no final com base nas escolhas do briefing (sem surpresas de escopo).</p>
+<div class="grid" id="packageGrid">
+<div class="card" data-package="Leve" role="button" tabindex="0">
+<h3>Ciclo VIS — Leve</h3>
+<p>Para organizar o básico e destravar o primeiro ganho de tempo.</p>
+<ul class="mini-list">
+<li>1 fonte principal (Excel/Sheets/SharePoint)</li>
+<li>ETL leve e padronização</li>
+<li>Dashboard simples ou automação pontual</li>
+</ul>
+<div class="card-actions">
+<button class="btn btn-primary" type="button">Selecionar</button>
+<button class="btn btn-ghost" data-scroll-to="wizard" type="button">Quero ver o briefing</button>
+</div>
+</div>
+<div class="card" data-package="Intermediário" role="button" tabindex="0">
+<h3>Ciclo VIS — Intermediário</h3>
+<p>Para conectar dados e tirar o time do modo “planilha infinita”.</p>
+<ul class="mini-list">
+<li>Múltiplas fontes (SQL/ERP/Drive)</li>
+<li>Modelo de dados e métricas-chave</li>
+<li>Dashboard refinado + alertas básicos</li>
+</ul>
+<div class="card-actions">
+<button class="btn btn-primary" type="button">Selecionar</button>
+<button class="btn btn-ghost" data-scroll-to="wizard" type="button">Quero ver o briefing</button>
+</div>
+</div>
+<div class="card" data-package="Avançado" role="button" tabindex="0">
+<h3>Ciclo VIS — Avançado</h3>
+<p>Para automações mais pesadas e governança de dados na prática.</p>
+<ul class="mini-list">
+<li>Scraping / integrações / API</li>
+<li>Orquestração e rotinas automatizadas</li>
+<li>Dashboards + estrutura em nuvem</li>
+</ul>
+<div class="card-actions">
+<button class="btn btn-primary" type="button">Selecionar</button>
+<button class="btn btn-ghost" data-scroll-to="wizard" type="button">Quero ver o briefing</button>
+</div>
+</div>
+</div>
+<div class="wizard" id="wizard" style="margin-top: 22px;">
+<div class="wizard-top">
+<div class="wizard-title">
+<strong>2) Briefing guiado</strong>
+<span>Você preenche e a VISU já chega “brifada” na call.</span>
+</div>
+<div aria-label="Progresso do briefing" class="progress"><div id="progressBar"></div></div>
+</div>
+<div class="wizard-body">
+<div class="step active" data-step="1">
+<h4>Etapa 1/5 — Qual é o seu cenário hoje?</h4>
+<p>Escolha o que mais se aproxima. Isso já direciona o tipo de solução.</p>
+<div class="option-grid" data-group="scenario">
+<div class="opt" data-value="Planilhas manuais e retrabalho">
+<strong>Planilhas manuais</strong>
+<span>Consolidação, PROCV, versões diferentes, retrabalho.</span>
+</div>
+<div class="opt" data-value="Dados desconectados entre sistemas">
+<strong>Dados desconectados</strong>
+<span>ERP, financeiro, CRM, e-commerce não conversam.</span>
+</div>
+<div class="opt" data-value="Falta de visibilidade em indicadores">
+<strong>Sem visibilidade</strong>
+<span>Indicadores não estão prontos na hora da decisão.</span>
+</div>
+</div>
+<div class="hint">
+<strong>Ciclo VIS:</strong> aqui é o <em>Visualizar</em>, entender o problema e o contexto real.
+                      </div>
+</div>
+<div class="step" data-step="2">
+<h4>Etapa 2/5 — Que tipo de “visual” você quer primeiro?</h4>
+<p>Como no Arquiteto de Bolso (estilo): aqui você escolhe a <strong>forma</strong> do resultado.</p>
+<div class="option-grid" data-group="output">
+<div class="opt" data-min="Leve" data-points="2" data-value="Dashboard executivo (KPIs)">
+<strong>Dashboard executivo</strong>
+<span>KPIs, metas, visão geral (Power BI).</span>
+</div>
+<div class="opt" data-min="Intermediário" data-points="5" data-value="Rotina automatizada (Python/ETL)">
+<strong>Automação</strong>
+<span>Rotina que roda sozinha e entrega relatórios prontos.</span>
+</div>
+<div class="opt" data-min="Leve" data-points="2" data-value="Organização + governança (Drive/SharePoint)">
+<strong>Organização</strong>
+<span>Pastas, padrões, versões, fonte única da verdade.</span>
+</div>
+</div>
+<div class="hint">
+<strong>Ciclo VIS:</strong> ainda é <em>Visualizar</em> — mas já focando no que precisa ficar visível primeiro.
+                      </div>
+<!-- Preferências visuais (somente se escolher Dashboard) -->
+<div class="vis-pref hidden" id="dashboardPrefs">
+<h4 style="margin-top: 14px;">Preferências visuais do dashboard</h4>
+<p>Escolha o que você acha mais bonito. Vamos salvar as <strong>2 referências</strong> mais próximas do seu gosto.</p>
+<div class="pref-grid" id="protoGrid">
+<!-- Opção 1 -->
+<div class="proto-card" data-proto-id="opt1">
+<div class="proto-head">
+<div>
+<p class="proto-title">Monitor de Oportunidades Comerciais</p>
+<p class="proto-sub">Layout claro e executivo</p>
+</div>
+<button class="chip" data-action="togglePreview" type="button">Pré‑visualizar</button>
+</div>
+<div class="proto-actions">
+<button class="chip" data-score="0" type="button">Não é meu estilo</button>
+<button class="chip" data-score="1" type="button">Ok</button>
+<button class="chip" data-score="2" type="button">Amei</button>
+</div>
+<div class="proto-preview" data-preview="">
+<div style="position: relative; width: 100%; height: 0; padding-top: 60.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+<iframe allow="fullscreen" allowfullscreen="allowfullscreen" loading="lazy" src="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?embed" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"></iframe>
+</div>
+<a href="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?utm_content=DAHBCvtHY1A&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" rel="noopener" target="_blank">Abrir no Canva</a>
+</div>
+</div>
+<!-- Opção 2 -->
+<div class="proto-card" data-proto-id="opt2">
+<div class="proto-head">
+<div>
+<p class="proto-title">Dashboard Vendas — Dark Mode</p>
+<p class="proto-sub">Visual mais moderno e escuro</p>
+</div>
+<button class="chip" data-action="togglePreview" type="button">Pré‑visualizar</button>
+</div>
+<div class="proto-actions">
+<button class="chip" data-score="0" type="button">Não é meu estilo</button>
+<button class="chip" data-score="1" type="button">Ok</button>
+<button class="chip" data-score="2" type="button">Amei</button>
+</div>
+<div class="proto-preview" data-preview="">
+<div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+<iframe allow="fullscreen" allowfullscreen="allowfullscreen" loading="lazy" src="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?embed" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"></iframe>
+</div>
+<a href="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?utm_content=DAG2WohpjRM&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" rel="noopener" target="_blank">Abrir no Canva</a>
+</div>
+</div>
+<!-- Opção 3 -->
+<div class="proto-card" data-proto-id="opt3">
+<div class="proto-head">
+<div>
+<p class="proto-title">Indicadores de Saúde Financeira</p>
+<p class="proto-sub">Foco em leitura rápida e comparativos</p>
+</div>
+<button class="chip" data-action="togglePreview" type="button">Pré‑visualizar</button>
+</div>
+<div class="proto-actions">
+<button class="chip" data-score="0" type="button">Não é meu estilo</button>
+<button class="chip" data-score="1" type="button">Ok</button>
+<button class="chip" data-score="2" type="button">Amei</button>
+</div>
+<div class="proto-preview" data-preview="">
+<div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+<iframe allow="fullscreen" allowfullscreen="allowfullscreen" loading="lazy" src="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?embed" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"></iframe>
+</div>
+<a href="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?utm_content=DAG37YlGcOw&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" rel="noopener" target="_blank">Abrir no Canva</a>
+</div>
+</div>
+<!-- Opção 4 -->
+<div class="proto-card" data-proto-id="opt4">
+<div class="proto-head">
+<div>
+<p class="proto-title">Vendas x Meta por Canal</p>
+<p class="proto-sub">Crescimento por canal e metas</p>
+</div>
+<button class="chip" data-action="togglePreview" type="button">Pré‑visualizar</button>
+</div>
+<div class="proto-actions">
+<button class="chip" data-score="0" type="button">Não é meu estilo</button>
+<button class="chip" data-score="1" type="button">Ok</button>
+<button class="chip" data-score="2" type="button">Amei</button>
+</div>
+<div class="proto-preview" data-preview="">
+<div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+<iframe allow="fullscreen" allowfullscreen="allowfullscreen" loading="lazy" src="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?embed" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"></iframe>
+</div>
+<a href="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?utm_content=DAG6A8oTJ8I&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" rel="noopener" target="_blank">Abrir no Canva</a>
+</div>
+</div>
+<!-- Opção 5 -->
+<div class="proto-card" data-proto-id="opt5">
+<div class="proto-head">
+<div>
+<p class="proto-title">Indicadores de RH e Clima Organizacional</p>
+<p class="proto-sub">Painel de pessoas, clima e saúde do time</p>
+</div>
+<button class="chip" data-action="togglePreview" type="button">Pré‑visualizar</button>
+</div>
+<div class="proto-actions">
+<button class="chip" data-score="0" type="button">Não é meu estilo</button>
+<button class="chip" data-score="1" type="button">Ok</button>
+<button class="chip" data-score="2" type="button">Amei</button>
+</div>
+<div class="proto-preview" data-preview="">
+<div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
+<iframe allow="fullscreen" allowfullscreen="allowfullscreen" loading="lazy" src="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?embed" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"></iframe>
+</div>
+<a href="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?utm_content=DAG7rdcKM0w&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" rel="noopener" target="_blank">Abrir no Canva</a>
+</div>
+</div>
+</div>
+<div class="pref-selected" id="protoSelectedText">Selecione suas preferências para o site sugerir as 2 referências mais próximas.</div>
+<h4 style="margin-top: 16px;">Tema</h4>
+<p class="pref-note">Você prefere o dashboard em versão clara ou escura?</p>
+<div class="theme-row" id="themeRow">
+<button class="chip" data-theme="Claro" type="button">Claro</button>
+<button class="chip" data-theme="Escuro" type="button">Escuro</button>
+</div>
+<h4 style="margin-top: 16px;">Cores predominantes</h4>
+<p class="pref-note">Escolha <strong>3 cores</strong> para guiar a identidade do dashboard.</p>
+<div class="swatches" id="swatches">
+<div class="swatch" data-color="#032842" data-label="Azul" style="background:#032842"></div>
+<div class="swatch" data-color="#06db8b" data-label="Verde" style="background:#06db8b"></div>
+<div class="swatch" data-color="#1b96db" data-label="Ciano" style="background:#1b96db"></div>
+<div class="swatch" data-color="#111827" data-label="Preto" style="background:#111827"></div>
+<div class="swatch" data-color="#f97316" data-label="Laranja" style="background:#f97316"></div>
+<div class="swatch" data-color="#a855f7" data-label="Roxo" style="background:#a855f7"></div>
+<div class="swatch" data-color="#ef4444" data-label="Vermelho" style="background:#ef4444"></div>
+<div class="swatch" data-color="#facc15" data-label="Amarelo" style="background:#facc15"></div>
+<div class="swatch" data-color="#94a3b8" data-label="Cinza" style="background:#94a3b8"></div>
+</div>
+<br/>
+<div class="pref-note" id="colorsNote">0/3 cores selecionadas.</div>
+</div>
+<!-- Preferências de automação (somente se escolher Automação) -->
+<div class="auto-pref hidden" id="automationPrefs">
+<h4 style="margin-top: 14px;">Trilha de automação</h4>
+<p class="pref-note">Responda em linguagem simples. O objetivo é a VISU entender o seu dia a dia e montar uma automação sem burocracia.</p>
+<!-- A) Plataforma -->
+<div class="auto-row">
+<h4>1) Qual ferramenta você prefere que rode a automação?</h4>
+<p class="pref-note">Se não souber, tudo bem — a VISU recomenda na call.</p>
+<div class="option-grid option-grid-compact" data-group="autoPlatform">
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Power Automate (Microsoft)">Power Automate (Microsoft)</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="n8n">n8n</div>
+<div class="opt compact" data-min="Leve" data-points="1" data-value="Google Workspace (Apps Script)">Google Workspace (Apps Script)</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Python">Python</div>
+<div class="opt compact" data-min="Leve" data-points="0" data-value="Não sei (me recomendem)">Não sei (me recomendem)</div>
+</div>
+<div class="pref-note" id="autoPlatformCostNote" style="margin-top:10px;"></div>
+</div>
+<!-- B) Objetivos -->
+<div class="auto-row">
+<h4>2) Quais processos manuais você gostaria de automatizar?</h4>
+<p class="pref-note">Escolha até <strong id="autoGoalLimitLabel">1</strong> opção(ões) (depende do pacote).</p>
+<div class="option-grid option-grid-compact" data-group="autoGoal">
+<div class="opt compact" data-min="Leve" data-points="1" data-value="Atualizar relatórios">Atualizar relatórios</div>
+<div class="opt compact" data-min="Leve" data-points="1" data-value="Consolidar planilhas">Consolidar planilhas</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Enviar alertas quando algo acontece">Enviar alertas</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Buscar dados externos automaticamente">Buscar dados externos</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Organizar e validar dados">Organizar e validar dados</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Criar tarefas a partir de e-mails">Criar tarefas por e-mail</div>
+</div>
+</div>
+<!-- F) Alertas (condicional) -->
+<div class="auto-row hidden" id="autoAlertsBlock">
+<h4>[*EXTRA*] Alertas: por onde você quer receber?</h4>
+<p class="pref-note">Esse bloco aparece porque você escolheu “Enviar alertas”.</p>
+<div class="option-grid option-grid-compact" data-group="autoAlertChannels">
+<div class="opt compact" data-min="Intermediário" data-points="0" data-value="E-mail">E-mail</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Slack">Slack</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Teams">Teams</div>
+<div class="opt compact" data-min="Avançado" data-points="2" data-value="WhatsApp">WhatsApp</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Google Chat">Google Chat</div>
+</div>
+</div>
+<!-- G) Scraping (condicional) -->
+<div class="auto-row hidden" id="autoScrapingBlock">
+<h4>[*EXTRA*] Buscar dados externos: a fonte é pública ou privada?</h4>
+<p class="pref-note">Esse bloco aparece porque você escolheu “Buscar dados externos”.</p>
+<div class="option-grid option-grid-compact" data-group="autoScraping">
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Fonte pública (sem login)">Fonte pública (sem login)</div>
+<div class="opt compact" data-min="Avançado" data-points="4" data-value="Fonte privada (com login)">Fonte privada (com login)</div>
+</div>
+</div>
+<!-- C) Onde acontece -->
+<div class="auto-row" hidden"="" id="autoSheetsBlock">
+<h4>[*EXTRA*] Onde estão os dados que vamos usar?</h4>
+<div class="option-grid option-grid-compact" data-group="autoWhere">
+<div class="opt compact" data-min="Leve" data-points="1" data-value="Só em planilhas">Só em planilhas</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Planilhas + sistema">Planilhas + sistema</div>
+<div class="opt compact" data-min="Avançado" data-points="4" data-value="Portal externo com login">Portal externo com login</div>
+<div class="opt compact" data-min="Avançado" data-points="4" data-value="Vários sistemas desconectados">Vários sistemas desconectados</div>
+</div>
+</div>
+<!-- D) Como roda -->
+<div class="auto-row">
+<h4>3) Como a automação deve ser ativada no dia a dia?</h4>
+<div class="option-grid option-grid-compact" data-group="autoMode">
+<div class="opt compact" data-min="Leve" data-points="1" data-value="Eu clico quando preciso">Eu clico quando preciso</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Ele roda sozinho todo dia">Ele roda sozinho todo dia</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Ele roda sozinho e me avisa se der erro">Roda e avisa se der erro</div>
+<div class="opt compact" data-min="Avançado" data-points="4" data-value="Ele roda sozinho e me avisa se algo sair do padrão">Roda e avisa fora do padrão</div>
+</div>
+</div>
+<!-- E) Integrações (multi) -->
+<div class="auto-row">
+<h4>4) A automação vai integrar com algum canal de comunicação?</h4>
+<p class="pref-note">Se você não usa algum deles, ignore. (Você pode marcar mais de um.)</p>
+<div class="option-grid option-grid-compact" data-group="autoIntegrations">
+<div class="opt compact" data-min="Leve" data-points="0" data-value="E-mail">E-mail</div>
+<div class="opt compact" data-min="Leve" data-points="0" data-value="Google Drive/Sheets">Drive/Sheets</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Slack">Slack</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Teams">Teams</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="WhatsApp">WhatsApp</div>
+<div class="opt compact" data-min="Avançado" data-points="3" data-value="Webhook/API">Webhook/API</div>
+</div>
+</div>
+<!-- H) Onde roda (stack) -->
+<div class="auto-row">
+<h4>5) Qual ecossistema sua empresa utiliza/pretende utilizar?</h4>
+<p class="pref-note">Escolha o ecossistema que você já usa (ou o que faz mais sentido). O custo abaixo é <strong>médio</strong> e serve para orientar.</p>
+<div class="tool-grid" id="toolGrid">
+<div class="tool-card" data-tool="Google Workspace (Drive + Apps Script)" data-tool-cost="~R$ 30–60 por usuário/mês" role="button" tabindex="0">
+<div>
+<div class="tool-top">
+<p class="tool-name">Google Workspace</p>
+<span class="tool-tag">Recomendado</span>
+</div>
+<p class="tool-desc">Ideal para quem já usa Drive/Sheets/Gmail.</p>
+</div>
+<p class="tool-cost">~R$ 30–60/usuário/mês</p>
+</div>
+<div class="tool-card" data-tool="Microsoft 365 + Power Automate" data-tool-cost="~R$ 75–120 por usuário/mês" role="button" tabindex="0">
+<div>
+<div class="tool-top">
+<p class="tool-name">Microsoft 365 / Power Automate</p>
+<span class="tool-tag">Corporativo</span>
+</div>
+<p class="tool-desc">Ideal para SharePoint/OneDrive/Teams.</p>
+</div>
+<p class="tool-cost">~R$ 75–120/usuário/mês</p>
+</div>
+<div class="tool-card" data-tool="n8n (automação avançada)" data-tool-cost="~R$ 50–150 por mês" role="button" tabindex="0">
+<div>
+<div class="tool-top">
+<p class="tool-name">n8n</p>
+<span class="tool-tag">Avançado</span>
+</div>
+<p class="tool-desc">Fluxos robustos, webhooks e integrações complexas.</p>
+</div>
+<p class="tool-cost">~R$ 50–150/mês</p>
+</div>
+<div class="tool-card" data-tool="Servidor próprio" data-tool-cost="Sem mensalidade extra (infra interna)" role="button" tabindex="0">
+<div>
+<div class="tool-top">
+<p class="tool-name">Servidor próprio</p>
+<span class="tool-tag">Sob medida</span>
+</div>
+<p class="tool-desc">Sem assinatura extra, mas exige infraestrutura.</p>
+</div>
+<p class="tool-cost">Infra interna</p>
+</div>
+</div>
+<div class="auto-selected" id="autoSelectedText">Selecione a plataforma, objetivos, contexto, funcionamento e ecossistema.</div>
+</div>
+<!-- I) Exemplos (opcional) -->
+<div class="auto-row">
+<h4>Exemplos de cenários que poderiam ajudar a descrever seu objetivo</h4>
+<p class="pref-note">Marque se algum exemplo te representa (isso ajuda a VISU a brifar a call).</p>
+<div class="option-grid option-grid-compact" data-group="autoExamples">
+<div class="opt compact" data-min="Leve" data-points="0" data-value="Salvar anexos de e-mail em uma pasta automaticamente">Salvar anexos do e-mail no Drive</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Criar tarefas a partir de e-mails (Notion/Trello/etc.)">Criar tarefas a partir de e-mails</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Avisar quando der erro no processo">Avisar quando der erro</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Integrar Apollo/Notion/HubSpot">Integrar CRM (Apollo/Notion/HubSpot)</div>
+</div>
+</div>
+</div>
+<div class="org-pref hidden" id="organizationPrefs">
+<h4 style="margin-top: 14px;">Trilha de organização</h4>
+<p class="pref-note">Responda de forma simples. A ideia é a VISU entender sua dor e desenhar uma estrutura clara, com regras fáceis de manter.</p>
+<div class="org-panels">
+<!-- Painel 1 -->
+<div class="org-panel">
+<div class="org-panel-head">
+<div class="org-panel-title">Mapa atual</div>
+<div class="org-panel-sub">Onde estão seus dados hoje e qual é o objetivo principal.</div>
+</div>
+<!-- 1) Objetivo principal -->
+<div class="org-row">
+<h4>1) Qual é o principal objetivo?</h4>
+<div class="option-grid option-grid-compact" data-group="orgGoal">
+<div class="opt compact" data-points="2" data-value="Organizar pastas e acessos">Organizar pastas e acessos</div>
+<div class="opt compact" data-points="2" data-value="Padronizar processos">Padronizar processos</div>
+<div class="opt compact" data-points="2" data-value="Tratar dados (padronizar/limpar)">Tratar dados (padronizar/limpar)</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Integrar sistemas/fontes">Integrar sistemas/fontes</div>
+<div class="opt compact" data-min="Avançado" data-points="4" data-value="Definir regras e governança">Definir regras e governança</div>
+</div>
+</div>
+<!-- 2) Onde estão os dados hoje -->
+<div class="org-row">
+<h4>2) Onde estão seus dados hoje?</h4>
+<p class="pref-note" style="margin-top:-6px;">Escolha o mais próximo da realidade.</p>
+<div class="option-grid option-grid-compact" data-group="orgWhere">
+<div class="opt compact" data-points="1" data-value="Planilhas">Planilhas</div>
+<div class="opt compact" data-points="1" data-value="Google Drive">Google Drive</div>
+<div class="opt compact" data-points="1" data-value="OneDrive/SharePoint">OneDrive/SharePoint</div>
+<div class="opt compact" data-points="2" data-value="Servidor próprio / rede">Servidor próprio / rede</div>
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Sistemas internos">Sistemas internos</div>
+<div class="opt compact" data-points="2" data-value="Tudo misturado">Tudo misturado</div>
+</div>
+</div>
+</div>
+<!-- Painel 2 -->
+<div class="org-panel">
+<div class="org-panel-head">
+<div class="org-panel-title">Estrutura e regras</div>
+<div class="org-panel-sub">Como a organização vai funcionar no dia a dia (pastas, padrão e acesso).</div>
+</div>
+<!-- 3) Rede de pastas -->
+<div class="org-row">
+<h4>3) Precisa criar ou redesenhar uma rede de pastas e acessos?</h4>
+<div class="yn-toggle" data-yn-wrap="orgFolders">
+<span class="yn-label">Não</span>
+<label class="switch" title="Alternar Sim/Não">
+<input data-yn="orgFolders" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<span class="yn-label">Sim</span>
+</div>
+<div class="option-grid option-grid-2 yn-hidden" data-group="orgFolders">
+<div class="opt compact" data-points="2" data-value="Sim">Sim</div>
+<div class="opt compact" data-points="0" data-value="Não">Não</div>
+</div>
+<!-- Condicional: plataforma -->
+<div class="org-subblock hidden" id="orgFolderPlatformBlock">
+<div class="org-subtitle">Ok — em qual plataforma?</div>
+<div class="option-grid option-grid-compact" data-group="orgFolderPlatform">
+<div class="opt compact" data-points="0" data-value="Google">Google</div>
+<div class="opt compact" data-points="0" data-value="OneDrive">OneDrive</div>
+<div class="opt compact" data-min="Intermediário" data-points="1" data-value="Servidor">Servidor</div>
+<div class="opt compact" data-points="0" data-value="Outro">Outro</div>
+</div>
+</div>
+</div>
+<!-- 4) Regras de nomenclatura -->
+<div class="org-row">
+<h4>4) Quer definir regras de salvamento, nomenclatura e acesso?</h4>
+<div class="yn-toggle" data-yn-wrap="orgRules">
+<span class="yn-label">Não</span>
+<label class="switch" title="Alternar Sim/Não">
+<input data-yn="orgRules" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<span class="yn-label">Sim</span>
+</div>
+<div class="option-grid option-grid-2 yn-hidden" data-group="orgRules">
+<div class="opt compact" data-points="2" data-value="Sim">Sim</div>
+<div class="opt compact" data-points="0" data-value="Não">Não</div>
+</div>
+</div>
+</div>
+<!-- Painel 3 -->
+<div class="org-panel">
+<div class="org-panel-head">
+<div class="org-panel-title">Integração e entregáveis</div>
+<div class="org-panel-sub">Se precisa integrar sistemas e qual nível de intervenção você quer.</div>
+</div>
+<!-- 5) Integração -->
+<div class="org-row">
+<h4>5) Precisa integrar sistemas ou fontes de dados?</h4>
+<div class="yn-toggle" data-yn-wrap="orgIntegration">
+<span class="yn-label">Não</span>
+<label class="switch" title="Alternar Sim/Não">
+<input data-yn="orgIntegration" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<span class="yn-label">Sim</span>
+</div>
+<div class="option-grid option-grid-2 yn-hidden" data-group="orgIntegration">
+<div class="opt compact" data-min="Intermediário" data-points="3" data-value="Sim">Sim</div>
+<div class="opt compact" data-points="0" data-value="Não">Não</div>
+</div>
+<!-- Condicional: detalhe -->
+<div class="org-subblock hidden" id="orgIntegrationDetailBlock">
+<div class="org-subtitle">Beleza — descreva a integração em 1–2 frases</div>
+<textarea id="orgIntegrationDetail" placeholder="Ex: puxar vendas do sistema X e juntar com planilha Y, gerando uma base única no Drive/SharePoint..."></textarea>
+<p class="pref-note">Quanto mais simples e direto, melhor. (Campo obrigatório quando “Sim”.)</p>
+</div>
+</div>
+<!-- 6) Nível de intervenção -->
+<div class="org-row">
+<h4>6) Qual nível de intervenção você quer?</h4>
+<div class="option-grid option-grid-compact" data-group="orgIntervention">
+<div class="opt compact" data-points="1" data-value="Ajuste em estrutura existente">Ajuste em estrutura existente</div>
+<div class="opt compact" data-min="Intermediário" data-points="2" data-value="Criação do zero">Criação do zero</div>
+<div class="opt compact" data-min="Avançado" data-points="3" data-value="Revisão de governança">Revisão de governança</div>
+</div>
+</div>
+<!-- 7) Exemplos opcionais -->
+<div class="org-row">
+<h4>Exemplos do que podemos entregar (opcional)</h4>
+<div class="org-chips" data-group="orgExamples">
+<div class="chip opt" data-value="Padronização de nomes e pastas">Padronização de nomes e pastas</div>
+<div class="chip opt" data-value="Regras de acesso">Regras de acesso</div>
+<div class="chip opt" data-min="Intermediário" data-value="Fluxo de classificação">Fluxo de classificação</div>
+<div class="chip opt" data-min="Intermediário" data-value="Centralização de dados">Centralização de dados</div>
+<div class="chip opt" data-min="Avançado" data-value="Documento de governança e regras">Documento de governança</div>
+</div>
+<p class="pref-note">Você pode anexar prints/arquivos na Etapa 4.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="hint" style="margin-top: 14px;"><strong>Ciclo VIS:</strong> você está estruturando o <em>Visualizar</em> através de informações adicionais, o “como” técnico fica com a VISU.</div></div>
+<div class="step" data-step="3">
+<h4>Etapa 3/5 — Nível da intervenção</h4>
+<p>Como “reforma superficial vs estrutural”, só que para dados.</p>
+<div class="option-grid" data-group="intervention">
+<div class="opt" data-min="Leve" data-points="1" data-value="Leve (ajuste rápido, sem mexer em sistemas)">
+<strong>Leve</strong>
+<span>Melhorias rápidas com o que já existe.</span>
+</div>
+<div class="opt" data-min="Intermediário" data-points="3" data-value="Intermediária (conectar fontes e padronizar)">
+<strong>Intermediária</strong>
+<span>Conectar fontes, criar modelo e métricas.</span>
+</div>
+<div class="opt" data-min="Avançado" data-points="6" data-value="Estrutural (API/automação pesada/governança)">
+<strong>Estrutural</strong>
+<span>Integrações, rotinas, segurança e governança.</span>
+</div>
+</div>
+<div class="hint">
+<strong>Ciclo VIS:</strong> aqui começa o <em>Idealizar</em> — decidir o caminho e o nível de mudança.
+                      </div>
+</div>
+<div class="step" data-step="4">
+<h4>Etapa 4/5 — Referências e detalhes</h4>
+<p>Anexe o que tiver (prints, planilhas, PDF, PPT) e descreva o contexto. Se não tiver anexos, tudo bem.</p>
+<div aria-label="Quantidade de fontes de dados" class="range-card">
+<div class="range-top">
+<div>
+<p class="range-title"><strong>Quantas fontes/conexões de dados você quer integrar?</strong></p>
+<p class="range-sub" id="sourcesSub">1 fonte • ideal para começar com um dashboard simples</p>
+</div>
+<div class="range-value" id="sourcesCountLabel">1</div>
+</div>
+<input class="range" id="sourcesCount" min="1" max="12" step="1" name="sourcesCount" type="range" value="1"/>
+<div class="range-legend">
+<span>1</span><span>6</span><span>11+</span></div>
+<div class="guard" id="guardBox">
+<div class="guard-row">
+<div>
+<strong id="guardTitle">Essa combinação pede um pacote maior.</strong><br/>
+<small id="guardText">Para 2+ fontes ou automações, o mínimo recomendado é Intermediário.</small>
+</div>
+<button class="btn btn-primary" id="btnUpgrade" type="button">Atualizar para Intermediário</button>
+</div>
+</div>
+</div>
+<div class="mini-divider"></div>
+<h5 style="margin: 0 0 6px 0;">Parâmetros para compor o valor</h5>
+<p class="muted" style="margin: 0 0 14px 0;">Isso ajusta o valor final conforme complexidade, perfil e urgência (o preço só aparece no final).</p>
+<div aria-label="Quantidade de ciclos" class="range-card" style="margin-top: 10px;">
+<div class="range-top">
+<div>
+<p class="range-title"><strong>Quantos Ciclos VIS você quer contratar agora?</strong></p>
+<p class="range-sub" id="cyclesSub">1 ciclo • ideal para começar e validar o ganho de tempo</p>
+</div>
+<div class="range-value" id="cyclesCountLabel">1</div>
+</div>
+<input class="range" id="cyclesCount" min="1" max="6" step="1" name="cyclesCount" type="range" value="1"/>
+<div class="range-legend"><span>1</span><span>3</span><span>6</span></div>
+</div>
+<div class="form-row">
+<div class="field">
+<label>Tipo de cliente</label>
+<div class="option-grid option-grid-compact" data-group="clientType">
+<div class="opt compact" data-value="Autônomo">Autônomo</div>
+<div class="opt compact" data-value="MEI">MEI</div>
+<div class="opt compact" data-value="Micro">Micro</div>
+<div class="opt compact selected" data-value="PME">PME</div>
+<div class="opt compact" data-value="Corporativo">Corporativo</div>
+</div>
+</div>
+</div>
+<div class="form-row">
+<div class="field">
+<label>Urgência</label>
+<div class="option-grid option-grid-compact" data-group="urgency">
+<div class="opt compact selected" data-value="Normal">Normal</div>
+<div class="opt compact" data-value="Alta">Alta</div>
+</div>
+</div>
+<div class="field">
+<label>Pacote de manutenção (opcional)</label>
+<div class="option-grid option-grid-compact" data-group="maintenance">
+<div class="opt compact selected" data-value="Sem manutenção">Sem manutenção</div>
+<div class="opt compact" data-value="Básico">Básico</div>
+<div class="opt compact" data-value="Estendido">Estendido</div>
+<div class="opt compact" data-value="Premium">Premium</div>
+</div>
+</div>
+</div>
+<div class="form-row">
+<div class="field">
+<label for="company">Empresa</label>
+<input id="company" name="company" placeholder="Ex.: Loja X / Clínica Y" type="text"/>
+</div>
+<div class="field">
+<label for="role">Seu cargo</label>
+<input id="role" name="role" placeholder="Ex.: Dono(a), Financeiro, Operações" type="text"/>
+</div>
+</div>
+<div class="form-row">
+<div class="field">
+<label for="sourcesTypes">Onde estão seus dados hoje? (selecione o principal)</label>
+<select id="sourcesTypes" name="sourcesTypes">
+<option value="">Selecione...</option>
+<option>Excel/Sheets</option>
+<option>Drive/SharePoint/OneDrive</option>
+<option>ERP / Sistema interno</option>
+<option>SQL / Banco de dados</option>
+<option>Mix de tudo</option>
+</select>
+</div>
+<div class="field">
+<label for="files">Anexos (opcional)</label>
+<input id="files" multiple="" name="files" type="file"/>
+</div>
+</div>
+<div class="field" style="margin-top: 12px;">
+<label for="context">Conte sobre o desafio (em 5–10 linhas)</label>
+<textarea id="context" name="context" placeholder="Ex.: Hoje eu fecho o mês juntando 6 planilhas, demora 2 dias e sempre dá divergência de CMV..."></textarea>
+</div>
+<div class="hint">
+<strong>Ciclo VIS:</strong> fechar o <em>Visualizar</em> com contexto e restrições reais vai ajudar o consultor a <em>Idealizar</em> as melhores soluções.
+                      </div>
+</div>
+<div class="step" data-step="5">
+<h4>Etapa 5/5 — Resumo e valor estimado</h4>
+<p>O valor aparece só aqui no final e é calculado a partir do seu briefing. Depois disso, você agenda a call.</p>
+<div class="form-row">
+<div class="field">
+<label for="name">Nome</label>
+<input id="name" name="name" placeholder="Seu nome" type="text"/>
+</div>
+<div class="field">
+<label for="email">E-mail</label>
+<input id="email" name="email" placeholder="voce@empresa.com" type="email"/>
+</div>
+</div>
+<div class="form-row">
+<div class="field">
+<label for="whats">WhatsApp</label>
+<input id="whats" name="whats" placeholder="(21) 99999-9999" type="tel"/>
+</div>
+<div class="field">
+<label for="date">Agendar conversa com o Consultor VISU</label>
+<input id="date" name="date" type="date"/>
+</div>
+</div>
+<div class="summary">
+<div class="card">
+<p class="kv"><strong>Pacote</strong><span id="sumPackage">—</span></p>
+<p class="kv"><strong>Fontes</strong><span id="sumSources">—</span></p>
+<p class="kv"><strong>Nível</strong><span id="sumIntervention">—</span></p>
+<p class="kv"><strong>Ciclos</strong><span id="sumCycles">—</span></p>
+</div>
+<div class="card">
+<p class="kv"><strong>Preço base (por ciclo)</strong><span id="sumBase">—</span></p>
+<p class="kv"><strong>Fator complexidade</strong><span id="sumFxComplex">—</span></p>
+<p class="kv"><strong>Fator cliente</strong><span id="sumFxClient">—</span></p>
+<p class="kv"><strong>Fator urgência</strong><span id="sumFxUrgency">—</span></p>
+<p class="kv"><strong>Manutenção (1º mês, por ciclo)</strong><span id="sumMaintenance">—</span></p>
+<p class="kv"><strong>Total estimado (por ciclo)</strong><span id="sumPerCycle">—</span></p>
+<p class="kv"><strong>Desconto por pacote</strong><span id="sumDiscount">—</span></p>
+<div class="total-row">
+<strong>Total estimado (final)</strong>
+<span id="sumTotal">—</span>
+</div>
+</div>
+</div>
+<div class="hint">
+<strong>Ciclo VIS:</strong> o próximo passo é o <em>Solucionar</em> — a call + protótipo + plano (entregas rápidas e objetivas).
+                      </div>
+</div>
+</div>
+<div class="wizard-actions">
+<button class="btn" id="btnBack" type="button">Voltar</button>
+<div class="note" id="stepNote">Selecione uma opção para continuar.</div>
+<button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
+</div>
+<!-- Form oculto (simulação) -->
+<form action="https://formsubmit.co/contato@visudados.com.br" class="hidden" enctype="multipart/form-data" id="leadForm" method="POST">
+<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
+<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
+<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
+<input name="_honey" style="display:none" type="text"/>
+<input id="f_pacote" name="pacote" type="hidden"/>
+<!-- preço só aparece no final; referência removida -->
+<input id="f_cenario" name="cenario" type="hidden"/>
+<input id="f_output" name="resultado_desejado" type="hidden"/>
+<input id="f_dash_top2" name="dashboard_referencias_top2" type="hidden"/>
+<input id="f_dash_theme" name="dashboard_tema" type="hidden"/>
+<input id="f_dash_colors" name="dashboard_cores" type="hidden"/>
+<input id="f_auto_goal" name="automacao_objetivo" type="hidden"/>
+<input id="f_auto_where" name="automacao_onde" type="hidden"/>
+<input id="f_auto_mode" name="automacao_funcionamento" type="hidden"/>
+<input id="f_auto_freq" name="automacao_frequencia" type="hidden"/>
+<input id="f_auto_tool" name="automacao_programa" type="hidden"/>
+<input id="f_auto_tool_cost" name="automacao_programa_custo" type="hidden"/>
+<input id="f_auto_platform" name="automacao_plataforma" type="hidden"/>
+<input id="f_auto_integrations" name="automacao_integracoes" type="hidden"/>
+<input id="f_auto_alert_channels" name="automacao_alertas_canais" type="hidden"/>
+<input id="f_auto_scraping" name="automacao_scraping_tipo" type="hidden"/>
+<input id="f_auto_examples" name="automacao_exemplos" type="hidden"/>
+<input id="f_org_goal" name="org_goal" type="hidden"/>
+<input id="f_org_where" name="org_where" type="hidden"/>
+<input id="f_org_folders" name="org_folders" type="hidden"/>
+<input id="f_org_folder_platform" name="org_folder_platform" type="hidden"/>
+<input id="f_org_rules" name="org_rules" type="hidden"/>
+<input id="f_org_integration" name="org_integration" type="hidden"/>
+<input id="f_org_integration_detail" name="org_integration_detail" type="hidden"/>
+<input id="f_org_intervention" name="org_intervention" type="hidden"/>
+<input id="f_org_examples" name="org_examples" type="hidden"/>
+<input id="f_intervention" name="nivel_intervencao" type="hidden"/>
+<input id="f_company" name="empresa" type="hidden"/>
+<input id="f_role" name="cargo" type="hidden"/>
+<input id="f_sourcesTypes" name="fontes_tipo" type="hidden"/>
+<input id="f_sourcesCount" name="fontes_quantidade" type="hidden"/>
+<input id="f_features" name="features" type="hidden"/>
+<input id="f_score" name="complexidade_score" type="hidden"/>
+<input id="f_recommended" name="pacote_recomendado" type="hidden"/>
+<input id="f_context" name="contexto" type="hidden"/>
+<input id="f_name" name="nome" type="hidden"/>
+<input id="f_email" name="email" type="hidden"/>
+<input id="f_whats" name="whatsapp" type="hidden"/>
+<input id="f_date" name="data" type="hidden"/>
+</form>
+</div>
+</div>
+<section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
+<h2>Preferindo falar direto?</h2>
+<p>Sem problema. Se quiser, já agenda uma conversa de 30 minutos.</p>
+<a class="cta-button" href="https://cal.com/visudados" target="_blank">Agendar diagnóstico gratuito</a>
+</section>
 
-        <div class="pill-row">
-          <div class="pill">✅ Briefing guiado (10–12 min)</div>
-          <div class="pill">✅ Call rápida (30 min)</div>
-          <div class="pill">✅ Entrega em até 48h</div>
-          <div class="pill">✅ Ciclo VIS (Visualizar → Idealizar → Solucionar)</div>
-        </div>
-      </section>
-
-      <h2 class="section-title">1) Escolha um pacote</h2>
-      <p class="muted" style="margin-top:-6px;">O preço será calculado no final com base nas escolhas do briefing (sem surpresas de escopo).</p>
-      <div class="grid" id="packageGrid">
-        <div class="card" role="button" tabindex="0" data-package="Leve">
-          <h3>Ciclo VIS — Leve</h3>
-          <p>Para organizar o básico e destravar o primeiro ganho de tempo.</p>
-          <ul class="mini-list">
-            <li>1 fonte principal (Excel/Sheets/SharePoint)</li>
-            <li>ETL leve e padronização</li>
-            <li>Dashboard simples ou automação pontual</li>
-          </ul>
-          <div class="card-actions">
-            <button class="btn btn-primary" type="button">Selecionar</button>
-            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
-          </div>
-        </div>
-
-        <div class="card" role="button" tabindex="0" data-package="Intermediário">
-          <h3>Ciclo VIS — Intermediário</h3>
-          <p>Para conectar dados e tirar o time do modo “planilha infinita”.</p>
-          <ul class="mini-list">
-            <li>Múltiplas fontes (SQL/ERP/Drive)</li>
-            <li>Modelo de dados e métricas-chave</li>
-            <li>Dashboard refinado + alertas básicos</li>
-          </ul>
-          <div class="card-actions">
-            <button class="btn btn-primary" type="button">Selecionar</button>
-            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
-          </div>
-        </div>
-
-        <div class="card" role="button" tabindex="0" data-package="Avançado">
-          <h3>Ciclo VIS — Avançado</h3>
-          <p>Para automações mais pesadas e governança de dados na prática.</p>
-          <ul class="mini-list">
-            <li>Scraping / integrações / API</li>
-            <li>Orquestração e rotinas automatizadas</li>
-            <li>Dashboards + estrutura em nuvem</li>
-          </ul>
-          <div class="card-actions">
-            <button class="btn btn-primary" type="button">Selecionar</button>
-            <button class="btn btn-ghost" type="button" data-scroll-to="wizard">Quero ver o briefing</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="wizard" class="wizard" style="margin-top: 22px;">
-        <div class="wizard-top">
-          <div class="wizard-title">
-            <strong>2) Briefing guiado</strong>
-            <span>Você preenche e a VISU já chega “brifada” na call.</span>
-          </div>
-          <div class="progress" aria-label="Progresso do briefing"><div id="progressBar"></div></div>
-        </div>
-
-          <div class="wizard-body">
-          <!-- STEP 1 -->
-          <div class="step active" data-step="1">
-            <h4>Etapa 1/5 — Qual é o seu cenário hoje?</h4>
-            <p>Escolha o que mais se aproxima. Isso já direciona o tipo de solução.</p>
-
-            <div class="option-grid" data-group="scenario">
-              <div class="opt" data-value="Planilhas manuais e retrabalho">
-                <strong>Planilhas manuais</strong>
-                <span>Consolidação, PROCV, versões diferentes, retrabalho.</span>
-              </div>
-              <div class="opt" data-value="Dados desconectados entre sistemas">
-                <strong>Dados desconectados</strong>
-                <span>ERP, financeiro, CRM, e-commerce não conversam.</span>
-              </div>
-              <div class="opt" data-value="Falta de visibilidade em indicadores">
-                <strong>Sem visibilidade</strong>
-                <span>Indicadores não estão prontos na hora da decisão.</span>
-              </div>
-            </div>
-
-            <div class="hint">
-              <strong>Ciclo VIS:</strong> aqui é o <em>Visualizar</em> — entender o problema e o contexto real.
-            </div>
-          </div>
-
-          <!-- STEP 2 -->
-          <div class="step" data-step="2">
-            <h4>Etapa 2/5 — Que tipo de “visual” você quer primeiro?</h4>
-            <p>Como no Arquiteto de Bolso (estilo): aqui você escolhe a <strong>forma</strong> do resultado.</p>
-
-            <div class="option-grid" data-group="output">
-              <div class="opt" data-value="Dashboard executivo (KPIs)" data-min="Leve" data-points="2">
-                <strong>Dashboard executivo</strong>
-                <span>KPIs, metas, visão geral (Power BI).</span>
-              </div>
-              <div class="opt" data-value="Rotina automatizada (Python/ETL)" data-min="Intermediário" data-points="5">
-                <strong>Automação</strong>
-                <span>Rotina que roda sozinha e entrega relatórios prontos.</span>
-              </div>
-              <div class="opt" data-value="Organização + governança (Drive/SharePoint)" data-min="Leve" data-points="2">
-                <strong>Organização</strong>
-                <span>Pastas, padrões, versões, fonte única da verdade.</span>
-              </div>
-            </div>
-
-            <div class="hint">
-              <strong>Ciclo VIS:</strong> ainda é <em>Visualizar</em> — mas já focando no que precisa ficar visível primeiro.
-            </div>
-
-            <!-- Preferências visuais (somente se escolher Dashboard) -->
-            <div class="vis-pref hidden" id="dashboardPrefs">
-              <h4 style="margin-top: 14px;">Preferências visuais do dashboard</h4>
-              <p>Escolha o que você acha mais bonito. Vamos salvar as <strong>2 referências</strong> mais próximas do seu gosto.</p>
-
-              <div class="pref-grid" id="protoGrid">
-                <!-- Opção 1 -->
-                <div class="proto-card" data-proto-id="opt1">
-                  <div class="proto-head">
-                    <div>
-                      <p class="proto-title">Monitor de Oportunidades Comerciais</p>
-                      <p class="proto-sub">Layout claro e executivo</p>
-                    </div>
-                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
-                  </div>
-                  <div class="proto-actions">
-                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
-                    <button class="chip" type="button" data-score="1">Ok</button>
-                    <button class="chip" type="button" data-score="2">Amei</button>
-                  </div>
-                  <div class="proto-preview" data-preview>
-                    <div style="position: relative; width: 100%; height: 0; padding-top: 60.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
-                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-                    </div>
-                    <a href="https://www.canva.com/design/DAHBCvtHY1A/2EnwtAVgFH1haqp4HAURwA/view?utm_content=DAHBCvtHY1A&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
-                  </div>
-                </div>
-
-                <!-- Opção 2 -->
-                <div class="proto-card" data-proto-id="opt2">
-                  <div class="proto-head">
-                    <div>
-                      <p class="proto-title">Dashboard Vendas — Dark Mode</p>
-                      <p class="proto-sub">Visual mais moderno e escuro</p>
-                    </div>
-                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
-                  </div>
-                  <div class="proto-actions">
-                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
-                    <button class="chip" type="button" data-score="1">Ok</button>
-                    <button class="chip" type="button" data-score="2">Amei</button>
-                  </div>
-                  <div class="proto-preview" data-preview>
-                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
-                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-                    </div>
-                    <a href="https://www.canva.com/design/DAG2WohpjRM/Zd7-7ZmdSw1NYL5EUXdvrg/view?utm_content=DAG2WohpjRM&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
-                  </div>
-                </div>
-
-                <!-- Opção 3 -->
-                <div class="proto-card" data-proto-id="opt3">
-                  <div class="proto-head">
-                    <div>
-                      <p class="proto-title">Indicadores de Saúde Financeira</p>
-                      <p class="proto-sub">Foco em leitura rápida e comparativos</p>
-                    </div>
-                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
-                  </div>
-                  <div class="proto-actions">
-                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
-                    <button class="chip" type="button" data-score="1">Ok</button>
-                    <button class="chip" type="button" data-score="2">Amei</button>
-                  </div>
-                  <div class="proto-preview" data-preview>
-                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
-                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-                    </div>
-                    <a href="https://www.canva.com/design/DAG37YlGcOw/7YooNzj7_69jdjpiRuXoZQ/view?utm_content=DAG37YlGcOw&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
-                  </div>
-                </div>
-
-                <!-- Opção 4 -->
-                <div class="proto-card" data-proto-id="opt4">
-                  <div class="proto-head">
-                    <div>
-                      <p class="proto-title">Vendas x Meta por Canal</p>
-                      <p class="proto-sub">Crescimento por canal e metas</p>
-                    </div>
-                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
-                  </div>
-                  <div class="proto-actions">
-                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
-                    <button class="chip" type="button" data-score="1">Ok</button>
-                    <button class="chip" type="button" data-score="2">Amei</button>
-                  </div>
-                  <div class="proto-preview" data-preview>
-                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
-                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-                    </div>
-                    <a href="https://www.canva.com/design/DAG6A8oTJ8I/AB7hfyzERlHlSAKaZphA0g/view?utm_content=DAG6A8oTJ8I&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
-                  </div>
-                </div>
-
-                <!-- Opção 5 -->
-                <div class="proto-card" data-proto-id="opt5">
-                  <div class="proto-head">
-                    <div>
-                      <p class="proto-title">Indicadores de RH e Clima Organizacional</p>
-                      <p class="proto-sub">Painel de pessoas, clima e saúde do time</p>
-                    </div>
-                    <button class="chip" type="button" data-action="togglePreview">Pré‑visualizar</button>
-                  </div>
-                  <div class="proto-actions">
-                    <button class="chip" type="button" data-score="0">Não é meu estilo</button>
-                    <button class="chip" type="button" data-score="1">Ok</button>
-                    <button class="chip" type="button" data-score="2">Amei</button>
-                  </div>
-                  <div class="proto-preview" data-preview>
-                    <div style="position: relative; width: 100%; height: 0; padding-top: 48.0000%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 0.8em; margin-bottom: 0.6em; overflow: hidden; border-radius: 8px; will-change: transform;">
-                      <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-                    </div>
-                    <a href="https://www.canva.com/design/DAG7rdcKM0w/8TZgL1HbJ1jWJuBZ0Awk_w/view?utm_content=DAG7rdcKM0w&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Abrir no Canva</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="pref-selected" id="protoSelectedText">Selecione suas preferências para o site sugerir as 2 referências mais próximas.</div>
-
-              <h4 style="margin-top: 16px;">Tema</h4>
-              <p class="pref-note">Você prefere o dashboard em versão clara ou escura?</p>
-              <div class="theme-row" id="themeRow">
-                <button class="chip" type="button" data-theme="Claro">Claro</button>
-                <button class="chip" type="button" data-theme="Escuro">Escuro</button>
-              </div>
-
-              <h4 style="margin-top: 16px;">Cores predominantes</h4>
-              <p class="pref-note">Escolha <strong>3 cores</strong> para guiar a identidade do dashboard.</p>
-              <div class="swatches" id="swatches">
-                <div class="swatch" data-color="#032842" data-label="Azul" style="background:#032842"></div>
-                <div class="swatch" data-color="#06db8b" data-label="Verde" style="background:#06db8b"></div>
-                <div class="swatch" data-color="#1b96db" data-label="Ciano" style="background:#1b96db"></div>
-                <div class="swatch" data-color="#111827" data-label="Preto" style="background:#111827"></div>
-                <div class="swatch" data-color="#f97316" data-label="Laranja" style="background:#f97316"></div>
-                <div class="swatch" data-color="#a855f7" data-label="Roxo" style="background:#a855f7"></div>
-                <div class="swatch" data-color="#ef4444" data-label="Vermelho" style="background:#ef4444"></div>
-                <div class="swatch" data-color="#facc15" data-label="Amarelo" style="background:#facc15"></div>
-                <div class="swatch" data-color="#94a3b8" data-label="Cinza" style="background:#94a3b8"></div>
-              </div>
-              <br>
-              <div class="pref-note" id="colorsNote">0/3 cores selecionadas.</div>
-            </div>
-          </div>
-
-          <!-- STEP 3 -->
-          <div class="step" data-step="3">
-            <h4>Etapa 3/5 — Nível da intervenção</h4>
-            <p>Como “reforma superficial vs estrutural”, só que para dados.</p>
-
-            <div class="option-grid" data-group="intervention">
-              <div class="opt" data-value="Leve (ajuste rápido, sem mexer em sistemas)" data-min="Leve" data-points="1">
-                <strong>Leve</strong>
-                <span>Melhorias rápidas com o que já existe.</span>
-              </div>
-              <div class="opt" data-value="Intermediária (conectar fontes e padronizar)" data-min="Intermediário" data-points="3">
-                <strong>Intermediária</strong>
-                <span>Conectar fontes, criar modelo e métricas.</span>
-              </div>
-              <div class="opt" data-value="Estrutural (API/automação pesada/governança)" data-min="Avançado" data-points="6">
-                <strong>Estrutural</strong>
-                <span>Integrações, rotinas, segurança e governança.</span>
-              </div>
-            </div>
-
-            <div class="hint">
-              <strong>Ciclo VIS:</strong> aqui começa o <em>Idealizar</em> — decidir o caminho e o nível de mudança.
-            </div>
-          </div>
-
-          <!-- STEP 4 -->
-          <div class="step" data-step="4">
-            <h4>Etapa 4/5 — Referências e detalhes</h4>
-            <p>Anexe o que tiver (prints, planilhas, PDF, PPT) e descreva o contexto. Se não tiver anexos, tudo bem.</p>
-
-            <div class="range-card" aria-label="Quantidade de fontes de dados">
-              <div class="range-top">
-                <div>
-                  <p class="range-title"><strong>Quantas fontes/conexões de dados você quer integrar?</strong></p>
-                  <p class="range-sub" id="sourcesSub">1 fonte • ideal para começar com um dashboard simples</p>
-                </div>
-                <div class="range-value" id="sourcesCountLabel">1</div>
-              </div>
-              <input id="sourcesCount" class="range" name="sourcesCount" type="range" min="1" max="11" step="1" value="1" />
-              <div class="range-legend">
-                <span>1</span><span>3</span><span>6</span><span>11+</span>
-              </div>
-              <div class="guard" id="guardBox">
-                <div class="guard-row">
-                  <div>
-                    <strong id="guardTitle">Essa combinação pede um pacote maior.</strong><br/>
-                    <small id="guardText">Para 2+ fontes ou automações, o mínimo recomendado é Intermediário.</small>
-                  </div>
-                  <button class="btn btn-primary" type="button" id="btnUpgrade">Atualizar para Intermediário</button>
-                </div>
-              </div>
-            </div>
-
-            <h4 style="margin-top: 18px;">Detalhes técnicos (opcional, mas ajuda muito)</h4>
-            <p>Marque apenas o que se aplica. Se algo exigir pacote maior, a página vai te sugerir upgrade.</p>
-
-            <div class="option-grid" data-group="features" style="grid-template-columns: repeat(3, 1fr);">
-              <div class="opt" data-value="Alertas automáticos (e-mail/WhatsApp)" data-min="Intermediário" data-points="3">
-                <strong>Alertas automáticos</strong>
-                <span>Notificações e disparos (status, metas, atrasos).</span>
-              </div>
-              <div class="opt" data-value="Integração via API (CRM/ERP/Plataformas)" data-min="Intermediário" data-points="4">
-                <strong>Integração via API</strong>
-                <span>Conectar ferramentas e puxar dados em tempo real.</span>
-              </div>
-              <div class="opt" data-value="Web scraping / RPA" data-min="Avançado" data-points="7">
-                <strong>Web scraping / RPA</strong>
-                <span>Captura automatizada e rotinas mais pesadas.</span>
-              </div>
-            </div>
-
-            <div class="mini-divider"></div>
-
-            <h5 style="margin: 0 0 6px 0;">Parâmetros para compor o valor</h5>
-            <p class="muted" style="margin: 0 0 14px 0;">Isso ajusta o valor final conforme complexidade, perfil e urgência (o preço só aparece no final).</p>
-
-            <div class="range-card" aria-label="Quantidade de ciclos" style="margin-top: 10px;">
-              <div class="range-top">
-                <div>
-                  <p class="range-title"><strong>Quantos Ciclos VIS você quer contratar agora?</strong></p>
-                  <p class="range-sub" id="cyclesSub">1 ciclo • ideal para começar e validar o ganho de tempo</p>
-                </div>
-                <div class="range-value" id="cyclesCountLabel">1</div>
-              </div>
-              <input id="cyclesCount" class="range" name="cyclesCount" type="range" min="1" max="6" step="1" value="1" />
-              <div class="range-legend"><span>1</span><span>2</span><span>3</span><span>6</span></div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label>Tipo de cliente</label>
-                <div class="option-grid option-grid-compact" data-group="clientType">
-                  <div class="opt compact" data-value="Autônomo">Autônomo</div>
-                  <div class="opt compact" data-value="MEI">MEI</div>
-                  <div class="opt compact" data-value="Micro">Micro</div>
-                  <div class="opt compact selected" data-value="PME">PME</div>
-                  <div class="opt compact" data-value="Corporativo">Corporativo</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label>Urgência</label>
-                <div class="option-grid option-grid-compact" data-group="urgency">
-                  <div class="opt compact selected" data-value="Normal">Normal</div>
-                  <div class="opt compact" data-value="Alta">Alta</div>
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Pacote de manutenção (opcional)</label>
-                <div class="option-grid option-grid-compact" data-group="maintenance">
-                  <div class="opt compact selected" data-value="Sem manutenção">Sem manutenção</div>
-                  <div class="opt compact" data-value="Básico">Básico</div>
-                  <div class="opt compact" data-value="Estendido">Estendido</div>
-                  <div class="opt compact" data-value="Premium">Premium</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label for="company">Empresa</label>
-                <input id="company" name="company" type="text" placeholder="Ex.: Loja X / Clínica Y" />
-              </div>
-              <div class="field">
-                <label for="role">Seu cargo</label>
-                <input id="role" name="role" type="text" placeholder="Ex.: Dono(a), Financeiro, Operações" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label for="sourcesTypes">Onde estão seus dados hoje? (selecione o principal)</label>
-                <select id="sourcesTypes" name="sourcesTypes">
-                  <option value="">Selecione...</option>
-                  <option>Excel/Sheets</option>
-                  <option>Drive/SharePoint/OneDrive</option>
-                  <option>ERP / Sistema interno</option>
-                  <option>SQL / Banco de dados</option>
-                  <option>Mix de tudo</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="files">Anexos (opcional)</label>
-                <input id="files" name="files" type="file" multiple />
-              </div>
-            </div>
-
-            <div class="field" style="margin-top: 12px;">
-              <label for="context">Conte sobre o desafio (em 5–10 linhas)</label>
-              <textarea id="context" name="context" placeholder="Ex.: Hoje eu fecho o mês juntando 6 planilhas, demora 2 dias e sempre dá divergência de CMV..."></textarea>
-            </div>
-
-            <div class="hint">
-              <strong>Ciclo VIS:</strong> fechar o <em>Idealizar</em> com contexto e restrições reais (pra não virar “projeto genérico”).
-            </div>
-          </div>
-
-          <!-- STEP 5 -->
-          <div class="step" data-step="5">
-            <h4>Etapa 5/5 — Resumo e valor estimado</h4>
-            <p>O valor aparece só aqui no final e é calculado a partir do seu briefing. Depois disso, você agenda a call.</p>
-
-            <div class="form-row">
-              <div class="field">
-                <label for="name">Nome</label>
-                <input id="name" name="name" type="text" placeholder="Seu nome" />
-              </div>
-              <div class="field">
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" placeholder="voce@empresa.com" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label for="whats">WhatsApp</label>
-                <input id="whats" name="whats" type="tel" placeholder="(21) 99999-9999" />
-              </div>
-              <div class="field">
-                <label for="date">Melhor data</label>
-                <input id="date" name="date" type="date" />
-              </div>
-            </div>
-
-            <div class="summary">
-              <div class="card">
-                <p class="kv"><strong>Pacote</strong><span id="sumPackage">—</span></p>
-                <p class="kv"><strong>Fontes</strong><span id="sumSources">—</span></p>
-                <p class="kv"><strong>Nível</strong><span id="sumIntervention">—</span></p>
-                <p class="kv"><strong>Ciclos</strong><span id="sumCycles">—</span></p>
-              </div>
-              <div class="card">
-                <p class="kv"><strong>Preço base (por ciclo)</strong><span id="sumBase">—</span></p>
-                <p class="kv"><strong>Fator complexidade</strong><span id="sumFxComplex">—</span></p>
-                <p class="kv"><strong>Fator cliente</strong><span id="sumFxClient">—</span></p>
-                <p class="kv"><strong>Fator urgência</strong><span id="sumFxUrgency">—</span></p>
-                <p class="kv"><strong>Manutenção (1º mês, por ciclo)</strong><span id="sumMaintenance">—</span></p>
-                <p class="kv"><strong>Total estimado (por ciclo)</strong><span id="sumPerCycle">—</span></p>
-                <p class="kv"><strong>Desconto por pacote</strong><span id="sumDiscount">—</span></p>
-                <div class="total-row">
-                  <strong>Total estimado (final)</strong>
-                  <span id="sumTotal">—</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="hint">
-              <strong>Ciclo VIS:</strong> o próximo passo é o <em>Solucionar</em> — a call + protótipo + plano (entregas rápidas e objetivas).
-            </div>
-          </div>
-
-          <div class="wizard-actions">
-            <button class="btn" id="btnBack" type="button">Voltar</button>
-            <div class="note" id="stepNote">Selecione uma opção para continuar.</div>
-            <button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
-          </div>
-
-          <!-- Form oculto (simulação) -->
-          <form id="leadForm" class="hidden" action="https://formsubmit.co/contato@visudados.com.br" method="POST" enctype="multipart/form-data">
-              <input type="hidden" id="hiddenTotal" name="preco_total_estimado" value="" />
-              <input type="hidden" id="hiddenBreakdown" name="preco_memoria_calculo" value="" />
-
-            <input type="hidden" name="_subject" value="Novo Lead - Compra VISU Express" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://visudados.com.br/obrigado.html?source=compra" />
-            <input type="text" name="_honey" style="display:none" />
-
-            <input type="hidden" name="pacote" id="f_pacote" />
-            <!-- preço só aparece no final; referência removida -->
-            <input type="hidden" name="cenario" id="f_cenario" />
-            <input type="hidden" name="resultado_desejado" id="f_output" />
-            <input type="hidden" name="dashboard_referencias_top2" id="f_dash_top2" />
-            <input type="hidden" name="dashboard_tema" id="f_dash_theme" />
-            <input type="hidden" name="dashboard_cores" id="f_dash_colors" />
-            <input type="hidden" name="nivel_intervencao" id="f_intervention" />
-            <input type="hidden" name="empresa" id="f_company" />
-            <input type="hidden" name="cargo" id="f_role" />
-            <input type="hidden" name="fontes_tipo" id="f_sourcesTypes" />
-            <input type="hidden" name="fontes_quantidade" id="f_sourcesCount" />
-            <input type="hidden" name="features" id="f_features" />
-            <input type="hidden" name="complexidade_score" id="f_score" />
-            <input type="hidden" name="pacote_recomendado" id="f_recommended" />
-            <input type="hidden" name="contexto" id="f_context" />
-
-            <input type="hidden" name="nome" id="f_name" />
-            <input type="hidden" name="email" id="f_email" />
-            <input type="hidden" name="whatsapp" id="f_whats" />
-            <input type="hidden" name="data" id="f_date" />
-          </form>
-        </div>
-      </div>
-
-      <section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
-        <h2>Preferindo falar direto?</h2>
-        <p>Sem problema. Se quiser, já agenda uma conversa de 30 minutos.</p>
-        <a href="https://cal.com/visudados" target="_blank" class="cta-button">Agendar diagnóstico gratuito</a>
-      </section>
-    </div>
-  </main>
-
-  <footer style="text-align:center; padding: 2rem 0; margin-top: 3rem; background: #f8f9fa;">
-    <p style="font-size: 0.85rem;">
+</main>
+<footer style="text-align:center; padding: 2rem 0; margin-top: 3rem; background: #f8f9fa;">
+<p style="font-size: 0.85rem;">
       © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
-    </p>
-  </footer>
-
-  <script>
+</p>
+</footer>
+<script>
     (function(){
       // ===== Mobile menu (igual ao contato.html) =====
       document.addEventListener("DOMContentLoaded", function(){
@@ -1173,6 +1568,18 @@
         dashTop2: [],
         dashTheme: null,
         dashColors: [],
+        autoGoal: [],
+        autoWhere: null,
+        autoMode: null,
+        autoFreq: 'Semanal',
+        autoTool: null,
+        autoToolCost: null,
+        autoPlatform: null,
+        autoIntegrations: [],
+        autoAlertChannels: [],
+        autoScraping: null,
+        autoExamples: [],
+
         dashProtoScores: { opt1: null, opt2: null, opt3: null, opt4: null, opt5: null },
         sourcesCount: 1,
         cyclesCount: 1,
@@ -1184,6 +1591,16 @@
         score: 0,
         required: 'Leve',
         recommended: 'Leve',
+
+        orgGoal: null,
+        orgWhere: null,
+        orgFolders: null,
+        orgFolderPlatform: null,
+        orgRules: null,
+        orgIntegration: null,
+        orgIntegrationDetail: '',
+        orgIntervention: null,
+        orgExamples: [],
       };
 
       const pkgOrder = { 'Leve': 1, 'Intermediário': 2, 'Avançado': 3 };
@@ -1208,12 +1625,170 @@
         return (state.output || '').toLowerCase().includes('dashboard');
       }
 
+      
       function showDashboardPrefs(show){
         if(!dashPrefsEl) return;
         dashPrefsEl.classList.toggle('hidden', !show);
       }
 
+      // ===== Preferências (automação) =====
+      function isAutomationSelected(){
+        const t = (state.output || '').toLowerCase();
+        return t.includes('automação') || t.includes('rotina automatizada') || t.includes('automatizada');
+      }
+
+      const autoPrefsEl = document.getElementById('automationPrefs');
+      const autoSelectedText = document.getElementById('autoSelectedText');
+
+      function showAutomationPrefs(show){
+        if(!autoPrefsEl) return;
+        autoPrefsEl.classList.toggle('hidden', !show);
+      }
+
+      function freqFromMode(mode){
+        const m = (mode || '').toLowerCase();
+        if(m.includes('clico')) return 'Sob demanda';
+        if(m.includes('todo dia')) return 'Diário';
+        if(m.includes('erro')) return 'Diário';
+        if(m.includes('padrão')) return 'Diário';
+        return 'Semanal';
+      }
+
+      // ===== Preferências (organização) =====
+const orgPrefsEl = document.getElementById('organizationPrefs');
+
+      function isOrganizationSelected(){
+        const t = (state.output || '').toLowerCase();
+        return t.includes('organiza');
+      }
+      function showOrganizationPrefs(show){
+        if(!orgPrefsEl) return;
+        orgPrefsEl.classList.toggle('hidden', !show);
+      }
+      function resetOrganizationPrefs(){
+        state.orgGoal = null;
+        state.orgWhere = null;
+        state.orgFolders = null;
+        state.orgFolderPlatform = null;
+        state.orgRules = null;
+        state.orgIntegration = null;
+        state.orgIntegrationDetail = '';
+        state.orgIntervention = null;
+        state.orgExamples = [];
+
+        document.querySelectorAll(
+          '[data-group="orgGoal"] .opt, [data-group="orgWhere"] .opt, [data-group="orgFolders"] .opt,'+
+          ' [data-group="orgFolderPlatform"] .opt, [data-group="orgRules"] .opt, [data-group="orgIntegration"] .opt,'+
+          ' [data-group="orgIntervention"] .opt, [data-group="orgExamples"] .opt'
+        ).forEach(o=>o.classList.remove('selected'));
+
+        const ip = document.getElementById('orgIntegrationDetail');
+        if(ip) ip.value = '';
+      }
+      function updateOrgUI(){
+        const platBlock = document.getElementById('orgFolderPlatformBlock');
+        const needsPlat = (state.orgFolders === 'Sim');
+        if(platBlock) platBlock.classList.toggle('hidden', !needsPlat);
+        if(!needsPlat){
+          state.orgFolderPlatform = null;
+          document.querySelectorAll('[data-group="orgFolderPlatform"] .opt').forEach(o=>o.classList.remove('selected'));
+        }
+
+        const intBlock = document.getElementById('orgIntegrationDetailBlock');
+        const needsInt = (state.orgIntegration === 'Sim');
+        if(intBlock) intBlock.classList.toggle('hidden', !needsInt);
+        if(!needsInt){
+          state.orgIntegrationDetail = '';
+          const ip = document.getElementById('orgIntegrationDetail');
+          if(ip) ip.value = '';
+        }
+      }
+
+      // Listener do textarea (1x)
+      const orgIntArea = document.getElementById('orgIntegrationDetail');
+      if(orgIntArea){
+        orgIntArea.addEventListener('input', () => {
+          state.orgIntegrationDetail = orgIntArea.value;
+          validateStep();
+        });
+      }
+
+      
+      function updateAutoUI(){
+        // Atualiza label do limite por pacote (anti "malandragem")
+        const limitLabel = document.getElementById('autoGoalLimitLabel');
+        const limit = (!state.pacote) ? 1 : (state.pacote === 'Leve' ? 1 : (state.pacote === 'Intermediário' ? 2 : 4));
+        if(limitLabel) limitLabel.textContent = String(limit);
+
+        // Blocos condicionais: Alertas e Scraping
+        const alertsBlock = document.getElementById('autoAlertsBlock');
+        const scrapingBlock = document.getElementById('autoScrapingBlock');
+        const sheetsBlock = document.getElementById('autoSheetsBlock');
+        const hasAlertsGoal = (state.autoGoal || []).some(v => (v || '').toLowerCase().includes('alerta'));
+        const hasScrapingGoal = (state.autoGoal || []).some(v => (v || '').toLowerCase().includes('buscar dados externos'));
+        const hasSheetsGoal = (state.autoGoal || []).some(v => {
+          const t = (v || '').toLowerCase();
+          return t.includes('atualizar relatórios') || t.includes('consolidar planilhas') || t.includes('organizar e validar');
+        });
+
+        if(alertsBlock) alertsBlock.classList.toggle('hidden', !hasAlertsGoal);
+        if(!hasAlertsGoal){
+          state.autoAlertChannels = [];
+          document.querySelectorAll('[data-group="autoAlertChannels"] .opt').forEach(o => o.classList.remove('selected'));
+        }
+
+        if(scrapingBlock) scrapingBlock.classList.toggle('hidden', !hasScrapingGoal);
+        if(!hasScrapingGoal){
+          state.autoScraping = null;
+          document.querySelectorAll('[data-group="autoScraping"] .opt').forEach(o => o.classList.remove('selected'));
+        }
+
+        if(sheetsBlock) sheetsBlock.classList.toggle('hidden', !hasSheetsGoal);
+        if(!hasSheetsGoal){
+          state.autoWhere = null;
+          document.querySelectorAll('[data-group="autoWhere"] .opt').forEach(o => o.classList.remove('selected'));
+        }
+
+        // Nota de custo da plataforma (bem simples)
+        const costNote = document.getElementById('autoPlatformCostNote');
+        if(costNote){
+          const p = (state.autoPlatform || '').toLowerCase();
+          let msg = '';
+          if(p.includes('power automate') || p.includes('microsoft')) msg = 'Custo médio: Power Automate ~R$ 75–120 por usuário/mês (varia por plano).';
+          else if(p === 'n8n') msg = 'Custo médio: n8n ~R$ 50–150/mês (hospedagem/infra).';
+          else if(p.includes('workspace') || p.includes('apps script')) msg = 'Custo médio: Google Workspace ~R$ 30–60 por usuário/mês.';
+          else if(p.includes('python')) msg = 'Custo médio: sem licença, mas pode exigir servidor/infra.';
+          else if(p.includes('não sei')) msg = 'Sem problema: a VISU recomenda a melhor opção na call.';
+          costNote.textContent = msg;
+        }
+
+        // Texto-resumo da trilha (para orientar o usuário)
+        if(!autoSelectedText) return;
+        const parts = [];
+
+        if(state.autoPlatform) parts.push(`Plataforma: ${state.autoPlatform}`);
+
+        if((state.autoGoal || []).length) parts.push(`Objetivos: ${state.autoGoal.join(', ')}`);
+
+        if(state.autoWhere) parts.push(`Onde acontece: ${state.autoWhere}`);
+
+        if(state.autoMode) parts.push(`Como roda: ${state.autoMode}`);
+
+        if((state.autoIntegrations || []).length) parts.push(`Integrações: ${state.autoIntegrations.join(', ')}`);
+
+        if((state.autoAlertChannels || []).length) parts.push(`Alertas: ${state.autoAlertChannels.join(', ')}`);
+
+        if(state.autoScraping) parts.push(`Scraping: ${state.autoScraping}`);
+
+        if(state.autoTool) parts.push(`Ecossistema: ${state.autoTool}${state.autoToolCost ? ' ('+state.autoToolCost+')' : ''}`);
+
+        autoSelectedText.textContent = parts.length
+          ? parts.join(' • ')
+          : 'Selecione a plataforma, objetivos, contexto, funcionamento e ecossistema.';
+      }
+
       function computeTop2FromScores(){
+
         const entries = Object.entries(state.dashProtoScores)
           .map(([id, score]) => ({ id, score: (score === null ? -1 : Number(score)) }));
         entries.sort((a,b) => {
@@ -1283,6 +1858,28 @@ function applyOptionLocks(){
 
   state.features = Array.from(document.querySelectorAll('[data-group="features"] .opt.selected'))
     .map(el => el.dataset.value);
+
+  // Automação (sincroniza caso algo tenha sido travado/desmarcado)
+  const apSel = document.querySelector('[data-group="autoPlatform"] .opt.selected');
+  state.autoPlatform = apSel ? apSel.dataset.value : state.autoPlatform;
+
+  state.autoGoal = Array.from(document.querySelectorAll('[data-group="autoGoal"] .opt.selected')).map(el => el.dataset.value);
+
+  const awSel = document.querySelector('[data-group="autoWhere"] .opt.selected');
+  state.autoWhere = awSel ? awSel.dataset.value : state.autoWhere;
+
+  const amSel = document.querySelector('[data-group="autoMode"] .opt.selected');
+  state.autoMode = amSel ? amSel.dataset.value : state.autoMode;
+
+  state.autoIntegrations = Array.from(document.querySelectorAll('[data-group="autoIntegrations"] .opt.selected')).map(el => el.dataset.value);
+
+  state.autoAlertChannels = Array.from(document.querySelectorAll('[data-group="autoAlertChannels"] .opt.selected')).map(el => el.dataset.value);
+
+  const asSel = document.querySelector('[data-group="autoScraping"] .opt.selected');
+  state.autoScraping = asSel ? asSel.dataset.value : state.autoScraping;
+
+  state.autoExamples = Array.from(document.querySelectorAll('[data-group="autoExamples"] .opt.selected')).map(el => el.dataset.value);
+
 }
 
 
@@ -1317,6 +1914,27 @@ function applyOptionLocks(){
           score += Number(el.dataset.points || 0);
         });
 
+        // 5) Trilha de automação (se escolhida)
+        if(isAutomationSelected()){
+          const autoGroupsSingle = ['autoPlatform','autoWhere','autoMode','autoScraping'];
+          autoGroupsSingle.forEach(g => {
+            const el = document.querySelector(`[data-group="${g}"] .opt.selected`);
+            if(el){
+              required = maxPackage(required, el.dataset.min || 'Leve');
+              score += Number(el.dataset.points || 0);
+            }
+          });
+
+          const autoGroupsMulti = ['autoGoal','autoIntegrations','autoAlertChannels','autoExamples'];
+          autoGroupsMulti.forEach(g => {
+            const els = Array.from(document.querySelectorAll(`[data-group="${g}"] .opt.selected`));
+            els.forEach(el => {
+              required = maxPackage(required, el.dataset.min || 'Leve');
+              score += Number(el.dataset.points || 0);
+            });
+          });
+        }
+
         state.score = score;
         state.required = required;
         state.recommended = clampRecommended(score);
@@ -1333,6 +1951,9 @@ function applyOptionLocks(){
 
 updateGuard();
         updateSummary();
+
+        // Revalida botão "Continuar" após qualquer recálculo
+        try { validateStep(); } catch (e) {}
       }
 
       function updateGuard(){
@@ -1387,6 +2008,9 @@ updateGuard();
         // Auto scroll pro wizard
         const w = $('#wizard');
         if(w){ w.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+        // Garante que o botão de avanço reflita a seleção do pacote imediatamente
+        try { validateStep(); } catch (e) {}
       }
 
       if(pkgGrid){
@@ -1411,7 +2035,21 @@ updateGuard();
         });
       }
 
-      // ===== Wizard =====
+      
+// Auto-seleção de pacote (default: Leve) para não travar o fluxo inicial.
+// Se o usuário escolher outro pacote, essa seleção é substituída normalmente.
+if(!state.pacote){
+  const leveCard = document.querySelector('[data-package="Leve"]');
+  if(leveCard){
+    // usa a mesma função de seleção, garantindo que state e UI fiquem consistentes
+    selectPackage(leveCard);
+  } else {
+    state.pacote = 'Leve';
+    applyPackageLocks();
+  }
+}
+
+// ===== Wizard =====
       const steps = $$('.step');
       const progressBar = $('#progressBar');
       const btnBack = $('#btnBack');
@@ -1437,15 +2075,36 @@ updateGuard();
           btnNext.textContent = (n === totalSteps) ? 'Finalizar (simular compra)' : 'Continuar';
         }
 
+        // Ajusta trilhas condicionais (somente na Etapa 2)
+        if(n === 2){
+          showDashboardPrefs(isDashboardSelected());
+          showAutomationPrefs(isAutomationSelected());
+          showOrganizationPrefs(isOrganizationSelected());
+          updateDashUI();
+          updateAutoUI();
+          updateOrgUI();
+        } else {
+          // Ao sair da etapa 2, garante que os blocos extras fiquem ocultos
+          showDashboardPrefs(false);
+          showAutomationPrefs(false);
+          showOrganizationPrefs(false);
+        }
+
         validateStep();
       }
 
       function markSelected(groupEl, optEl){
         const group = groupEl.dataset.group;
-        if(group === 'features'){
+
+        // Multi-select groups
+        const multiGroups = ['features','autoGoal','autoIntegrations','autoAlertChannels','autoExamples','orgExamples'];
+
+        if(multiGroups.includes(group)){
           optEl.classList.toggle('selected');
           return;
         }
+
+        // Single-select groups
         $$('.opt', groupEl).forEach(o => o.classList.remove('selected'));
         optEl.classList.add('selected');
       }
@@ -1580,7 +2239,18 @@ updateGuard();
           intervention: state.intervention,
           scenario: state.scenario,
           output: state.output,
-          features: state.features
+          features: state.features,
+          auto_platform: state.autoPlatform,
+          auto_goal: state.autoGoal,
+          auto_where: state.autoWhere,
+          auto_mode: state.autoMode,
+          auto_freq: state.autoFreq,
+          auto_integrations: state.autoIntegrations,
+          auto_alert_channels: state.autoAlertChannels,
+          auto_scraping: state.autoScraping,
+          auto_examples: state.autoExamples,
+          auto_tool: state.autoTool,
+          auto_tool_cost: state.autoToolCost
         });
       }
 
@@ -1588,18 +2258,21 @@ updateGuard();
       function validateStep(){
         let ok = true;
 
-        // Bloqueia avançar sem pacote em qualquer etapa
+        // Garante pacote (default: Leve) — evita travar o avanço caso o usuário ainda não tenha escolhido
         if(!state.pacote){
-          ok = false;
-          if(stepNote) stepNote.textContent = 'Selecione um pacote acima para começar.';
+          state.pacote = 'Leve';
+          // tenta marcar visualmente o card Leve, se existir
+          const leveCard = document.querySelector('[data-package="Leve"]');
+          if(leveCard) leveCard.classList.add('selected');
+          if(stepNote) stepNote.textContent = '';
+          applyPackageLocks();
         } else {
           if(stepNote) stepNote.textContent = '';
         }
 
-        // Guardrail: se o briefing exigir pacote maior, bloqueia avanço até ajustar
-        if(ok && state.pacote && pkgOrder[state.pacote] < pkgOrder[state.required]){
-          ok = false;
-          if(stepNote) stepNote.textContent = `Seu briefing pede, no mínimo, o pacote ${state.required}. Clique em “Atualizar” no aviso acima.`;
+        // Guardrail: se o briefing exigir pacote maior, exibe aviso (sem travar navegação)
+        if(state.pacote && pkgOrder[state.pacote] < pkgOrder[state.required]){
+          if(stepNote) stepNote.textContent = `Seu briefing pede, no mínimo, o pacote ${state.required}.`;
         }
 
         // Regras por etapa
@@ -1623,9 +2296,64 @@ updateGuard();
                 if(stepNote){
                   stepNote.textContent = ok ? '' : 'Para dashboard: selecione 2 referências (Ok/Amei), escolha o tema e 3 cores.';
                 }
+              } else if(isAutomationSelected()){
+                const hasPlatform = Boolean(state.autoPlatform);
+                const hasGoal = (state.autoGoal || []).length > 0;
+                const sheetsBlock = document.getElementById('autoSheetsBlock');
+                const needsWhere = sheetsBlock && !sheetsBlock.classList.contains('hidden');
+                const hasWhere = !needsWhere || Boolean(state.autoWhere);
+                const hasMode = Boolean(state.autoMode);
+                const hasTool = Boolean(state.autoTool);
+
+                const wantsAlerts = (state.autoGoal || []).some(v => (v || '').toLowerCase().includes('alerta'));
+                const wantsScraping = (state.autoGoal || []).some(v => (v || '').toLowerCase().includes('buscar dados externos'));
+
+                const hasAlertChannel = !wantsAlerts || ((state.autoAlertChannels || []).length > 0);
+                const hasScrapingType = !wantsScraping || Boolean(state.autoScraping);
+
+                ok = hasPlatform && hasGoal && hasWhere && hasMode && hasTool && hasAlertChannel && hasScrapingType;
+
+                if(stepNote){
+                  if(!hasPlatform) stepNote.textContent = 'Para automação: escolha uma plataforma (mesmo que seja “Não sei”).';
+                  else if(!hasGoal) stepNote.textContent = 'Para automação: selecione pelo menos 1 objetivo.';
+                  else if(needsWhere && !hasWhere) stepNote.textContent = 'Para automação: selecione onde isso acontece hoje.';
+                  else if(!hasMode) stepNote.textContent = 'Para automação: selecione como você quer que funcione no dia a dia.';
+                  else if(wantsAlerts && !hasAlertChannel) stepNote.textContent = 'Para automação: escolha por onde quer receber os alertas.';
+                  else if(wantsScraping && !hasScrapingType) stepNote.textContent = 'Para automação: escolha se a fonte é pública ou privada.';
+                  else if(!hasTool) stepNote.textContent = 'Para automação: selecione o ecossistema onde isso vai rodar.';
+                  else stepNote.textContent = '';
+                }
+              } else if(isOrganizationSelected()){
+                const platBlock = document.getElementById('orgFolderPlatformBlock');
+                const intBlock  = document.getElementById('orgIntegrationDetailBlock');
+                const needsPlat = platBlock && !platBlock.classList.contains('hidden');
+                const needsInt  = intBlock  && !intBlock.classList.contains('hidden');
+
+                const okOrg =
+                  !!state.orgGoal &&
+                  !!state.orgWhere &&
+                  !!state.orgFolders &&
+                  (!needsPlat || !!state.orgFolderPlatform) &&
+                  !!state.orgRules &&
+                  !!state.orgIntegration &&
+                  (!needsInt || (state.orgIntegrationDetail || '').trim().length >= 5) &&
+                  !!state.orgIntervention;
+
+                ok = okOrg;
+
+                if(stepNote && !ok){
+                  if(!state.orgGoal) stepNote.textContent = 'Para organização: selecione o objetivo principal.';
+                  else if(!state.orgWhere) stepNote.textContent = 'Para organização: selecione onde estão seus dados hoje.';
+                  else if(!state.orgFolders) stepNote.textContent = 'Para organização: responda sobre rede de pastas e acessos.';
+                  else if(needsPlat && !state.orgFolderPlatform) stepNote.textContent = 'Para organização: selecione a plataforma da rede de pastas.';
+                  else if(!state.orgRules) stepNote.textContent = 'Para organização: responda se quer regras de nomenclatura/acesso.';
+                  else if(!state.orgIntegration) stepNote.textContent = 'Para organização: responda se precisa integrar sistemas/fontes.';
+                  else if(needsInt && (state.orgIntegrationDetail || '').trim().length < 5) stepNote.textContent = 'Para organização: descreva quais sistemas/fontes precisam conversar.';
+                  else if(!state.orgIntervention) stepNote.textContent = 'Para organização: selecione o nível de intervenção.';
+                }
               } else {
                 if(stepNote) stepNote.textContent = '';
-              }
+              } 
             }
           }
           if(currentStep === 3){
@@ -1651,32 +2379,105 @@ updateGuard();
       }
 
       // Clique nas opções
-      $$('.option-grid').forEach(grid => {
+      $$('[data-group]').forEach(grid => {
         grid.addEventListener('click', (e) => {
           const opt = e.target.closest('.opt');
           if(!opt) return;
           if(opt.classList.contains('disabled')) return;
-          markSelected(grid, opt);
 
           const group = grid.dataset.group;
           const val = opt.dataset.value;
 
+          // Limites (anti-escopo escondido) para multi-seleção em Automação
+          if(group === 'autoGoal'){
+            const limit = (!state.pacote) ? 1 : (state.pacote === 'Leve' ? 1 : (state.pacote === 'Intermediário' ? 2 : 4));
+            const alreadySelected = opt.classList.contains('selected');
+            const selectedCount = document.querySelectorAll('[data-group="autoGoal"] .opt.selected').length;
+
+            if(!alreadySelected && selectedCount >= limit){
+              // feedback simples e humano
+              const label = document.getElementById('autoSelectedText');
+              if(label) label.textContent = `No pacote ${state.pacote || 'Leve'}, selecione até ${limit} objetivo(s).`;
+              return;
+            }
+          }
+
+          markSelected(grid, opt);
+
+
+          // Pacote (Etapa 1)
+          if(group === 'pacote'){
+            state.pacote = val;
+            // Aplica travas visuais por pacote imediatamente
+            applyPackageLocks();
+          }
+
+
           if(group === 'scenario') state.scenario = val;
           if(group === 'output') {
             state.output = val;
+
             const dash = isDashboardSelected();
+            const auto = isAutomationSelected();
+            const org = isOrganizationSelected();
+
+
             showDashboardPrefs(dash);
+            showAutomationPrefs(auto);
+            showOrganizationPrefs(org);
+
+
             if(!dash){
-              // reseta preferências se a pessoa não quiser dashboard
+              // Reseta preferências se a pessoa NÃO quiser dashboard
               state.dashTop2 = [];
               state.dashTheme = null;
               state.dashColors = [];
               state.dashProtoScores = { opt1: null, opt2: null, opt3: null, opt4: null, opt5: null };
-              // limpa UI
+
               document.querySelectorAll('.proto-card [data-score]').forEach(b => b.classList.remove('selected'));
               document.querySelectorAll('#themeRow [data-theme]').forEach(b => b.classList.remove('selected'));
               document.querySelectorAll('#swatches .swatch').forEach(s => s.classList.remove('selected'));
               updateDashUI();
+            }
+
+            if(!auto){
+              // Reseta preferências se a pessoa NÃO quiser automação
+              state.autoGoal = [];
+              state.autoWhere = null;
+              state.autoMode = null;
+              state.autoFreq = 'Semanal';
+              state.autoTool = null;
+              state.autoToolCost = null;
+
+              state.autoPlatform = null;
+              state.autoIntegrations = [];
+              state.autoAlertChannels = [];
+              state.autoScraping = null;
+              state.autoExamples = [];
+
+              // Limpa seleções
+              ['autoPlatform','autoGoal','autoWhere','autoMode','autoIntegrations','autoAlertChannels','autoScraping','autoExamples','autoFreq']
+                .forEach(g => document.querySelectorAll(`[data-group="${g}"] .opt`).forEach(o => o.classList.remove('selected')));
+
+              // Esconde blocos condicionais
+              const ab = document.getElementById('autoAlertsBlock');
+              const sb = document.getElementById('autoScrapingBlock');
+              if(ab) ab.classList.add('hidden');
+              if(sb) sb.classList.add('hidden');
+
+              // Limpa stack selection
+              document.querySelectorAll('#toolGrid .tool-card').forEach(c => c.classList.remove('selected'));
+
+              // Limpa nota de custo da plataforma
+              const costNote = document.getElementById('autoPlatformCostNote');
+              if(costNote) costNote.textContent = '';
+
+              updateAutoUI();
+            }
+
+            if(!org){
+              resetOrganizationPrefs();
+              updateOrgUI();
             }
           }
           if(group === 'intervention') state.intervention = val;
@@ -1684,8 +2485,67 @@ updateGuard();
             // atualiza array de features
             state.features = Array.from(document.querySelectorAll('[data-group="features"] .opt.selected')).map(el => el.dataset.value);
           }
+          if(group === 'autoPlatform') state.autoPlatform = val;
 
-          // recalcula exigências
+          if(group === 'autoGoal'){
+            state.autoGoal = Array.from(document.querySelectorAll('[data-group="autoGoal"] .opt.selected')).map(el => el.dataset.value);
+          }
+          if(group === 'autoWhere') state.autoWhere = val;
+
+          if(group === 'autoMode') { state.autoMode = val; state.autoFreq = freqFromMode(val); }
+
+          if(group === 'autoIntegrations'){
+            state.autoIntegrations = Array.from(document.querySelectorAll('[data-group="autoIntegrations"] .opt.selected')).map(el => el.dataset.value);
+          }
+
+          if(group === 'autoAlertChannels'){
+            state.autoAlertChannels = Array.from(document.querySelectorAll('[data-group="autoAlertChannels"] .opt.selected')).map(el => el.dataset.value);
+          }
+
+          if(group === 'autoScraping') state.autoScraping = val;
+
+          if(group === 'autoExamples'){
+            state.autoExamples = Array.from(document.querySelectorAll('[data-group="autoExamples"] .opt.selected')).map(el => el.dataset.value);
+          }
+
+          // ===== Organização (state updates) =====
+          if(group === 'orgGoal') state.orgGoal = val;
+          if(group === 'orgWhere') state.orgWhere = val;
+
+          if(group === 'orgFolders'){
+            state.orgFolders = val;
+            // Mostra/oculta seleção de plataforma quando "Sim"
+            updateOrgUI();
+          }
+
+          if(group === 'orgFolderPlatform') state.orgFolderPlatform = val;
+          if(group === 'orgRules') state.orgRules = val;
+
+          if(group === 'orgIntegration'){
+            state.orgIntegration = val;
+            // Mostra/oculta campo de detalhe quando "Sim"
+            updateOrgUI();
+          }
+
+          if(group === 'orgIntervention') state.orgIntervention = val;
+
+          if(group === 'orgExamples'){
+            state.orgExamples = Array
+              .from(document.querySelectorAll('[data-group="orgExamples"] .opt.selected'))
+              .map(el => el.dataset.value);
+          }
+
+
+          if(group === 'autoFreq') state.autoFreq = val;
+
+          // Atualiza UI conforme trilha
+          if(group && group.startsWith('auto')){
+            updateAutoUI();
+          }
+          if(group && group.startsWith('org')){
+            updateOrgUI();
+          }
+// recalcula exigências
           computeRequirements();
 
           updateSummary();
@@ -1766,7 +2626,37 @@ updateGuard();
         });
       }
 
-      // Inputs que influenciam validação
+      
+      // Automação: seleção do programa/ferramenta
+      const toolGrid = document.getElementById('toolGrid');
+      if(toolGrid){
+        function selectToolCard(card){
+          Array.from(toolGrid.querySelectorAll('.tool-card')).forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          state.autoTool = (card.dataset.tool || '').trim();
+          state.autoToolCost = (card.dataset.toolCost || '').trim();
+          updateAutoUI();
+          validateStep();
+        }
+
+        toolGrid.addEventListener('click', (e) => {
+          const card = e.target.closest('.tool-card');
+          if(!card) return;
+          if(card.classList.contains('disabled')) return;
+          selectToolCard(card);
+        });
+
+        Array.from(toolGrid.querySelectorAll('.tool-card')).forEach(card => {
+          card.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter' || e.key === ' '){
+              e.preventDefault();
+              selectToolCard(card);
+            }
+          });
+        });
+      }
+
+// Inputs que influenciam validação
       ['context','name','email'].forEach(id => {
         const el = document.getElementById(id);
         if(el){ el.addEventListener('input', validateStep); }
@@ -1784,18 +2674,17 @@ updateGuard();
       }
 
       if(sourcesCount){
-        sourcesCount.addEventListener('input', () => {
-          const n = Number(sourcesCount.value || 1);
+        const applySources = () => {
+          const n = Math.max(1, Number(sourcesCount.value || 1));
           state.sourcesCount = n;
-          if(sourcesCountLabel) sourcesCountLabel.textContent = String(n >= 11 ? '11+' : n);
+          if(sourcesCountLabel) sourcesCountLabel.textContent = (n >= 11 ? '11+' : String(n));
           if(sourcesSub) sourcesSub.textContent = sourcesSubText(n);
           computeRequirements();
           validateStep();
-        });
+        };
+        sourcesCount.addEventListener('input', applySources);
         // inicial
-        state.sourcesCount = Number(sourcesCount.value || 1);
-        if(sourcesCountLabel) sourcesCountLabel.textContent = '1';
-        if(sourcesSub) sourcesSub.textContent = sourcesSubText(1);
+        applySources();
       }
 
       // Slider: quantidade de ciclos
@@ -1811,17 +2700,17 @@ updateGuard();
       }
 
       if(cyclesCount){
-        cyclesCount.addEventListener('input', () => {
-          const n = Number(cyclesCount.value || 1);
+        const applyCycles = () => {
+          const n = Math.max(1, Number(cyclesCount.value || 1));
           state.cyclesCount = n;
           if(cyclesCountLabel) cyclesCountLabel.textContent = String(n);
           if(cyclesSub) cyclesSub.textContent = cyclesSubText(n);
           updateSummary();
-        });
+          validateStep();
+        };
+        cyclesCount.addEventListener('input', applyCycles);
         // inicial
-        state.cyclesCount = Number(cyclesCount.value || 1);
-        if(cyclesCountLabel) cyclesCountLabel.textContent = String(state.cyclesCount);
-        if(cyclesSub) cyclesSub.textContent = cyclesSubText(state.cyclesCount);
+        applyCycles();
       }
 
       // Select: tipo de fonte
@@ -1863,6 +2752,41 @@ updateGuard();
           // referência de preço removida (preço é calculado no final)
           document.getElementById('f_cenario').value = state.scenario || '';
           document.getElementById('f_output').value = state.output || '';
+
+          // Automação (se aplicável)
+          const goalStr = (state.autoGoal && state.autoGoal.length) ? state.autoGoal.join(' | ') : '';
+          const integStr = (state.autoIntegrations && state.autoIntegrations.length) ? state.autoIntegrations.join(' | ') : '';
+          const alertStr = (state.autoAlertChannels && state.autoAlertChannels.length) ? state.autoAlertChannels.join(' | ') : '';
+          const exStr = (state.autoExamples && state.autoExamples.length) ? state.autoExamples.join(' | ') : '';
+
+          document.getElementById('f_auto_goal').value = goalStr;
+
+          const autoWhereEl = document.getElementById('f_auto_where');
+          if(autoWhereEl) autoWhereEl.value = state.autoWhere || '';
+
+          const autoModeEl = document.getElementById('f_auto_mode');
+          if(autoModeEl) autoModeEl.value = state.autoMode || '';
+
+          document.getElementById('f_auto_freq').value = state.autoFreq || '';
+          document.getElementById('f_auto_tool').value = state.autoTool || '';
+          document.getElementById('f_auto_tool_cost').value = state.autoToolCost || '';
+
+          const ap = document.getElementById('f_auto_platform');
+          if(ap) ap.value = state.autoPlatform || '';
+
+          const ai = document.getElementById('f_auto_integrations');
+          if(ai) ai.value = integStr;
+
+          const aa = document.getElementById('f_auto_alert_channels');
+          if(aa) aa.value = alertStr;
+
+          const as = document.getElementById('f_auto_scraping');
+          if(as) as.value = state.autoScraping || '';
+
+          const ae = document.getElementById('f_auto_examples');
+          if(ae) ae.value = exStr;
+
+
           document.getElementById('f_dash_top2').value = (state.dashTop2 && state.dashTop2.length) ? state.dashTop2.map(protoTitleById).join(' | ') : '';
           document.getElementById('f_dash_theme').value = state.dashTheme || '';
           document.getElementById('f_dash_colors').value = (state.dashColors && state.dashColors.length) ? state.dashColors.join(' | ') : '';
@@ -1881,6 +2805,16 @@ updateGuard();
           document.getElementById('f_email').value = (document.getElementById('email')?.value || '').trim();
           document.getElementById('f_whats').value = (document.getElementById('whats')?.value || '').trim();
           document.getElementById('f_date').value = (document.getElementById('date')?.value || '').trim();
+
+          document.getElementById('f_org_goal').value = state.orgGoal || '';
+          document.getElementById('f_org_where').value = state.orgWhere || '';
+          document.getElementById('f_org_folders').value = state.orgFolders || '';
+          document.getElementById('f_org_folder_platform').value = state.orgFolderPlatform || '';
+          document.getElementById('f_org_rules').value = state.orgRules || '';
+          document.getElementById('f_org_integration').value = state.orgIntegration || '';
+          document.getElementById('f_org_integration_detail').value = (state.orgIntegrationDetail || '').trim();
+          document.getElementById('f_org_intervention').value = state.orgIntervention || '';
+          document.getElementById('f_org_examples').value = (state.orgExamples && state.orgExamples.length) ? state.orgExamples.join(' | ') : '';
 
           // Tracking
           try {
@@ -1904,10 +2838,75 @@ updateGuard();
       // inicial
       setProgress();
       computeRequirements();
+      updateDashUI();
+      updateAutoUI();
       validateStep();
 
       // Sempre mantém resumo atualizado quando entrar no passo 5
-      const observer = new MutationObserver(() => {
+      
+      // ====== Data (Etapa 5): bloquear sáb/dom e liberar a partir de 2 dias úteis ======
+      const dateInput = document.getElementById('date');
+
+      function addBusinessDays(fromDate, businessDays){
+        const d = new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate());
+        let added = 0;
+        while(added < businessDays){
+          d.setDate(d.getDate() + 1);
+          const day = d.getDay(); // 0 dom, 6 sáb
+          if(day !== 0 && day !== 6) added++;
+        }
+        return d;
+      }
+
+      function toISODate(d){
+        const y = d.getFullYear();
+        const m = String(d.getMonth()+1).padStart(2,'0');
+        const day = String(d.getDate()).padStart(2,'0');
+        return `${y}-${m}-${day}`;
+      }
+
+      if(dateInput){
+        const minDate = addBusinessDays(new Date(), 2);
+        dateInput.min = toISODate(minDate);
+
+        dateInput.addEventListener('input', () => {
+          if(!dateInput.value) return;
+          const selected = new Date(dateInput.value + 'T00:00:00');
+          const dow = selected.getDay();
+          if(dow === 0 || dow === 6){
+            alert('Selecione apenas dias úteis.');
+            dateInput.value = '';
+            validateStep();
+            return;
+          }
+          // Reforço: não deixar escolher antes do mínimo
+          const selectedISO = toISODate(selected);
+          if(selectedISO < dateInput.min){
+            alert('Selecione uma data a partir de 2 dias úteis para frente.');
+            dateInput.value = '';
+          }
+          validateStep();
+        });
+      }
+
+      // ====== Toggle (Sim/Não) — Trilha de Organização ======
+      function bindYesNoToggle(group){
+        const cb = document.querySelector(`input[data-yn="${group}"]`);
+        const grid = document.querySelector(`.option-grid[data-group="${group}"]`);
+        if(!cb || !grid) return;
+
+        cb.dataset.touched = '0';
+
+        cb.addEventListener('change', () => {
+          cb.dataset.touched = '1';
+          const val = cb.checked ? 'Sim' : 'Não';
+          const opt = grid.querySelector(`.opt[data-value="${val}"]`);
+          if(opt) opt.click();
+        });
+      }
+      ['orgFolders','orgRules','orgIntegration'].forEach(bindYesNoToggle);
+
+const observer = new MutationObserver(() => {
         if(currentStep === 5) updateSummary();
       });
       observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
