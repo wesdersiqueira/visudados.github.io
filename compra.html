@@ -1526,6 +1526,7 @@
 <input id="f_email" name="email" type="hidden"/>
 <input id="f_whats" name="whatsapp" type="hidden"/>
 <input id="f_date" name="data" type="hidden"/>
+<button id="leadFormSubmit" type="submit" style="display:none"></button>
 </form>
 </div>
 </div>
@@ -2831,7 +2832,11 @@ function applyPackageLocks(){
             });
           } catch(e) {}
 
-          form.submit();
+          if (form.requestSubmit) {
+            form.requestSubmit(); // submit “normal”, dispara evento e mantém comportamento do contato
+          } else {
+            document.getElementById('leadFormSubmit')?.click(); // fallback
+          }
         });
       }
 
