@@ -1479,19 +1479,13 @@
 <button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
 </div>
 <!-- Form oculto (simulação) -->
-<form action="https://formsubmit.co/contato@visudados.com.br" method="POST">
-
-    <!-- Assunto do e-mail -->
-    <input type="hidden" name="_subject" value="Nova Compra - VISU Dados">
-
-    <!-- Formatação em tabela -->
-    <input type="hidden" name="_template" value="table">
-
-    <!-- Página de redirecionamento -->
-    <input type="hidden" name="_next" value="https://visudados.com.br/obrigado.html?source=compra">
-
-    <!-- Anti-spam -->
-    <input type="text" name="_honey" style="display:none">
+<form action="https://formsubmit.co/contato@visudados.com.br" class="hidden" enctype="multipart/form-data" id="leadForm" method="POST">
+<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
+<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
+<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
+<input name="_honey" style="display:none" type="text"/>
 <input id="f_pacote" name="pacote" type="hidden"/>
 <!-- preço só aparece no final; referência removida -->
 <input id="f_cenario" name="cenario" type="hidden"/>
