@@ -835,55 +835,6 @@
 </div>
 </div>
 </div>
-<form action="https://formsubmit.co/contato@visudados.com.br" id="leadForm" method="POST">
-
-<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
-<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
-<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
-<input name="_template" type="hidden" value="table"/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
-<input name="_honey" style="display:none" type="text"/>
-<input id="f_pacote" name="pacote" type="hidden"/>
-<input id="f_cenario" name="cenario" type="hidden"/>
-<input id="f_output" name="resultado_desejado" type="hidden"/>
-<input id="f_dash_top2" name="dashboard_referencias_top2" type="hidden"/>
-<input id="f_dash_theme" name="dashboard_tema" type="hidden"/>
-<input id="f_dash_colors" name="dashboard_cores" type="hidden"/>
-<input id="f_auto_goal" name="automacao_objetivo" type="hidden"/>
-<input id="f_auto_where" name="automacao_onde" type="hidden"/>
-<input id="f_auto_mode" name="automacao_funcionamento" type="hidden"/>
-<input id="f_auto_freq" name="automacao_frequencia" type="hidden"/>
-<input id="f_auto_tool" name="automacao_programa" type="hidden"/>
-<input id="f_auto_tool_cost" name="automacao_programa_custo" type="hidden"/>
-<input id="f_auto_platform" name="automacao_plataforma" type="hidden"/>
-<input id="f_auto_integrations" name="automacao_integracoes" type="hidden"/>
-<input id="f_auto_alert_channels" name="automacao_alertas_canais" type="hidden"/>
-<input id="f_auto_scraping" name="automacao_scraping_tipo" type="hidden"/>
-<input id="f_auto_examples" name="automacao_exemplos" type="hidden"/>
-<input id="f_org_goal" name="org_goal" type="hidden"/>
-<input id="f_org_where" name="org_where" type="hidden"/>
-<input id="f_org_folders" name="org_folders" type="hidden"/>
-<input id="f_org_folder_platform" name="org_folder_platform" type="hidden"/>
-<input id="f_org_rules" name="org_rules" type="hidden"/>
-<input id="f_org_integration" name="org_integration" type="hidden"/>
-<input id="f_org_integration_detail" name="org_integration_detail" type="hidden"/>
-<input id="f_org_intervention" name="org_intervention" type="hidden"/>
-<input id="f_org_examples" name="org_examples" type="hidden"/>
-<input id="f_intervention" name="nivel_intervencao" type="hidden"/>
-<input id="f_company" name="empresa" type="hidden"/>
-<input id="f_role" name="cargo" type="hidden"/>
-<input id="f_sourcesTypes" name="fontes_tipo" type="hidden"/>
-<input id="f_sourcesCount" name="fontes_quantidade" type="hidden"/>
-<input id="f_features" name="features" type="hidden"/>
-<input id="f_score" name="complexidade_score" type="hidden"/>
-<input id="f_recommended" name="pacote_recomendado" type="hidden"/>
-<input id="f_context" name="contexto" type="hidden"/>
-<input id="f_name" name="nome" type="hidden"/>
-<input id="f_email" name="email" type="hidden"/>
-<input id="f_whats" name="whatsapp" type="hidden"/>
-<input id="f_date" name="data" type="hidden"/>
-
 <div class="wizard" id="wizard" style="margin-top: 22px;">
 <div class="wizard-top">
 <div class="wizard-title">
@@ -1523,8 +1474,56 @@
 <div class="note" id="stepNote">Selecione uma opção para continuar.</div>
 <button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
 </div>
-</form>
+<!-- Form oculto (simulação) -->
+<form action="https://formsubmit.co/contato@visudados.com.br" id="leadForm" method="POST">
+<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
+<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
+<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
+<input name="_template" type="hidden" value="table"/>
 
+<input type="hidden" name="_captcha" value="false"/><input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
+<input id="f_pacote" name="pacote" type="hidden"/>
+<!-- preço só aparece no final; referência removida -->
+<input id="f_cenario" name="cenario" type="hidden"/>
+<input id="f_output" name="resultado_desejado" type="hidden"/>
+<input id="f_dash_top2" name="dashboard_referencias_top2" type="hidden"/>
+<input id="f_dash_theme" name="dashboard_tema" type="hidden"/>
+<input id="f_dash_colors" name="dashboard_cores" type="hidden"/>
+<input id="f_auto_goal" name="automacao_objetivo" type="hidden"/>
+<input id="f_auto_where" name="automacao_onde" type="hidden"/>
+<input id="f_auto_mode" name="automacao_funcionamento" type="hidden"/>
+<input id="f_auto_freq" name="automacao_frequencia" type="hidden"/>
+<input id="f_auto_tool" name="automacao_programa" type="hidden"/>
+<input id="f_auto_tool_cost" name="automacao_programa_custo" type="hidden"/>
+<input id="f_auto_platform" name="automacao_plataforma" type="hidden"/>
+<input id="f_auto_integrations" name="automacao_integracoes" type="hidden"/>
+<input id="f_auto_alert_channels" name="automacao_alertas_canais" type="hidden"/>
+<input id="f_auto_scraping" name="automacao_scraping_tipo" type="hidden"/>
+<input id="f_auto_examples" name="automacao_exemplos" type="hidden"/>
+<input id="f_org_goal" name="org_goal" type="hidden"/>
+<input id="f_org_where" name="org_where" type="hidden"/>
+<input id="f_org_folders" name="org_folders" type="hidden"/>
+<input id="f_org_folder_platform" name="org_folder_platform" type="hidden"/>
+<input id="f_org_rules" name="org_rules" type="hidden"/>
+<input id="f_org_integration" name="org_integration" type="hidden"/>
+<input id="f_org_integration_detail" name="org_integration_detail" type="hidden"/>
+<input id="f_org_intervention" name="org_intervention" type="hidden"/>
+<input id="f_org_examples" name="org_examples" type="hidden"/>
+<input id="f_intervention" name="nivel_intervencao" type="hidden"/>
+<input id="f_company" name="empresa" type="hidden"/>
+<input id="f_role" name="cargo" type="hidden"/>
+<input id="f_sourcesTypes" name="fontes_tipo" type="hidden"/>
+<input id="f_sourcesCount" name="fontes_quantidade" type="hidden"/>
+<input id="f_features" name="features" type="hidden"/>
+<input id="f_score" name="complexidade_score" type="hidden"/>
+<input id="f_recommended" name="pacote_recomendado" type="hidden"/>
+<input id="f_context" name="contexto" type="hidden"/>
+<input id="f_name" name="nome" type="hidden"/>
+<input id="f_email" name="email" type="hidden"/>
+<input id="f_whats" name="whatsapp" type="hidden"/>
+<input id="f_date" name="data" type="hidden"/>
+<button id="leadFormSubmit" type="submit" class="btn-primary"></button>
+</form>
 </div>
 </div>
 <section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
@@ -2060,15 +2059,6 @@ function applyPackageLocks(){
       const stepNote = $('#stepNote');
 
       let currentStep = 1;
-      const leadFormEl = document.getElementById('leadForm');
-      if(leadFormEl){
-        leadFormEl.addEventListener('submit', (e) => {
-          // Evita submit acidental (Enter) antes da última etapa
-          if(currentStep < totalSteps){
-            e.preventDefault();
-          }
-        });
-      }
       const totalSteps = steps.length;
 
       function setProgress(){
@@ -2742,7 +2732,7 @@ function applyPackageLocks(){
       }
 
       if(btnNext){
-        btnNext.addEventListener('click', (e) => {
+        btnNext.addEventListener('click', () => {
           if(!validateStep()) return;
 
           // salva inputs do step 4 e 5 quando existirem
@@ -2755,13 +2745,14 @@ function applyPackageLocks(){
             return;
           }
 
+          // Finaliza: preenche form oculto e envia
           const form = document.getElementById('leadForm');
           if(!form) return;
 
-          // Preenche campos ocultos (para a VISU receber tudo em tabela no e-mail)
-
+          // Campos do wizard
           document.getElementById('f_pacote').value = state.pacote || '';
-                    document.getElementById('f_cenario').value = state.scenario || '';
+          // referência de preço removida (preço é calculado no final)
+          document.getElementById('f_cenario').value = state.scenario || '';
           document.getElementById('f_output').value = state.output || '';
 
           // Automação (se aplicável)
@@ -2827,7 +2818,6 @@ function applyPackageLocks(){
           document.getElementById('f_org_intervention').value = state.orgIntervention || '';
           document.getElementById('f_org_examples').value = (state.orgExamples && state.orgExamples.length) ? state.orgExamples.join(' | ') : '';
 
-          
           // Tracking
           try {
             const pricing = calcPricing();
@@ -2837,11 +2827,10 @@ function applyPackageLocks(){
               items: [{ item_name: `Ciclo VIS — ${state.pacote}`, price: Number(pricing.totalFinal || 0) }]
             });
           } catch(e) {}
-
           if (form.requestSubmit) {
-            form.requestSubmit();
+            form.requestSubmit(); // submit “normal”, dispara evento e mantém comportamento do contato
           } else {
-            form.submit();
+            document.getElementById('leadFormSubmit')?.click(); // fallback
           }
         });
       }
