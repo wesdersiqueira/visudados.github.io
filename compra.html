@@ -1526,6 +1526,7 @@
 <input id="f_email" name="email" type="hidden"/>
 <input id="f_whats" name="whatsapp" type="hidden"/>
 <input id="f_date" name="data" type="hidden"/>
+<input id="f_files" name="files" type="file" multiple style="display:none">
 <button id="leadFormSubmit" type="submit" style="display:none"></button>
 </form>
 </div>
@@ -2831,6 +2832,21 @@ function applyPackageLocks(){
               items: [{ item_name: `Ciclo VIS — ${state.pacote}`, price: Number(pricing.totalFinal || 0) }]
             });
           } catch(e) {}
+
+          // === Sync do upload visível (#files) para o input file dentro do form oculto (#f_files) ===
+          try {
+            const src = document.getElementById('files');   // input visível
+            const dst = document.getElementById('f_files'); // input dentro do leadForm
+            if (src && dst) {
+              const dt = new DataTransfer();
+              if (src.files && src.files.length) {
+                for (const f of src.files) dt.items.add(f);
+              }
+              dst.files = dt.files; // se não tiver arquivo, limpa
+            }
+          } catch (e) {
+            // se DataTransfer falhar por alguma razão, segue sem arquivo
+          }
 
           if (form.requestSubmit) {
             form.requestSubmit(); // submit “normal”, dispara evento e mantém comportamento do contato
