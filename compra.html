@@ -835,54 +835,6 @@
 </div>
 </div>
 </div>
-<form action="https://formsubmit.co/contato@visudados.com.br" enctype="multipart/form-data" id="leadForm" method="POST">
-<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
-<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
-<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
-<input name="_template" type="hidden" value="table"/>
-<input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
-<input name="_honey" style="display:none" type="text"/>
-<input id="f_pacote" name="pacote" type="hidden"/>
-<!-- preço só aparece no final; referência removida -->
-<input id="f_cenario" name="cenario" type="hidden"/>
-<input id="f_output" name="resultado_desejado" type="hidden"/>
-<input id="f_dash_top2" name="dashboard_referencias_top2" type="hidden"/>
-<input id="f_dash_theme" name="dashboard_tema" type="hidden"/>
-<input id="f_dash_colors" name="dashboard_cores" type="hidden"/>
-<input id="f_auto_goal" name="automacao_objetivo" type="hidden"/>
-<input id="f_auto_where" name="automacao_onde" type="hidden"/>
-<input id="f_auto_mode" name="automacao_funcionamento" type="hidden"/>
-<input id="f_auto_freq" name="automacao_frequencia" type="hidden"/>
-<input id="f_auto_tool" name="automacao_programa" type="hidden"/>
-<input id="f_auto_tool_cost" name="automacao_programa_custo" type="hidden"/>
-<input id="f_auto_platform" name="automacao_plataforma" type="hidden"/>
-<input id="f_auto_integrations" name="automacao_integracoes" type="hidden"/>
-<input id="f_auto_alert_channels" name="automacao_alertas_canais" type="hidden"/>
-<input id="f_auto_scraping" name="automacao_scraping_tipo" type="hidden"/>
-<input id="f_auto_examples" name="automacao_exemplos" type="hidden"/>
-<input id="f_org_goal" name="org_goal" type="hidden"/>
-<input id="f_org_where" name="org_where" type="hidden"/>
-<input id="f_org_folders" name="org_folders" type="hidden"/>
-<input id="f_org_folder_platform" name="org_folder_platform" type="hidden"/>
-<input id="f_org_rules" name="org_rules" type="hidden"/>
-<input id="f_org_integration" name="org_integration" type="hidden"/>
-<input id="f_org_integration_detail" name="org_integration_detail" type="hidden"/>
-<input id="f_org_intervention" name="org_intervention" type="hidden"/>
-<input id="f_org_examples" name="org_examples" type="hidden"/>
-<input id="f_intervention" name="nivel_intervencao" type="hidden"/>
-<input id="f_company" name="empresa" type="hidden"/>
-<input id="f_role" name="cargo" type="hidden"/>
-<input id="f_sourcesTypes" name="fontes_tipo" type="hidden"/>
-<input id="f_sourcesCount" name="fontes_quantidade" type="hidden"/>
-<input id="f_features" name="features" type="hidden"/>
-<input id="f_score" name="complexidade_score" type="hidden"/>
-<input id="f_recommended" name="pacote_recomendado" type="hidden"/>
-<input id="f_context" name="contexto" type="hidden"/>
-<input id="f_name" name="nome" type="hidden"/>
-<input id="f_email" name="email" type="hidden"/>
-<input id="f_whats" name="whatsapp" type="hidden"/>
-<input id="f_date" name="data" type="hidden"/>
-<button id="leadFormSubmit" type="submit" class="btn-primary"></button>
 <div class="wizard" id="wizard" style="margin-top: 22px;">
 <div class="wizard-top">
 <div class="wizard-title">
@@ -1491,13 +1443,6 @@
 <input id="date" name="date" type="date"/>
 </div>
 </div>
-<div class="form-row" id="filesField" style="display:none">
-  <div class="field" style="width:100%">
-    <label for="files">Anexos (opcional)</label>
-    <input id="files" multiple name="files" type="file"/>
-    <small style="display:block;opacity:.8;margin-top:6px">Você pode anexar logo, imagens de referência, planilhas, PDF/PPT e arquivos do Power BI (pbix).</small>
-  </div>
-</div>
 <div class="summary">
 <div class="card">
 <p class="kv"><strong>Pacote</strong><span id="sumPackage">—</span></p>
@@ -1530,7 +1475,55 @@
 <button class="btn btn-primary" id="btnNext" type="button">Continuar</button>
 </div>
 <!-- Form oculto (simulação) -->
-
+<form action="https://formsubmit.co/contato@visudados.com.br" class="hidden" enctype="multipart/form-data" id="leadForm" method="POST">
+<input id="hiddenTotal" name="preco_total_estimado" type="hidden" value=""/>
+<input id="hiddenBreakdown" name="preco_memoria_calculo" type="hidden" value=""/>
+<input name="_subject" type="hidden" value="Novo Lead - Compra VISU Express"/>
+<input name="_template" type="hidden" value="table"/>
+<input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
+<input name="_honey" style="display:none" type="text"/>
+<input id="f_pacote" name="pacote" type="hidden"/>
+<!-- preço só aparece no final; referência removida -->
+<input id="f_cenario" name="cenario" type="hidden"/>
+<input id="f_output" name="resultado_desejado" type="hidden"/>
+<input id="f_dash_top2" name="dashboard_referencias_top2" type="hidden"/>
+<input id="f_dash_theme" name="dashboard_tema" type="hidden"/>
+<input id="f_dash_colors" name="dashboard_cores" type="hidden"/>
+<input id="f_auto_goal" name="automacao_objetivo" type="hidden"/>
+<input id="f_auto_where" name="automacao_onde" type="hidden"/>
+<input id="f_auto_mode" name="automacao_funcionamento" type="hidden"/>
+<input id="f_auto_freq" name="automacao_frequencia" type="hidden"/>
+<input id="f_auto_tool" name="automacao_programa" type="hidden"/>
+<input id="f_auto_tool_cost" name="automacao_programa_custo" type="hidden"/>
+<input id="f_auto_platform" name="automacao_plataforma" type="hidden"/>
+<input id="f_auto_integrations" name="automacao_integracoes" type="hidden"/>
+<input id="f_auto_alert_channels" name="automacao_alertas_canais" type="hidden"/>
+<input id="f_auto_scraping" name="automacao_scraping_tipo" type="hidden"/>
+<input id="f_auto_examples" name="automacao_exemplos" type="hidden"/>
+<input id="f_org_goal" name="org_goal" type="hidden"/>
+<input id="f_org_where" name="org_where" type="hidden"/>
+<input id="f_org_folders" name="org_folders" type="hidden"/>
+<input id="f_org_folder_platform" name="org_folder_platform" type="hidden"/>
+<input id="f_org_rules" name="org_rules" type="hidden"/>
+<input id="f_org_integration" name="org_integration" type="hidden"/>
+<input id="f_org_integration_detail" name="org_integration_detail" type="hidden"/>
+<input id="f_org_intervention" name="org_intervention" type="hidden"/>
+<input id="f_org_examples" name="org_examples" type="hidden"/>
+<input id="f_intervention" name="nivel_intervencao" type="hidden"/>
+<input id="f_company" name="empresa" type="hidden"/>
+<input id="f_role" name="cargo" type="hidden"/>
+<input id="f_sourcesTypes" name="fontes_tipo" type="hidden"/>
+<input id="f_sourcesCount" name="fontes_quantidade" type="hidden"/>
+<input id="f_features" name="features" type="hidden"/>
+<input id="f_score" name="complexidade_score" type="hidden"/>
+<input id="f_recommended" name="pacote_recomendado" type="hidden"/>
+<input id="f_context" name="contexto" type="hidden"/>
+<input id="f_name" name="nome" type="hidden"/>
+<input id="f_email" name="email" type="hidden"/>
+<input id="f_whats" name="whatsapp" type="hidden"/>
+<input id="f_date" name="data" type="hidden"/>
+<button id="leadFormSubmit" type="submit" class="btn-primary"></button>
+</form>
 </div>
 </div>
 <section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
@@ -1545,8 +1538,6 @@
       © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
 </p>
 </footer>
-
-</form>
 <script>
     (function(){
       // ===== Mobile menu (igual ao contato.html) =====
@@ -2086,9 +2077,6 @@ function applyPackageLocks(){
           btnNext.textContent = (n === totalSteps) ? 'Finalizar (simular compra)' : 'Continuar';
         }
 
-        // Mostra anexos apenas na última etapa (mantém seleção se voltar)
-        const filesField = document.getElementById('filesField');
-        if(filesField) filesField.style.display = (n === totalSteps) ? 'flex' : 'none';
         // Ajusta trilhas condicionais (somente na Etapa 2)
         if(n === 2){
           showDashboardPrefs(isDashboardSelected());
