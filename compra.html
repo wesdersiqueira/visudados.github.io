@@ -1416,7 +1416,7 @@ function applyPackageLocks(){
         if(btnNext){
           const isLast = (n === totalSteps);
           btnNext.textContent = isLast ? 'Enviar' : 'Continuar';
-          btnNext.type = isLast ? 'submit' : 'button';
+          btnNext.type = 'button';
         }
 
         // Ajusta trilhas condicionais (somente na Etapa 2)
@@ -2076,74 +2076,87 @@ function applyPackageLocks(){
       if(btnNext){
         btnNext.addEventListener('click', (e) => {
           // Nos passos intermediários, o botão apenas avança (não envia o form)
+          e.preventDefault();
+
           if(currentStep < totalSteps){
-            e.preventDefault();
             if(!validateStep()) return;
             updateSummary();
             showStep(currentStep + 1);
             if(currentStep === totalSteps) updateSummary();
             return;
           }
-          // No último passo, não bloqueia: o submit é nativo do <form>
-        });
-      }
 
-      // Submit nativo do form (sem  no JS)
-      const leadForm = document.getElementById('leadForm');
-      if(leadForm){
-        leadForm.addEventListener('submit', (e) => {
-          // só permite enviar no último passo
-          if(currentStep !== totalSteps){
-            e.preventDefault();
-            return;
-          }
-          if(!validateStep()){
-            e.preventDefault();
-            return;
-          }
+          // ===== Último passo: enviar via JS (robusto) =====
+          if(!validateStep()) return;
 
           // garante resumo/calculos atualizados
           updateSummary();
 
           // preenche campos hidden de apoio (mantém e-mail “bonito” no FormSubmit)
-          const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = (val ?? ''); };
+          fillHiddenFields();
 
-          setVal('f_pacote', state.pacote || '');
-          setVal('f_cenario', state.scenario || '');
-          setVal('f_output', state.output || '');
-
-          setVal('f_dash_top2', state.dashTop2 || '');
-          setVal('f_dash_theme', state.dashTheme || '');
-          setVal('f_dash_colors', state.dashColors || '');
-
-          // automação
-          if(document.getElementById('f_auto_goal')){
-            const goalStr = (state.autoGoal && state.autoGoal.length) ? state.autoGoal.join(' | ') : '';
-            setVal('f_auto_goal', goalStr);
-          }
-          if(document.getElementById('f_auto_where')) setVal('f_auto_where', state.autoWhere || '');
-          if(document.getElementById('f_auto_mode')) setVal('f_auto_mode', state.autoMode || '');
-          if(document.getElementById('f_auto_examples')){
-            const exStr = (state.autoExamples && state.autoExamples.length) ? state.autoExamples.join(' | ') : '';
-            setVal('f_auto_examples', exStr);
+          // re-busca o form na hora do envio (evita null por qualquer motivo)
+          const form = document.getElementById('leadForm');
+          if(!form){
+            if(stepNote) stepNote.textContent = 'Erro: formulário não encontrado na página.';
+            return;
           }
 
-          // organização
-          if(document.getElementById('f_org_scope')){
-            const orgStr = (state.orgScope && state.orgScope.length) ? state.orgScope.join(' | ') : '';
-            setVal('f_org_scope', orgStr);
-          }
-
-          // precificação
-          const totalEl = document.getElementById('hiddenTotal');
-          if(totalEl && pricing && typeof pricing.totalFinal !== 'undefined'){
-            totalEl.value = String(pricing.totalFinal);
-          }
-          const breakdownEl = document.getElementById('hiddenBreakdown');
-          if(breakdownEl && pricing && pricing.breakdownText){
-            breakdownEl.value = pricing.breakdownText;
+          // enviar exatamente como no compra_deepseek (bypass de validação nativa)
+          if(stepNote) stepNote.textContent = 'Enviando...';
+          try{
+            form.submit();
+          }catch(err){
+            // fallback: tenta de novo sem depender de variáveis externas
+            try{ document.getElementById('leadForm').submit(); }catch(e2){}
           }
         });
+      }
+
+      // Form do FormSubmit
+      const leadForm = document.getElementById('leadForm');
+
+      // Centraliza o preenchimento dos campos hidden antes do envio
+      function fillHiddenFields(){
+        const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = (val ?? ''); };
+
+        // campos principais
+        setVal('f_pacote', state.pacote || '');
+        setVal('f_cenario', state.scenario || '');
+        setVal('f_output', state.output || '');
+
+        // dashboard
+        setVal('f_dash_top2', state.dashTop2 || '');
+        setVal('f_dash_theme', state.dashTheme || '');
+        setVal('f_dash_colors', state.dashColors || '');
+
+        // automação
+        if(document.getElementById('f_auto_goal')){
+          const goalStr = (state.autoGoal && state.autoGoal.length) ? state.autoGoal.join(' | ') : '';
+          setVal('f_auto_goal', goalStr);
+        }
+        if(document.getElementById('f_auto_where')) setVal('f_auto_where', state.autoWhere || '');
+        if(document.getElementById('f_auto_mode')) setVal('f_auto_mode', state.autoMode || '');
+        if(document.getElementById('f_auto_examples')){
+          const exStr = (state.autoExamples && state.autoExamples.length) ? state.autoExamples.join(' | ') : '';
+          setVal('f_auto_examples', exStr);
+        }
+
+        // organização
+        if(document.getElementById('f_org_scope')){
+          const orgStr = (state.orgScope && state.orgScope.length) ? state.orgScope.join(' | ') : '';
+          setVal('f_org_scope', orgStr);
+        }
+
+        // precificação
+        const totalEl = document.getElementById('hiddenTotal');
+        if(totalEl && pricing && typeof pricing.totalFinal !== 'undefined'){
+          totalEl.value = String(pricing.totalFinal);
+        }
+        const breakdownEl = document.getElementById('hiddenBreakdown');
+        if(breakdownEl && pricing && pricing.breakdownText){
+          breakdownEl.value = pricing.breakdownText;
+        }
       }
  // valida em tempo real
       document.addEventListener('change', (e) => {
