@@ -182,6 +182,7 @@
 <input name="_template" type="hidden" value="table"/>
 <input name="_next" type="hidden" value="https://visudados.com.br/obrigado.html?source=compra"/>
 <input name="_honey" style="display:none" type="text"/>
+<input id="briefing_json" name="briefing_json" type="hidden" value=""/>
 <input id="f_pacote" name="pacote" type="hidden"/>
 <input id="f_cenario" name="cenario" type="hidden"/>
 <input id="f_output" name="resultado_desejado" type="hidden"/>
@@ -2117,46 +2118,131 @@ function applyPackageLocks(){
       const leadForm = document.getElementById('leadForm');
 
       // Centraliza o preenchimento dos campos hidden antes do envio
+      function buildBriefingPayload(){
+        const pricing = calcPricing();
+        const getVal = (id) => {
+          const el = document.getElementById(id);
+          return el ? (el.value ?? '').trim() : '';
+        };
+
+        return {
+          meta: {
+            source: 'compra.html',
+            submittedAt: new Date().toISOString(),
+            currentStep,
+            totalSteps
+          },
+          briefing: {
+            pacote: state.pacote || '',
+            scenario: state.scenario || '',
+            output: state.output || '',
+            intervention: state.intervention || '',
+            sourcesCount: Number(state.sourcesCount || 0),
+            cyclesCount: Number(state.cyclesCount || 0),
+            sourcesTypes: state.sourcesTypes || getVal('sourcesTypes'),
+            context: getVal('context')
+          },
+          dashboard: {
+            dashTop2: Array.isArray(state.dashTop2) ? state.dashTop2 : [],
+            dashTheme: state.dashTheme || '',
+            dashColors: Array.isArray(state.dashColors) ? state.dashColors : [],
+            dashProtoScores: state.dashProtoScores || {}
+          },
+          automation: {
+            autoPlatform: state.autoPlatform || '',
+            autoGoal: Array.isArray(state.autoGoal) ? state.autoGoal : [],
+            autoWhere: state.autoWhere || '',
+            autoMode: state.autoMode || '',
+            autoFreq: state.autoFreq || '',
+            autoTool: state.autoTool || '',
+            autoToolCost: state.autoToolCost || '',
+            autoIntegrations: Array.isArray(state.autoIntegrations) ? state.autoIntegrations : [],
+            autoAlertChannels: Array.isArray(state.autoAlertChannels) ? state.autoAlertChannels : [],
+            autoScraping: state.autoScraping || '',
+            autoExamples: Array.isArray(state.autoExamples) ? state.autoExamples : []
+          },
+          organization: {
+            orgGoal: state.orgGoal || '',
+            orgWhere: state.orgWhere || '',
+            orgFolders: state.orgFolders || '',
+            orgFolderPlatform: state.orgFolderPlatform || '',
+            orgRules: state.orgRules || '',
+            orgIntegration: state.orgIntegration || '',
+            orgIntegrationDetail: state.orgIntegrationDetail || '',
+            orgIntervention: state.orgIntervention || '',
+            orgExamples: Array.isArray(state.orgExamples) ? state.orgExamples : []
+          },
+          decisioning: {
+            score: Number(state.score || 0),
+            required: state.required || '',
+            recommended: state.recommended || '',
+            clientType: state.clientType || '',
+            urgency: state.urgency || '',
+            maintenance: state.maintenance || '',
+            features: Array.isArray(state.features) ? state.features : []
+          },
+          pricing: pricing,
+          contact: {
+            company: getVal('company'),
+            role: getVal('role'),
+            name: getVal('name'),
+            email: getVal('email'),
+            whats: getVal('whats'),
+            date: getVal('date')
+          }
+        };
+      }
+
       function fillHiddenFields(){
         const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = (val ?? ''); };
+        const pricing = calcPricing();
+        const payload = buildBriefingPayload();
+        const jsonText = JSON.stringify(payload, null, 2);
 
-        // campos principais
+        setVal('briefing_json', jsonText);
+
+        // mantém compatibilidade com campos já existentes, sem depender deles para o envio
         setVal('f_pacote', state.pacote || '');
         setVal('f_cenario', state.scenario || '');
         setVal('f_output', state.output || '');
-
-        // dashboard
-        setVal('f_dash_top2', state.dashTop2 || '');
+        setVal('f_dash_top2', (state.dashTop2 || []).join(' | '));
         setVal('f_dash_theme', state.dashTheme || '');
-        setVal('f_dash_colors', state.dashColors || '');
-
-        // automação
-        if(document.getElementById('f_auto_goal')){
-          const goalStr = (state.autoGoal && state.autoGoal.length) ? state.autoGoal.join(' | ') : '';
-          setVal('f_auto_goal', goalStr);
-        }
-        if(document.getElementById('f_auto_where')) setVal('f_auto_where', state.autoWhere || '');
-        if(document.getElementById('f_auto_mode')) setVal('f_auto_mode', state.autoMode || '');
-        if(document.getElementById('f_auto_examples')){
-          const exStr = (state.autoExamples && state.autoExamples.length) ? state.autoExamples.join(' | ') : '';
-          setVal('f_auto_examples', exStr);
-        }
-
-        // organização
-        if(document.getElementById('f_org_scope')){
-          const orgStr = (state.orgScope && state.orgScope.length) ? state.orgScope.join(' | ') : '';
-          setVal('f_org_scope', orgStr);
-        }
-
-        // precificação
-        const totalEl = document.getElementById('hiddenTotal');
-        if(totalEl && pricing && typeof pricing.totalFinal !== 'undefined'){
-          totalEl.value = String(pricing.totalFinal);
-        }
-        const breakdownEl = document.getElementById('hiddenBreakdown');
-        if(breakdownEl && pricing && pricing.breakdownText){
-          breakdownEl.value = pricing.breakdownText;
-        }
+        setVal('f_dash_colors', (state.dashColors || []).join(' | '));
+        setVal('f_auto_goal', (state.autoGoal || []).join(' | '));
+        setVal('f_auto_where', state.autoWhere || '');
+        setVal('f_auto_mode', state.autoMode || '');
+        setVal('f_auto_freq', state.autoFreq || '');
+        setVal('f_auto_tool', state.autoTool || '');
+        setVal('f_auto_tool_cost', state.autoToolCost || '');
+        setVal('f_auto_platform', state.autoPlatform || '');
+        setVal('f_auto_integrations', (state.autoIntegrations || []).join(' | '));
+        setVal('f_auto_alert_channels', (state.autoAlertChannels || []).join(' | '));
+        setVal('f_auto_scraping', state.autoScraping || '');
+        setVal('f_auto_examples', (state.autoExamples || []).join(' | '));
+        setVal('f_org_goal', state.orgGoal || '');
+        setVal('f_org_where', state.orgWhere || '');
+        setVal('f_org_folders', state.orgFolders || '');
+        setVal('f_org_folder_platform', state.orgFolderPlatform || '');
+        setVal('f_org_rules', state.orgRules || '');
+        setVal('f_org_integration', state.orgIntegration || '');
+        setVal('f_org_integration_detail', state.orgIntegrationDetail || '');
+        setVal('f_org_intervention', state.orgIntervention || '');
+        setVal('f_org_examples', (state.orgExamples || []).join(' | '));
+        setVal('f_intervention', state.intervention || '');
+        setVal('f_company', document.getElementById('company')?.value || '');
+        setVal('f_role', document.getElementById('role')?.value || '');
+        setVal('f_sourcesTypes', state.sourcesTypes || document.getElementById('sourcesTypes')?.value || '');
+        setVal('f_sourcesCount', state.sourcesCount || '');
+        setVal('f_features', (state.features || []).join(' | '));
+        setVal('f_score', state.score || '');
+        setVal('f_recommended', state.recommended || '');
+        setVal('f_context', document.getElementById('context')?.value || '');
+        setVal('f_name', document.getElementById('name')?.value || '');
+        setVal('f_email', document.getElementById('email')?.value || '');
+        setVal('f_whats', document.getElementById('whats')?.value || '');
+        setVal('f_date', document.getElementById('date')?.value || '');
+        setVal('hiddenTotal', String(pricing.totalFinal ?? ''));
+        setVal('hiddenBreakdown', jsonText);
       }
  // valida em tempo real
       document.addEventListener('change', (e) => {
@@ -2225,12 +2311,24 @@ function applyPackageLocks(){
 
         cb.dataset.touched = '0';
 
-        cb.addEventListener('change', () => {
-          cb.dataset.touched = '1';
-          const val = cb.checked ? 'Sim' : 'Não';
+        const syncToggleToValue = (val, markTouched=false) => {
+          if(markTouched) cb.dataset.touched = '1';
+          cb.checked = (val === 'Sim');
           const opt = grid.querySelector(`.opt[data-value="${val}"]`);
-          if(opt) opt.click();
+          if(opt && !opt.classList.contains('selected')) opt.click();
+        };
+
+        cb.addEventListener('change', () => {
+          syncToggleToValue(cb.checked ? 'Sim' : 'Não', true);
         });
+
+        // Estado padrão: "Não" já selecionado, sem exigir interação do usuário.
+        const selected = grid.querySelector('.opt.selected');
+        if(selected){
+          cb.checked = (selected.dataset.value === 'Sim');
+        } else {
+          syncToggleToValue('Não', false);
+        }
       }
       ['orgFolders','orgRules','orgIntegration'].forEach(bindYesNoToggle);
 
