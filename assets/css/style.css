@@ -835,7 +835,7 @@ width: 100%;
 height: 100%;
 background-size: cover;
 background-position: center;
-animation: slide 24s infinite ease-in-out;
+animation: slide 60s infinite step-end;
 z-index: 1;
 filter: brightness(0.6);
 }
@@ -850,8 +850,8 @@ color: white;
 
 @keyframes slide {
 0%   { background-image: url('../img/visu1.jpg'); }
-33%  { background-image: url('../img/visu2.jpg'); }
-66%  { background-image: url('../img/visu3.jpg'); }
+40%  { background-image: url('../img/visu2.jpg'); }
+80%  { background-image: url('../img/visu3.jpg'); }
 100% { background-image: url('../img/visu1.jpg'); }
 }
 
