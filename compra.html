@@ -24,7 +24,7 @@
 <link href="assets/css/style.css" rel="stylesheet"/>
 
 </head>
-<body>
+<body class="theme-premium theme-premium--compra">
 <!-- Header -->
 <header>
 <div class="logo-container">
@@ -44,7 +44,7 @@
 <span>Contato</span>
 </a>
 </li>
-<li><a class="nav-link cta-link active" href="#" onclick="return false;"><span>Fazer Orçamento</span></a></li>
+<li><a class="nav-link cta-link active" data-cta-motion="none" href="#" onclick="return false;"><span>Fazer Orçamento</span></a></li>
 <!-- Dropdown para desktop (hidden em mobile) -->
 <li class="dropdown desktop-only">
 <a class="nav-link with-arrow" data-toggle="dropdown">
@@ -127,7 +127,7 @@
 </header>
 <main>
 <div class="page-wrap">
-<section class="hero-mini">
+<section class="hero-mini premium-surface">
 <h1>VISU Express — o Ciclo VIS em formato de produto</h1>
 <p>
           A Lógica é simples: você escolhe um pacote, preenche um briefing guiado (com referências), e entra numa call com um dos nossos consultores já com tudo pré-organizado. A agilidade da etapa Visualizar do Ciclo VIS faz com que você receba Diagnóstico + Protótipo + Plano de execução.
@@ -142,7 +142,7 @@
 <h2 class="section-title">1) Escolha um pacote</h2>
 <p class="muted" style="margin-top:-6px;">O preço será calculado no final com base nas escolhas do briefing (sem surpresas de escopo).</p>
 <div class="grid" id="packageGrid">
-<div class="card" data-package="Leve" role="button" tabindex="0">
+<div class="card premium-card" data-package="Leve" role="button" tabindex="0">
 <h3>Ciclo VIS — Leve</h3>
 <p>Para organizar o básico e destravar o primeiro ganho de tempo.</p>
 <ul class="mini-list">
@@ -230,7 +230,7 @@
 <input id="f_email" name="email" type="hidden"/>
 <input id="f_whats" name="whatsapp" type="hidden"/>
 <input id="f_date" name="data" type="hidden"/>
-<div class="wizard" id="wizard" style="margin-top: 22px;">
+<div class="wizard premium-surface" id="wizard" style="margin-top: 22px;">
 <div class="wizard-top">
 <div class="wizard-title">
 <strong>2) Briefing guiado</strong>
@@ -878,7 +878,7 @@
 <section class="cta-section" style="margin-top: 34px; border-radius: 18px; overflow: hidden;">
 <h2>Preferindo falar direto?</h2>
 <p>Sem problema. Se quiser, já agenda uma conversa de 30 minutos.</p>
-<a class="cta-button" href="https://cal.com/visudados" target="_blank">Agendar diagnóstico gratuito</a>
+<a class="cta-button" data-cta-motion="subtle" href="https://cal.com/visudados" target="_blank">Agendar diagnóstico gratuito</a>
 </section>
 
 </main>

@@ -22,11 +22,11 @@ o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+
 o.onload=function(){window.trackingFunctions.onLoad({appId:"696ff1269382b90011701476"})},
 document.head.appendChild(o)}initApollo();</script>
 
-    <!-- Apollo script begin --> 
+    <!-- Apollo script begin -->
 <script>(function initApolloInbound(){var TIMEOUT_MS=15000;var timeoutId;var style=document.createElement('style');style.id='apollo-form-prehide-css';style.textContent='form:has(input[type="email" i]),form:has(input[name="email" i]),.hs-form-iframe{position:relative!important}form:has(input[type="email" i])::before,form:has(input[name="email" i])::before,.hs-form-iframe::before{content:"";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;width:50px;height:50px;margin:auto;border:2.5px solid #e1e1e1;border-top:2.5px solid #9ea3a6;border-radius:50%;animation:spin 1s linear infinite;background-color:transparent;pointer-events:auto;z-index:999999;opacity:1}form:has(input[type="email" i]) *,form:has(input[name="email" i]) *,.hs-form-iframe *{opacity:0!important;user-select:none!important;pointer-events:none!important}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}';(document.head || document.documentElement).appendChild(style);function cleanup(){var styleEl=document.getElementById('apollo-form-prehide-css');if(styleEl)styleEl.remove();if(timeoutId)clearTimeout(timeoutId);}timeoutId=setTimeout(function(){console.warn('[Apollo] Form enrichment timeout after 5s - revealing forms. Check network and console for errors.');cleanup();},TIMEOUT_MS);var nocache=Math.random().toString(36).substring(7);var script=document.createElement('script');script.src='https://assets.apollo.io/js/apollo-inbound.js?nocache=' + nocache;script.defer=true;script.onerror=function(){console.error('[Apollo] Failed to load form enrichment script');cleanup();};script.onload=function(){try{window.ApolloInbound.formEnrichment.init({appId: '699a23eac34dcd0019de0ec5',onReady: function(){cleanup();},onError: function(err){console.error('[Apollo] Form enrichment init error:',err);cleanup();}});}catch(err){console.error('[Apollo] Error initializing form enrichment:',err);cleanup();}};document.head.appendChild(script);})();</script> <!-- Apollo script end -->
-    
+
 </head>
-<body>
+<body class="theme-premium theme-premium--home">
     <!-- Header -->
     <header>
         <div class="logo-container">
@@ -35,7 +35,6 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
         <nav class="main-nav">
             <ul class="header-links">
-                <!-- Item simples -->
                 <li>
                     <a href="index.html" class="nav-link active">
                         <span>Home</span>
@@ -46,9 +45,8 @@ document.head.appendChild(o)}initApollo();</script>
                         <span>Contato</span>
                     </a>
                 </li>
-                <li><a class="nav-link cta-link" href="compra.html"><span>Fazer Orçamento</span></a></li>
+                <li><a class="nav-link cta-link" data-cta-motion="header" href="compra.html"><span>Fazer Orçamento</span></a></li>
 
-                <!-- Dropdown para desktop (hidden em mobile) -->
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
                         <span>Serviços</span>
@@ -63,8 +61,7 @@ document.head.appendChild(o)}initApollo();</script>
                         <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
                     </ul>
                 </li>
-                
-                <!-- Accordion para mobile (hidden em desktop) -->
+
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
                         <span>Serviços</span>
@@ -81,15 +78,13 @@ document.head.appendChild(o)}initApollo();</script>
                         </ul>
                     </div>
                 </li>
-                
-                <!-- Outros itens -->
+
                 <li>
                     <a href="sobre.html" class="nav-link">
                         <span>Sobre Nós</span>
                     </a>
                 </li>
-                
-                <!-- Segundo dropdown -->
+
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
                         <span>Tecnologias</span>
@@ -103,7 +98,7 @@ document.head.appendChild(o)}initApollo();</script>
                         <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
                         <span>Tecnologias</span>
@@ -119,47 +114,57 @@ document.head.appendChild(o)}initApollo();</script>
                         </ul>
                     </div>
                 </li>
-                
+
                 <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
                 <li><a class="nav-link" href="https://app.visudados.com.br/"><span>Entrar</span></a></li>
-                <!-- <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li> -->
-
             </ul>
         </nav>
-        
-        <!-- Botão mobile -->
+
         <button class="mobile-menu-toggle" aria-label="Abrir menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
-    </div>
+    </header>
 
-</header>
-
-    <!-- Hero Section -->
-    <!-- <section class="hero">
-        <h1>Transforme dados em decisões estratégicas</h1>
-        <p>O método <strong>Ciclo VIS</strong> foi criado para PMEs que querem sair das planilhas manuais e tomar decisões com agilidade e precisão.</p>
-        <a href="#contato" class="cta-button">Agendar diagnóstico gratuito</a>
-    </section> -->
-    <section class="hero-slideshow">
+    <section class="hero-slideshow premium-hero" data-grid-reveal>
         <div class="slideshow-bg"></div>
-        <div class="hero-content">
-        <h1>Transforme dados em decisões estratégicas</h1>
-        <p>Com o método Ciclo VIS, seus dados trabalham por você.</p>
-        <a href="contato.html" class="cta-button">Solicitar Diagnóstico Gratuito</a>
+        <div class="premium-grid premium-grid-base" aria-hidden="true"></div>
+        <div class="premium-grid premium-grid-active" aria-hidden="true"></div>
+        <div class="premium-orb premium-orb-one" aria-hidden="true"></div>
+        <div class="premium-orb premium-orb-two" aria-hidden="true"></div>
+        <div class="premium-orb premium-orb-three" aria-hidden="true"></div>
+        <div class="hero-content premium-hero-content">
+            <span class="premium-kicker">Ciclo VIS para empresas que precisam ganhar velocidade</span>
+            <h1 class="premium-hero-title">Transforme dados em decisões estratégicas</h1>
+            <p class="premium-hero-copy">Com o método Ciclo VIS, seus dados deixam de ser um gargalo operacional e passam a trabalhar a favor da sua equipe, com clareza, ritmo e governança.</p>
+            <div class="premium-hero-actions">
+                <a href="contato.html" class="cta-button" data-cta-motion="subtle">Solicitar Diagnóstico Gratuito</a>
+                <a href="compra.html" class="premium-secondary-link" data-cta-motion="subtle">Conhecer o VISU Express</a>
+            </div>
+            <div class="premium-hero-stats">
+                <article class="premium-stat">
+                    <strong>Visualizar</strong>
+                    <span>Mapeamos o fluxo e deixamos claro onde o dado se perde e onde o processo trava.</span>
+                </article>
+                <article class="premium-stat">
+                    <strong>Idealizar</strong>
+                    <span>Desenhamos a estrutura certa para a rotina da sua equipe, sem excesso de complexidade.</span>
+                </article>
+                <article class="premium-stat">
+                    <strong>Solucionar</strong>
+                    <span>Você acompanha etapas, entregas e ganhos reais com mais visibilidade e confiança.</span>
+                </article>
+            </div>
         </div>
     </section>
-    
 
-    <!-- Seção Método VIS -->
-    <section class="metodo-section" style= "background: var(--cinza);"">
+    <section class="metodo-section premium-section" style="background: var(--cinza);">
         <h2 style="text-align: center;">O Método Ciclo<span style="color: var(--azul-claro);"> VIS</span></h2>
         <p style="text-align: center; max-width: 700px; margin: 0 auto 60px;">Um processo em 3 etapas para transformar seus dados em resultados mensuráveis</p>
-        
+
         <div class="ciclo-container">
-            <div class="etapa">
+            <div class="etapa premium-card">
                 <div class="etapa-numero">1</div>
                 <h3>Visualizar</h3>
                 <p>Mapeamos todos os pontos de dor nos seus processos manuais, identificando oportunidades de automação e análise.</p>
@@ -169,8 +174,8 @@ document.head.appendChild(o)}initApollo();</script>
                     <li>Priorização de melhorias</li>
                 </ul>
             </div>
-            
-            <div class="etapa">
+
+            <div class="etapa premium-card">
                 <div class="etapa-numero">2</div>
                 <h3>Idealizar</h3>
                 <p>Criamos soluções personalizadas que se integram perfeitamente ao seu fluxo de trabalho, priorizando resultados mensuráveis.</p>
@@ -180,8 +185,8 @@ document.head.appendChild(o)}initApollo();</script>
                     <li>Plano de implementação</li>
                 </ul>
             </div>
-            
-            <div class="etapa">
+
+            <div class="etapa premium-card">
                 <div class="etapa-numero">3</div>
                 <h3>Solucionar</h3>
                 <p>Implementamos dashboards, automações e pipelines de dados prontos para ação, com treinamento para sua equipe.</p>
@@ -194,56 +199,50 @@ document.head.appendChild(o)}initApollo();</script>
         </div>
     </section>
 
-    <!-- Seção Diferenciais -->
-    <section class="diferenciais">
+    <section class="diferenciais premium-section">
         <h2 style="text-align: center;">Por que o método <span style="color: var(--verde);">Ciclo VIS</span> funciona</h2>
-        
-        <div class="diferencial-card">
+
+        <div class="diferencial-card premium-card">
             <h3>Foco em resultados práticos</h3>
             <p>Cada etapa do processo é desenhada para entregar valor tangível, com métricas claras de sucesso.</p>
         </div>
-        
-        <div class="diferencial-card">
+
+        <div class="diferencial-card premium-card">
             <h3>Tecnologia acessível</h3>
             <p>Utilizamos ferramentas que sua equipe pode manter e operar, sem depender de consultores eternamente.</p>
         </div>
-        
-        <div class="diferencial-card">
+
+        <div class="diferencial-card premium-card">
             <h3>Adaptável ao seu negócio</h3>
             <p>Do diagnóstico à implementação, respeitamos seus processos e cultura organizacional.</p>
         </div>
     </section>
-        </div>
-    </section>
 
-    <!-- Seção CTA -->
-    <section class="cta-section" id="contato">
+    <section class="cta-section premium-section premium-cta-shell" id="contato">
         <h2>Pronto para transformar seus dados?</h2>
         <p>Agende uma consultoria gratuita de 30 minutos e receba um diagnóstico inicial do seu fluxo de dados.</p>
-        <a href="contato.html" class="cta-button">Quero meu diagnóstico</a>
+        <a href="contato.html" class="cta-button" data-cta-motion="subtle">Quero meu diagnóstico</a>
     </section>
-    <!-- Footer -->
-    <p style="text-align: center; font-size: 0.85rem;">
-        © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
-    </p>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 VISU Dados &bull; <a href="politica-de-privacidade.html">Política de Privacidade</a></p>
+        <span>
+            Ao continuar com o Google, você autoriza a VISU Dados a coletar seu e-mail, cidade e país para fins de contato profissional.
+        </span>
+    </footer>
+
+    <script src="assets/js/premium-grid.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toggleButton = document.querySelector(".mobile-menu-toggle");
             const nav = document.querySelector(".main-nav");
-    
+
             toggleButton.addEventListener("click", () => {
                 nav.classList.toggle("active");
                 toggleButton.classList.toggle("active");
             });
         });
     </script>
-    <!-- Aviso LGPD -->
-    <p style="text-align: center; font-size: 0.85rem;">
-        © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a><br>
-        <span style="font-size: 0.75rem; color: gray;">
-            Ao continuar com o Google, você autoriza a VISU Dados a coletar seu e-mail, cidade e país para fins de contato profissional.
-        </span>
-    </p>
 
 <!-- Script do Login Google One Tap embutido -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>

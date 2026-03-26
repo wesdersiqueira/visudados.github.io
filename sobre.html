@@ -1,101 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-L8PV0HWVNS');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L8PV0HWVNS');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISU Dados | Consultoria Boutique em Inteligência de Dados</title>
+    <title>VISU Dados | Sobre Nos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
-    <style>
-        .dna-section {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin: 40px auto;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
-        }
-        .dna-item {
-            margin-bottom: 30px;
-        }
-        .dna-icon {
-            color: var(--verde);
-            font-size: 1.5rem;
-            margin-right: 15px;
-        }
-    </style>
 </head>
-<body>
-    <!-- Header -->
+<body class="theme-premium theme-premium--detail">
     <header>
         <div class="logo-container">
             <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
-            <h2>VISU <span class="green-dot">•</span> Dados</h2>
+            <h2>VISU <span class="green-dot">&bull;</span> Dados</h2>
         </div>
         <nav class="main-nav">
             <ul class="header-links">
-                <!-- Item simples -->
-                <li>
-                    <a href="index.html" class="nav-link">
-                        <span>Home</span>
-                    </a>
-                </li>
-                    <a href="contato.html" class="nav-link">
-                        <span>Contato</span>
-                    </a>
-                </li>
-                <li><a class="nav-link cta-link" href="compra.html"><span>Fazer Orçamento</span></a></li>
-
-                <!-- Dropdown para desktop (hidden em mobile) -->
+                <li><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                <li><a href="contato.html" class="nav-link"><span>Contato</span></a></li>
+                <li><a class="nav-link cta-link" href="compra.html"><span>Fazer Or&ccedil;amento</span></a></li>
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
-                        <span>Serviços</span>
+                        <span>Servi&ccedil;os</span>
                         <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automa&ccedil;&atilde;o de Planilhas</a></li>
                         <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
-                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
-                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Solu&ccedil;&otilde;es ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estrat&eacute;gica</a></li>
                     </ul>
                 </li>
-                
-                <!-- Accordion para mobile (hidden em desktop) -->
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
-                        <span>Serviços</span>
+                        <span>Servi&ccedil;os</span>
                         <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                     <div class="collapse" id="servicosCollapse">
                         <ul class="submenu">
-                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automa&ccedil;&atilde;o</a></li>
                             <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
                             <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
                             <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
                         </ul>
                     </div>
                 </li>
-                
-                <!-- Outros itens -->
-                <li>
-                    <a href="sobre.html" class="nav-link">
-                        <span>Sobre Nós</span>
-                    </a>
-                </li>
-                
-                <!-- Segundo dropdown -->
+                <li><a href="sobre.html" class="nav-link"><span>Sobre N&oacute;s</span></a></li>
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
                         <span>Tecnologias</span>
@@ -109,7 +70,6 @@ gtag('config', 'G-L8PV0HWVNS');
                         <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
                     </ul>
                 </li>
-                
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
                         <span>Tecnologias</span>
@@ -125,122 +85,118 @@ gtag('config', 'G-L8PV0HWVNS');
                         </ul>
                     </div>
                 </li>
-                
                 <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
                 <li><a class="nav-link" href="https://app.visudados.com.br/"><span>Entrar</span></a></li>
-                <!-- <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li> -->
-
             </ul>
         </nav>
-        
-        <!-- Botão mobile -->
         <button class="mobile-menu-toggle" aria-label="Abrir menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
-    </div>
+    </header>
 
-</header>
-    
-    <!-- Hero Section -->
-    <section class="hero" style="background: var(--azul-claro);">
-        <h1 style="color: white;">Transformação estratégica de dados</h1>
-        <p style="color: rgba(255,255,255,0.9); font-size: 1.3rem;">Visualizar. Idealizar. Solucionar.</p>
-    </section>
-
-    <!-- Seção DNA VISU -->
-    <section class="container">
-        <div class="dna-section">
-            <div class="dna-item">
-                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
-                    <span class="dna-icon">•</span> Nosso Posicionamento
-                </h3>
-                <p><strong>Statup</strong> em inteligência de dados que transforma tarefas manuais, construções morosas e planilhas complexas em soluções claras, automatizadas e estratégicas.</p>
-            </div>
-
-            <div class="dna-item">
-                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
-                    <span class="dna-icon">•</span> Metodologia Exclusiva
-                </h3>
-                <p>Aplicamos o <strong>Ciclo VIS</strong> para entender a dor do cliente, desenhar soluções inteligentes e entregar resultados com impacto real em 3 etapas:</p>
-                <ul style="margin-top: 15px; list-style-type: none;">
-                    <li style="margin-bottom: 10px;"><strong>VISUALIZAR:</strong> Diagnóstico preciso dos fluxos de dados</li>
-                    <li style="margin-bottom: 10px;"><strong>IDEALIZAR:</strong> Projeto customizado para seu negócio</li>
-                    <li><strong>SOLUCIONAR:</strong> Implementação com treinamento</li>
-                </ul>
-            </div>
-
-            <div class="dna-item">
-                <h3 style="color: var(--azul-claro); display: flex; align-items: center;">
-                    <span class="dna-icon">•</span> Como Entregamos Resultados
-                </h3>
-                <p>Atuamos com:</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
-                    <div style="background: var(--cinza); padding: 15px; border-radius: 8px;">
-                        <strong>Automações em Python</strong>
-                        <p style="margin-top: 5px; font-size: 0.9rem;">Redução de tarefas repetitivas</p>
-                    </div>
-                    <div style="background: var(--cinza); padding: 15px; border-radius: 8px;">
-                        <strong>ETL e Power BI</strong>
-                        <p style="margin-top: 5px; font-size: 0.9rem;">Dashboards atualizados em tempo real</p>
-                    </div>
-                    <div style="background: var(--cinza); padding: 15px; border-radius: 8px;">
-                        <strong>Dados em Nuvem</strong>
-                        <p style="margin-top: 5px; font-size: 0.9rem;">Acesso seguro de qualquer lugar</p>
-                    </div>
+    <section class="detail-hero">
+        <div class="detail-hero-inner">
+            <div class="detail-hero-copy">
+                <span class="detail-kicker">Sobre a VISU</span>
+                <h1>Transformacao estrategica de dados com clareza.</h1>
+                <p>Visualizar, idealizar e solucionar. A VISU organiza informacoes, estrutura processos e acompanha cada entrega como uma parceira moderna e confiavel.</p>
+                <div class="detail-chip-row">
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Visualizar</span>
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Idealizar</span>
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Solucionar</span>
+                </div>
+                <div class="detail-hero-actions">
+                    <a href="compra.html" class="cta-button" data-cta-motion="subtle"><span>Iniciar um projeto</span></a>
+                    <a href="ser_consultoria.html" class="premium-secondary-link" data-cta-motion="subtle"><span>Conhecer nossos servicos</span></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Para Quem É -->
-    <section class="metodo-section" style="background-color: var(--azul-claro);">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 40px; color: white; font-size: 40px;">Para empresas que:</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                <div class="case-card" style="background: white; padding: 75px; border-radius: 10px; text-align: center;">
-                    <h3 style="color: var(--azul-escuro);">🕒 Perdem tempo</h3>
-                    <p>Com planilhas manuais e consolidação de dados</p>
-                </div>
-                <div class="case-card" style="background: white; padding: 40px; border-radius: 10px; text-align: center;">
-                    <h3 style="color: var(--azul-escuro);">📊 Precisam de clareza</h3>
-                    <p>Para tomar decisões estratégicas com confiança</p>
-                </div>
-                <div class="case-card" style="background: white; padding: 25px; border-radius: 10px; text-align: center;">
-                    <h3 style="color: var(--azul-escuro);">🔄 Buscam eficiência</h3>
-                    <p>Em processos operacionais repetitivos</p>
-                </div>
+    <section class="section-servico">
+        <h2>Nosso posicionamento</h2>
+        <p>Somos uma startup em inteligencia de dados que transforma tarefas manuais, construcoes morosas e planilhas complexas em solucoes claras, automatizadas e estrategicas.</p>
+        <div class="cards-beneficios">
+            <div class="card-beneficio">
+                <h3>Automa&ccedil;&otilde;es em Python</h3>
+                <p>Rotinas que reduzem trabalho repetitivo e deixam a opera&ccedil;&atilde;o mais previs&iacute;vel.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>ETL e Power BI</h3>
+                <p>Bases organizadas e dashboards atualizados para dar visibilidade ao que importa.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Dados em Nuvem</h3>
+                <p>Acesso seguro, governanca e acompanhamento real da informacao.</p>
             </div>
         </div>
     </section>
 
-    <!--Seção para entrar em contato-->>
+    <section class="section-servico">
+        <h2>Metodologia exclusiva</h2>
+        <p>Aplicamos o <strong>Ciclo VIS</strong> para entender a dor do cliente, desenhar solucoes inteligentes e entregar resultados com impacto real.</p>
+        <div class="cards-beneficios">
+            <div class="card-beneficio">
+                <h3>Visualizar</h3>
+                <p>Diagnostico preciso dos fluxos, fontes e gargalos que afetam a decisao.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Idealizar</h3>
+                <p>Projeto customizado com prioridades claras, escopo viavel e foco no negocio.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Solucionar</h3>
+                <p>Implementacao acompanhada, com visibilidade do projeto e evolucao consistente.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-servico">
+        <h2>Para empresas que:</h2>
+        <div class="cards-beneficios">
+            <div class="card-beneficio">
+                <h3>Perdem tempo</h3>
+                <p>Com planilhas manuais, consolidacoes lentas e retrabalho operacional.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Precisam de clareza</h3>
+                <p>Para tomar decisoes estrategicas com mais confianca e menos ru&iacute;do.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Buscam eficiencia</h3>
+                <p>Em processos repetitivos que ainda dependem de muita operacao manual.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="contato-section">
         <h1>Vamos conversar?</h1>
-        <p>Se você deseja entender melhor como podemos transformar os dados da sua empresa em soluções estratégicas, entre em contato conosco:</p>
-        
+        <p>Se voc&ecirc; deseja entender melhor como podemos transformar os dados da sua empresa em solu&ccedil;&otilde;es estrat&eacute;gicas, entre em contato conosco:</p>
         <div class="contato-links">
-            <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
-            <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
-            <a href="https://wa.me/5521997191477" target="_blank">📞 Fale com a gente no WhatsApp</a>
+            <a href="mailto:contato@visudados.com.br">contato@visudados.com.br</a>
+            <a href="https://www.linkedin.com/company/visudados" target="_blank" rel="noreferrer">Acompanhar no LinkedIn</a>
+            <a href="https://wa.me/5521997191477" target="_blank" rel="noreferrer">Fale com a gente no WhatsApp</a>
         </div>
     </section>
-        <!-- Footer -->
-        <p style="text-align: center; font-size: 0.85rem;">
-            © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
-        </p>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const toggleButton = document.querySelector(".mobile-menu-toggle");
-                const nav = document.querySelector(".main-nav");
-        
-                toggleButton.addEventListener("click", () => {
-                    nav.classList.toggle("active");
-                    toggleButton.classList.toggle("active");
-                });
+
+    <footer class="site-footer">
+        <p>&copy; 2025 VISU Dados</p>
+        <span><a href="politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a></span>
+    </footer>
+
+    <script src="assets/js/premium-detail-motion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+
+            toggleButton.addEventListener("click", () => {
+                nav.classList.toggle("active");
+                toggleButton.classList.toggle("active");
             });
-        </script>
-    
+        });
+    </script>
 </body>
 </html>

@@ -1,84 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-L8PV0HWVNS');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L8PV0HWVNS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L8PV0HWVNS');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISU Dados | Método Ciclo VIS - Transformação Estratégica de Dados</title>
+    <title>VISU Dados | Tecnologia Python</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
-<body>
-    <!-- Header -->
+<body class="theme-premium theme-premium--detail">
     <header>
         <div class="logo-container">
             <img src="assets/img/logo-visu.png" alt="VISU Dados" class="logo">
-            <h2>VISU <span class="green-dot">•</span> Dados</h2>
+            <h2>VISU <span class="green-dot">&bull;</span> Dados</h2>
         </div>
         <nav class="main-nav">
             <ul class="header-links">
-                <!-- Item simples -->
-                <li>
-                    <a href="index.html" class="nav-link">
-                        <span>Home</span>
-                    </a>
-                </li>
-                    <a href="contato.html" class="nav-link">
-                        <span>Contato</span>
-                    </a>
-                </li>
-                <li><a class="nav-link cta-link" href="compra.html"><span>Fazer Orçamento</span></a></li>
+                <li><a href="index.html" class="nav-link"><span>Home</span></a></li>
+                <li><a href="contato.html" class="nav-link"><span>Contato</span></a></li>
+                <li><a class="nav-link cta-link" href="compra.html"><span>Fazer Or&ccedil;amento</span></a></li>
 
-                <!-- Dropdown para desktop (hidden em mobile) -->
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
-                        <span>Serviços</span>
+                        <span>Servi&ccedil;os</span>
                         <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automação de Planilhas</a></li>
+                        <li><a href="ser_automatizacao.html" class="dropdown-item">Automa&ccedil;&atilde;o de Planilhas</a></li>
                         <li><a href="ser_dashboards.html" class="dropdown-item">Dashboards em Power BI</a></li>
-                        <li><a href="ser_etl.html" class="dropdown-item">Soluções ETL</a></li>
-                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estratégica</a></li>
+                        <li><a href="ser_etl.html" class="dropdown-item">Solu&ccedil;&otilde;es ETL</a></li>
+                        <li><a href="ser_consultoria.html" class="dropdown-item">Consultoria Estrat&eacute;gica</a></li>
                     </ul>
                 </li>
-                
-                <!-- Accordion para mobile (hidden em desktop) -->
+
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#servicosCollapse">
-                        <span>Serviços</span>
+                        <span>Servi&ccedil;os</span>
                         <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                     <div class="collapse" id="servicosCollapse">
                         <ul class="submenu">
-                            <li><a href="ser_automatizacao.html" class="submenu-item">Automação</a></li>
+                            <li><a href="ser_automatizacao.html" class="submenu-item">Automa&ccedil;&atilde;o</a></li>
                             <li><a href="ser_dashboards.html" class="submenu-item">Dashboards</a></li>
                             <li><a href="ser_etl.html" class="submenu-item">ETL</a></li>
                             <li><a href="ser_consultoria.html" class="submenu-item">Consultoria</a></li>
                         </ul>
                     </div>
                 </li>
-                
-                <!-- Outros itens -->
-                <li>
-                    <a href="sobre.html" class="nav-link">
-                        <span>Sobre Nós</span>
-                    </a>
-                </li>
-                
-                <!-- Segundo dropdown -->
+
+                <li><a href="sobre.html" class="nav-link"><span>Sobre N&oacute;s</span></a></li>
+
                 <li class="dropdown desktop-only">
                     <a class="nav-link with-arrow" data-toggle="dropdown">
                         <span>Tecnologias</span>
@@ -92,7 +74,7 @@ gtag('config', 'G-L8PV0HWVNS');
                         <li><a href="tec_sql.html" class="dropdown-item">SQL</a></li>
                     </ul>
                 </li>
-                
+
                 <li class="accordion mobile-only">
                     <a class="nav-link with-arrow" data-toggle="collapse" href="#tecnologiasCollapse">
                         <span>Tecnologias</span>
@@ -108,91 +90,97 @@ gtag('config', 'G-L8PV0HWVNS');
                         </ul>
                     </div>
                 </li>
-                
+
                 <li><a href="trabalhe_conosco.html" class="nav-link"><span>Trabalhe Conosco</span></a></li>
                 <li><a class="nav-link" href="https://app.visudados.com.br/"><span>Entrar</span></a></li>
-                <!-- <li><a href="portfolio.html" class="nav-link"><span>Portfólio</span></a></li> -->
-
             </ul>
         </nav>
-        
-        <!-- Botão mobile -->
+
         <button class="mobile-menu-toggle" aria-label="Abrir menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
-    </div>
+    </header>
 
-</header>
-<!-- Hero -->
-<section class="hero" style="background: var(--azul-escuro); text-align: center;">
-    <h1 style="color: white;">Por que Python muda o jogo</h1>
-    <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem;">Python é uma linguagem que conecta sistemas, automatiza processos e transforma tarefas repetitivas em soluções inteligentes.</p>
-</section>
-
-<!-- Explicação sobre Python -->
-<section class="section-servico">
-    <h2>Uma tecnologia, infinitas possibilidades</h2>
-    <p>Python é hoje a linguagem mais usada no mundo para ciência de dados, automação e inteligência artificial. Mas ela não é apenas poderosa — ela é acessível, flexível e altamente adaptável ao dia a dia de pequenas e médias empresas.</p>
-    <p>Com Python, é possível:</p>
-    <ul style="margin-left: 20px;">
-    <li>Automatizar planilhas inteiras com velocidade e precisão</li>
-    <li>Conectar APIs e bancos de dados</li>
-    <li>Criar pipelines ETL robustos e reutilizáveis</li>
-    <li>Enviar relatórios automáticos por e-mail</li>
-    <li>Capturar dados da internet (scraping)</li>
-    </ul>
-</section>
-
-<!-- Aplicações na VISU -->
-<section class="section-servico" style="background: var(--cinza); border-radius: 12px;">
-    <h2>Como usamos Python na VISU Dados</h2>
-    <p>Python é o coração técnico das nossas soluções. A cada cliente, avaliamos o cenário e aplicamos a linguagem com propósito estratégico, dentro do nosso método exclusivo: o Ciclo VIS.</p>
-    <p>Em cada ciclo, Python é explorado para:</p>
-    <div class="cards-beneficios">
-    <div class="card-beneficio">
-        <h3>Ciclo VIS Leve</h3>
-        <p>Scripts para organizar planilhas, padronizar colunas e consolidar dados em poucos segundos.</p>
-    </div>
-    <div class="card-beneficio">
-        <h3>Ciclo VIS Intermediário</h3>
-        <p>Construção de fluxos ETL, automações entre sistemas e limpeza de dados com múltiplas fontes.</p>
-    </div>
-    <div class="card-beneficio">
-        <h3>Ciclo VIS Avançado</h3>
-        <p>Scraping, integrações com APIs, organização de pipelines em nuvem e envio de relatórios automáticos.</p>
-    </div>
-    </div>
-</section>
-
-<br>
-    <!--Seção para entrar em contato-->>
-    <section class="contato-section">
-        <h1>Vamos conversar?</h1>
-        <p>Se você deseja entender melhor como podemos transformar os dados da sua empresa em soluções estratégicas, entre em contato conosco:</p>
-        
-        <div class="contato-links">
-            <a href="mailto:contato@visudados.com.br">✉️ contato@visudados.com.br</a>
-            <a href="https://www.linkedin.com/company/visudados" target="_blank">🔗 Acompanhar no LinkedIn</a>
-            <a href="https://wa.me/5521997191477" target="_blank">📞 Fale com a gente no WhatsApp</a>
+    <section class="detail-hero detail-hero--navy detail-hero--monumental">
+        <div class="detail-hero-inner">
+            <div class="detail-hero-copy">
+                <span class="detail-kicker">Tecnologia VISU</span>
+                <h1>Por que Python muda o jogo</h1>
+                <p>Python &eacute; a linguagem que conecta sistemas, automatiza processos e transforma tarefas repetitivas em solu&ccedil;&otilde;es inteligentes.</p>
+                <div class="detail-chip-row">
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Automacao aplicada</span>
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Integracao entre fontes</span>
+                    <span class="detail-chip"><span class="detail-chip-dot"></span>Escala com clareza</span>
+                </div>
+                <div class="detail-hero-actions">
+                    <a href="compra.html" class="cta-button" data-cta-motion="subtle"><span>Orcar com a VISU</span></a>
+                    <a href="ser_automatizacao.html" class="premium-secondary-link" data-cta-motion="subtle"><span>Ver automacao em Python</span></a>
+                </div>
+            </div>
         </div>
     </section>
-        <!-- Footer -->
-        <p style="text-align: center; font-size: 0.85rem;">
-            © 2025 VISU Dados • <a href="politica-de-privacidade.html">Política de Privacidade</a>
-        </p>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const toggleButton = document.querySelector(".mobile-menu-toggle");
-                const nav = document.querySelector(".main-nav");
-        
-                toggleButton.addEventListener("click", () => {
-                    nav.classList.toggle("active");
-                    toggleButton.classList.toggle("active");
-                });
+
+    <section class="section-servico">
+        <h2>Uma tecnologia, infinitas possibilidades</h2>
+        <p>Python &eacute; hoje a linguagem mais usada no mundo para ci&ecirc;ncia de dados, automa&ccedil;&atilde;o e intelig&ecirc;ncia artificial. Mas ela n&atilde;o &eacute; apenas poderosa: ela &eacute; acess&iacute;vel, flex&iacute;vel e altamente adapt&aacute;vel ao dia a dia de pequenas e m&eacute;dias empresas.</p>
+        <p>Com Python, &eacute; poss&iacute;vel:</p>
+        <ul>
+            <li>Automatizar planilhas inteiras com velocidade e precisao</li>
+            <li>Conectar APIs e bancos de dados</li>
+            <li>Criar pipelines ETL robustos e reutilizaveis</li>
+            <li>Enviar relatorios automaticos por e-mail</li>
+            <li>Capturar dados da internet com seguranca</li>
+        </ul>
+    </section>
+
+    <section class="section-servico">
+        <h2>Como usamos Python na VISU Dados</h2>
+        <p>Python &eacute; o cora&ccedil;&atilde;o t&eacute;cnico das nossas solu&ccedil;&otilde;es. A cada cliente, avaliamos o cen&aacute;rio e aplicamos a linguagem com prop&oacute;sito estrat&eacute;gico dentro do nosso m&eacute;todo exclusivo: o Ciclo VIS.</p>
+        <p>Em cada ciclo, Python &eacute; explorado para:</p>
+        <div class="cards-beneficios">
+            <div class="card-beneficio">
+                <h3>Ciclo VIS Leve</h3>
+                <p>Scripts para organizar planilhas, padronizar colunas e consolidar dados em poucos segundos.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Ciclo VIS Intermediario</h3>
+                <p>Construcao de fluxos ETL, automacoes entre sistemas e limpeza de dados com multiplas fontes.</p>
+            </div>
+            <div class="card-beneficio">
+                <h3>Ciclo VIS Avancado</h3>
+                <p>Scraping, integracoes com APIs, organizacao de pipelines em nuvem e envio de relatorios automaticos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contato-section">
+        <h1>Vamos conversar?</h1>
+        <p>Se voc&ecirc; deseja entender melhor como podemos transformar os dados da sua empresa em solu&ccedil;&otilde;es estrat&eacute;gicas, entre em contato conosco:</p>
+        <div class="contato-links">
+            <a href="mailto:contato@visudados.com.br">contato@visudados.com.br</a>
+            <a href="https://www.linkedin.com/company/visudados" target="_blank" rel="noreferrer">Acompanhar no LinkedIn</a>
+            <a href="https://wa.me/5521997191477" target="_blank" rel="noreferrer">Fale com a gente no WhatsApp</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 VISU Dados</p>
+        <span><a href="politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a></span>
+    </footer>
+
+    <script src="assets/js/premium-detail-motion.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+
+            toggleButton.addEventListener("click", () => {
+                nav.classList.toggle("active");
+                toggleButton.classList.toggle("active");
             });
-        </script>
-    
+        });
+    </script>
 </body>
 </html>
