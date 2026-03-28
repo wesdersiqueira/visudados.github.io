@@ -862,11 +862,6 @@
 <div class="hint">
 <strong>Ciclo VIS:</strong> o próximo passo é o <em>Solucionar</em> — a call + protótipo + plano (entregas rápidas e objetivas).
                       </div>
-<div class="card" style="margin-top: 14px; padding: 16px;">
-<strong style="display:block; margin-bottom: 8px;">Validacao de seguranca</strong>
-<p class="muted" style="margin: 0 0 12px;">Confirme que voce e uma pessoa antes de enviar o briefing.</p>
-<div id="recaptchaWidget"></div>
-</div>
 </div>
 </div>
 <div class="wizard-actions">
@@ -909,13 +904,6 @@
       // ===== Helpers =====
       const $ = (sel, root=document) => root.querySelector(sel);
       const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-      const SUPABASE_URL = 'https://rttxxlyjvlgpaulgywqs.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ0dHh4bHlqdmxncGF1bGd5d3FzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMTE1MDAsImV4cCI6MjA4OTg4NzUwMH0.b193HrToQCzHnJo7tEECKn0i-o4gGLEO58XVSAufSpc';
-      const VISU_EXPRESS_ENDPOINT = `${SUPABASE_URL}/functions/v1/visu-express-intake`;
-      const THANK_YOU_URL = 'https://visudados.com.br/obrigado.html?source=compra';
-      const CAPTCHA_SITE_KEY = '6Lf5cZssAAAAACLkWFrggYawB0iZJg2X3e9ECYen';
-      const MIN_FILL_TIME_MS = 15000;
-      const pageLoadStartedAt = Date.now();
 
       const state = {
         pacote: null,
@@ -1438,10 +1426,6 @@ function applyPackageLocks(){
           const isLast = (n === totalSteps);
           btnNext.textContent = isLast ? 'Enviar' : 'Continuar';
           btnNext.type = 'button';
-        }
-
-        if(n === totalSteps){
-          renderCaptchaWidget();
         }
 
         // Ajusta trilhas condicionais (somente na Etapa 2)
@@ -2099,7 +2083,7 @@ function applyPackageLocks(){
       }
 
       if(btnNext){
-        btnNext.addEventListener('click', async (e) => {
+        btnNext.addEventListener('click', (e) => {
           // Nos passos intermediários, o botão apenas avança (não envia o form)
           e.preventDefault();
 
@@ -2111,13 +2095,36 @@ function applyPackageLocks(){
             return;
           }
 
-          await handleFinalSubmit();
-          return;
+          // ===== Último passo: enviar via JS (robusto) =====
+          if(!validateStep()) return;
+
+          // garante resumo/calculos atualizados
+          updateSummary();
+
+          // preenche campos hidden de apoio (mantém e-mail “bonito” no FormSubmit)
+          fillHiddenFields();
+
+          // re-busca o form na hora do envio (evita null por qualquer motivo)
+          const form = document.getElementById('leadForm');
+          if(!form){
+            if(stepNote) stepNote.textContent = 'Erro: formulário não encontrado na página.';
+            return;
+          }
+
+          // enviar exatamente como no compra_deepseek (bypass de validação nativa)
+          if(stepNote) stepNote.textContent = 'Enviando...';
+          try{
+            form.submit();
+          }catch(err){
+            // fallback: tenta de novo sem depender de variáveis externas
+            try{ document.getElementById('leadForm').submit(); }catch(e2){}
+          }
         });
       }
 
       // Form do FormSubmit
       const leadForm = document.getElementById('leadForm');
+<<<<<<< HEAD
       let isFinalSubmitting = false;
       let captchaWidgetId = null;
 
@@ -2340,6 +2347,8 @@ function applyPackageLocks(){
         }
         if(stepNote) stepNote.textContent = 'Nao foi possivel concluir o envio agora. Tente novamente em instantes.';
       }
+=======
+>>>>>>> parent of e6d44d3 (Novo Captcha do Google)
 
       // Centraliza o preenchimento dos campos hidden antes do envio
       function buildBriefingPayload(){
@@ -2367,6 +2376,7 @@ function applyPackageLocks(){
         const pricingMemoryValue = JSON.stringify(pricing);
 
         return {
+<<<<<<< HEAD
           source: 'visu_express_site',
           lead_source_type: 'manual',
           lead_origin_manual: 'Site / VISU Express',
@@ -2432,6 +2442,8 @@ function applyPackageLocks(){
           preco_total_estimado: Number(pricing.totalFinal || 0),
           preco_memoria_calculo: pricingMemoryValue,
           total_estimado: Number(pricing.totalFinal || 0),
+=======
+>>>>>>> parent of e6d44d3 (Novo Captcha do Google)
           meta: {
             source: 'compra.html',
             submittedAt: new Date().toISOString(),
@@ -2645,6 +2657,5 @@ const observer = new MutationObserver(() => {
 
     })();
   </script>
-<script async defer src="https://www.google.com/recaptcha/api.js?onload=onVisuCaptchaApiLoad&render=explicit"></script>
 </body>
 </html>
