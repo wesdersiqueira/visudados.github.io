@@ -2155,6 +2155,22 @@ function applyPackageLocks(){
         }
       }
 
+      function parseWorkspaceErrorMessage(errorBody){
+        if(!errorBody) return '';
+
+        try{
+          const parsed = JSON.parse(errorBody);
+          if(parsed && typeof parsed === 'object'){
+            if(typeof parsed.error === 'string' && parsed.error.trim()) return parsed.error.trim();
+            if(typeof parsed.message === 'string' && parsed.message.trim()) return parsed.message.trim();
+          }
+        }catch(err){
+          // Mantem fallback para texto puro.
+        }
+
+        return String(errorBody).trim();
+      }
+
       function isSubmitTooFast(){
         return (Date.now() - pageLoadStartedAt) < MIN_FILL_TIME_MS;
       }
@@ -2293,19 +2309,20 @@ function applyPackageLocks(){
 
         if(workspaceResult.status >= 400 && workspaceResult.status < 500){
           isFinalSubmitting = false;
-          resetCaptchaWidget();
           if(btnNext){
             btnNext.disabled = false;
             btnNext.textContent = originalLabel;
           }
 
-          const responseMessage = (workspaceResult.errorBody || '').toLowerCase();
+          const backendMessage = parseWorkspaceErrorMessage(workspaceResult.errorBody);
+          const responseMessage = backendMessage.toLowerCase();
           if(responseMessage.includes('captcha')){
+            resetCaptchaWidget();
             if(stepNote) stepNote.textContent = 'A validacao de seguranca expirou ou foi recusada pelo app. Marque o captcha novamente e tente enviar.';
             return;
           }
 
-          if(stepNote) stepNote.textContent = 'O app recusou este envio para revisao. Confira os dados e tente novamente.';
+          if(stepNote) stepNote.textContent = backendMessage || 'O app recusou este envio para revisao. Confira os dados e tente novamente.';
           return;
         }
 
