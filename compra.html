@@ -862,6 +862,11 @@
 <div class="hint">
 <strong>Ciclo VIS:</strong> o próximo passo é o <em>Solucionar</em> — a call + protótipo + plano (entregas rápidas e objetivas).
                       </div>
+<div class="card" style="margin-top: 14px; padding: 16px;">
+<strong style="display:block; margin-bottom: 8px;">Validacao de seguranca</strong>
+<p class="muted" style="margin: 0 0 12px;">Confirme que voce e uma pessoa antes de enviar o briefing.</p>
+<div id="recaptchaWidget"></div>
+</div>
 </div>
 </div>
 <div class="wizard-actions">
@@ -904,6 +909,13 @@
       // ===== Helpers =====
       const $ = (sel, root=document) => root.querySelector(sel);
       const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+      const SUPABASE_URL = 'https://rttxxlyjvlgpaulgywqs.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ0dHh4bHlqdmxncGF1bGd5d3FzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMTE1MDAsImV4cCI6MjA4OTg4NzUwMH0.b193HrToQCzHnJo7tEECKn0i-o4gGLEO58XVSAufSpc';
+      const VISU_EXPRESS_ENDPOINT = `${SUPABASE_URL}/functions/v1/visu-express-intake`;
+      const THANK_YOU_URL = 'https://visudados.com.br/obrigado.html?source=compra';
+      const CAPTCHA_SITE_KEY = '6Lf5cZssAAAAACLkWFrggYawB0iZJg2X3e9ECYen';
+      const MIN_FILL_TIME_MS = 15000;
+      const pageLoadStartedAt = Date.now();
 
       const state = {
         pacote: null,
@@ -1426,6 +1438,10 @@ function applyPackageLocks(){
           const isLast = (n === totalSteps);
           btnNext.textContent = isLast ? 'Enviar' : 'Continuar';
           btnNext.type = 'button';
+        }
+
+        if(n === totalSteps){
+          renderCaptchaWidget();
         }
 
         // Ajusta trilhas condicionais (somente na Etapa 2)
@@ -2083,7 +2099,7 @@ function applyPackageLocks(){
       }
 
       if(btnNext){
-        btnNext.addEventListener('click', (e) => {
+        btnNext.addEventListener('click', async (e) => {
           // Nos passos intermediários, o botão apenas avança (não envia o form)
           e.preventDefault();
 
@@ -2095,35 +2111,169 @@ function applyPackageLocks(){
             return;
           }
 
-          // ===== Último passo: enviar via JS (robusto) =====
-          if(!validateStep()) return;
-
-          // garante resumo/calculos atualizados
-          updateSummary();
-
-          // preenche campos hidden de apoio (mantém e-mail “bonito” no FormSubmit)
-          fillHiddenFields();
-
-          // re-busca o form na hora do envio (evita null por qualquer motivo)
-          const form = document.getElementById('leadForm');
-          if(!form){
-            if(stepNote) stepNote.textContent = 'Erro: formulário não encontrado na página.';
-            return;
-          }
-
-          // enviar exatamente como no compra_deepseek (bypass de validação nativa)
-          if(stepNote) stepNote.textContent = 'Enviando...';
-          try{
-            form.submit();
-          }catch(err){
-            // fallback: tenta de novo sem depender de variáveis externas
-            try{ document.getElementById('leadForm').submit(); }catch(e2){}
-          }
+          await handleFinalSubmit();
+          return;
         });
       }
 
       // Form do FormSubmit
       const leadForm = document.getElementById('leadForm');
+      let isFinalSubmitting = false;
+      let captchaWidgetId = null;
+
+      function renderCaptchaWidget(){
+        if(captchaWidgetId !== null) return true;
+
+        const captchaMount = document.getElementById('recaptchaWidget');
+        if(!captchaMount || !window.grecaptcha || typeof window.grecaptcha.render !== 'function'){
+          return false;
+        }
+
+        captchaWidgetId = window.grecaptcha.render(captchaMount, {
+          sitekey: CAPTCHA_SITE_KEY
+        });
+
+        return true;
+      }
+
+      function getCaptchaToken(){
+        if(!window.grecaptcha || typeof window.grecaptcha.getResponse !== 'function'){
+          return '';
+        }
+
+        if(captchaWidgetId !== null){
+          return window.grecaptcha.getResponse(captchaWidgetId) || '';
+        }
+
+        return window.grecaptcha.getResponse() || '';
+      }
+
+      function isSubmitTooFast(){
+        return (Date.now() - pageLoadStartedAt) < MIN_FILL_TIME_MS;
+      }
+
+      function validateBeforeWorkspaceSubmit(){
+        if(isSubmitTooFast()){
+          return {
+            ok: false,
+            message: 'Sua submissao foi rapida demais para validacao. Confirme os dados e tente novamente.'
+          };
+        }
+
+        renderCaptchaWidget();
+
+        if(!window.grecaptcha || typeof window.grecaptcha.getResponse !== 'function'){
+          return {
+            ok: false,
+            message: 'A validacao de seguranca ainda nao carregou. Aguarde alguns segundos e tente novamente.'
+          };
+        }
+
+        const captchaToken = getCaptchaToken();
+        if(!captchaToken){
+          return {
+            ok: false,
+            message: 'Conclua a validacao de seguranca antes de enviar.'
+          };
+        }
+
+        return {
+          ok: true,
+          captchaToken
+        };
+      }
+
+      window.onVisuCaptchaApiLoad = function(){
+        renderCaptchaWidget();
+      };
+
+      function submitViaFormSubmitFallback(form){
+        try{
+          form.submit();
+          return true;
+        }catch(err){
+          try{
+            document.getElementById('leadForm').submit();
+            return true;
+          }catch(e2){
+            console.error('Falha no fallback via FormSubmit.', e2);
+          }
+        }
+        return false;
+      }
+
+      async function submitToVisuWorkspace(payload){
+        if(typeof fetch !== 'function') return false;
+
+        try{
+          const response = await fetch(VISU_EXPRESS_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if(!response.ok){
+            console.warn('VISU Workspace respondeu com erro.', response.status, response.statusText);
+            return false;
+          }
+
+          return true;
+        }catch(err){
+          console.error('Falha ao enviar para o VISU Workspace.', err);
+          return false;
+        }
+      }
+
+      async function handleFinalSubmit(){
+        if(isFinalSubmitting) return;
+        if(!validateStep()) return;
+
+        updateSummary();
+
+        const workspaceValidation = validateBeforeWorkspaceSubmit();
+        if(!workspaceValidation.ok){
+          if(stepNote) stepNote.textContent = workspaceValidation.message;
+          return;
+        }
+
+        const form = leadForm || document.getElementById('leadForm');
+        if(!form){
+          if(stepNote) stepNote.textContent = 'Erro: formulario nao encontrado na pagina.';
+          return;
+        }
+
+        fillHiddenFields();
+
+        isFinalSubmitting = true;
+
+        const originalLabel = btnNext ? btnNext.textContent : 'Enviar';
+        if(btnNext){
+          btnNext.disabled = true;
+          btnNext.textContent = 'Enviando...';
+        }
+        if(stepNote) stepNote.textContent = 'Enviando...';
+
+        const payload = buildBriefingPayload();
+        const workspaceOk = await submitToVisuWorkspace(payload);
+
+        if(workspaceOk){
+          window.location.href = THANK_YOU_URL;
+          return;
+        }
+
+        const fallbackSubmitted = submitViaFormSubmitFallback(form);
+        if(fallbackSubmitted) return;
+
+        isFinalSubmitting = false;
+        if(btnNext){
+          btnNext.disabled = false;
+          btnNext.textContent = originalLabel;
+        }
+        if(stepNote) stepNote.textContent = 'Nao foi possivel concluir o envio agora. Tente novamente em instantes.';
+      }
 
       // Centraliza o preenchimento dos campos hidden antes do envio
       function buildBriefingPayload(){
@@ -2134,6 +2284,10 @@ function applyPackageLocks(){
         };
 
         return {
+          source: 'visu_express_site',
+          lead_source_type: 'manual',
+          lead_origin_manual: 'Site / VISU Express',
+          captcha_token: getCaptchaToken(),
           meta: {
             source: 'compra.html',
             submittedAt: new Date().toISOString(),
@@ -2347,5 +2501,6 @@ const observer = new MutationObserver(() => {
 
     })();
   </script>
+<script async defer src="https://www.google.com/recaptcha/api.js?onload=onVisuCaptchaApiLoad&render=explicit"></script>
 </body>
 </html>
