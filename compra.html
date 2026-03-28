@@ -2148,6 +2148,13 @@ function applyPackageLocks(){
         return window.grecaptcha.getResponse() || '';
       }
 
+      function resetCaptchaWidget(){
+        if(window.grecaptcha && typeof window.grecaptcha.reset === 'function'){
+          if(captchaWidgetId !== null) window.grecaptcha.reset(captchaWidgetId);
+          else window.grecaptcha.reset();
+        }
+      }
+
       function isSubmitTooFast(){
         return (Date.now() - pageLoadStartedAt) < MIN_FILL_TIME_MS;
       }
@@ -2203,7 +2210,13 @@ function applyPackageLocks(){
       }
 
       async function submitToVisuWorkspace(payload){
-        if(typeof fetch !== 'function') return false;
+        if(typeof fetch !== 'function'){
+          return {
+            ok: false,
+            status: 0,
+            errorBody: 'Fetch indisponivel no navegador.'
+          };
+        }
 
         try{
           const response = await fetch(VISU_EXPRESS_ENDPOINT, {
@@ -2215,15 +2228,29 @@ function applyPackageLocks(){
             body: JSON.stringify(payload)
           });
 
+          const responseText = await response.text();
+
           if(!response.ok){
-            console.warn('VISU Workspace respondeu com erro.', response.status, response.statusText);
-            return false;
+            console.warn('VISU Workspace respondeu com erro.', response.status, responseText || response.statusText);
+            return {
+              ok: false,
+              status: response.status,
+              errorBody: responseText || response.statusText || 'Erro sem corpo na resposta.'
+            };
           }
 
-          return true;
+          return {
+            ok: true,
+            status: response.status,
+            body: responseText
+          };
         }catch(err){
           console.error('Falha ao enviar para o VISU Workspace.', err);
-          return false;
+          return {
+            ok: false,
+            status: 0,
+            errorBody: err && err.message ? err.message : 'Falha de rede ao enviar para o VISU Workspace.'
+          };
         }
       }
 
@@ -2257,10 +2284,28 @@ function applyPackageLocks(){
         if(stepNote) stepNote.textContent = 'Enviando...';
 
         const payload = buildBriefingPayload();
-        const workspaceOk = await submitToVisuWorkspace(payload);
+        const workspaceResult = await submitToVisuWorkspace(payload);
 
-        if(workspaceOk){
+        if(workspaceResult.ok){
           window.location.href = THANK_YOU_URL;
+          return;
+        }
+
+        if(workspaceResult.status >= 400 && workspaceResult.status < 500){
+          isFinalSubmitting = false;
+          resetCaptchaWidget();
+          if(btnNext){
+            btnNext.disabled = false;
+            btnNext.textContent = originalLabel;
+          }
+
+          const responseMessage = (workspaceResult.errorBody || '').toLowerCase();
+          if(responseMessage.includes('captcha')){
+            if(stepNote) stepNote.textContent = 'A validacao de seguranca expirou ou foi recusada pelo app. Marque o captcha novamente e tente enviar.';
+            return;
+          }
+
+          if(stepNote) stepNote.textContent = 'O app recusou este envio para revisao. Confira os dados e tente novamente.';
           return;
         }
 
