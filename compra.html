@@ -2124,234 +2124,6 @@ function applyPackageLocks(){
 
       // Form do FormSubmit
       const leadForm = document.getElementById('leadForm');
-<<<<<<< HEAD
-<<<<<<< HEAD
-      let isFinalSubmitting = false;
-      let captchaWidgetId = null;
-
-      function renderCaptchaWidget(){
-        if(captchaWidgetId !== null) return true;
-
-        const captchaMount = document.getElementById('recaptchaWidget');
-        if(!captchaMount || !window.grecaptcha || typeof window.grecaptcha.render !== 'function'){
-          return false;
-        }
-
-        captchaWidgetId = window.grecaptcha.render(captchaMount, {
-          sitekey: CAPTCHA_SITE_KEY
-        });
-
-        return true;
-      }
-
-      function getCaptchaToken(){
-        if(!window.grecaptcha || typeof window.grecaptcha.getResponse !== 'function'){
-          return '';
-        }
-
-        if(captchaWidgetId !== null){
-          return window.grecaptcha.getResponse(captchaWidgetId) || '';
-        }
-
-        return window.grecaptcha.getResponse() || '';
-      }
-
-      function resetCaptchaWidget(){
-        if(window.grecaptcha && typeof window.grecaptcha.reset === 'function'){
-          if(captchaWidgetId !== null) window.grecaptcha.reset(captchaWidgetId);
-          else window.grecaptcha.reset();
-        }
-      }
-
-      function parseWorkspaceErrorMessage(errorBody){
-        if(!errorBody) return '';
-
-        try{
-          const parsed = JSON.parse(errorBody);
-          if(parsed && typeof parsed === 'object'){
-            if(typeof parsed.error === 'string' && parsed.error.trim()) return parsed.error.trim();
-            if(typeof parsed.message === 'string' && parsed.message.trim()) return parsed.message.trim();
-          }
-        }catch(err){
-          // Mantem fallback para texto puro.
-        }
-
-        return String(errorBody).trim();
-      }
-
-      function isSubmitTooFast(){
-        return (Date.now() - pageLoadStartedAt) < MIN_FILL_TIME_MS;
-      }
-
-      function validateBeforeWorkspaceSubmit(){
-        if(isSubmitTooFast()){
-          return {
-            ok: false,
-            message: 'Sua submissao foi rapida demais para validacao. Confirme os dados e tente novamente.'
-          };
-        }
-
-        renderCaptchaWidget();
-
-        if(!window.grecaptcha || typeof window.grecaptcha.getResponse !== 'function'){
-          return {
-            ok: false,
-            message: 'A validacao de seguranca ainda nao carregou. Aguarde alguns segundos e tente novamente.'
-          };
-        }
-
-        const captchaToken = getCaptchaToken();
-        if(!captchaToken){
-          return {
-            ok: false,
-            message: 'Conclua a validacao de seguranca antes de enviar.'
-          };
-        }
-
-        return {
-          ok: true,
-          captchaToken
-        };
-      }
-
-      window.onVisuCaptchaApiLoad = function(){
-        renderCaptchaWidget();
-      };
-
-      function submitViaFormSubmitFallback(form){
-        try{
-          form.submit();
-          return true;
-        }catch(err){
-          try{
-            document.getElementById('leadForm').submit();
-            return true;
-          }catch(e2){
-            console.error('Falha no fallback via FormSubmit.', e2);
-          }
-        }
-        return false;
-      }
-
-      async function submitToVisuWorkspace(payload){
-        if(typeof fetch !== 'function'){
-          return {
-            ok: false,
-            status: 0,
-            errorBody: 'Fetch indisponivel no navegador.'
-          };
-        }
-
-        try{
-          const response = await fetch(VISU_EXPRESS_ENDPOINT, {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-            },
-            body: JSON.stringify(payload)
-          });
-
-          const responseText = await response.text();
-
-          if(!response.ok){
-            console.warn('VISU Workspace respondeu com erro.', response.status, responseText || response.statusText);
-            return {
-              ok: false,
-              status: response.status,
-              errorBody: responseText || response.statusText || 'Erro sem corpo na resposta.'
-            };
-          }
-
-          return {
-            ok: true,
-            status: response.status,
-            body: responseText
-          };
-        }catch(err){
-          console.error('Falha ao enviar para o VISU Workspace.', err);
-          return {
-            ok: false,
-            status: 0,
-            errorBody: err && err.message ? err.message : 'Falha de rede ao enviar para o VISU Workspace.'
-          };
-        }
-      }
-
-      async function handleFinalSubmit(){
-        if(isFinalSubmitting) return;
-        if(!validateStep()) return;
-
-        updateSummary();
-
-        const workspaceValidation = validateBeforeWorkspaceSubmit();
-        if(!workspaceValidation.ok){
-          if(stepNote) stepNote.textContent = workspaceValidation.message;
-          return;
-        }
-
-        const form = leadForm || document.getElementById('leadForm');
-        if(!form){
-          if(stepNote) stepNote.textContent = 'Erro: formulario nao encontrado na pagina.';
-          return;
-        }
-
-        fillHiddenFields();
-
-        isFinalSubmitting = true;
-
-        const originalLabel = btnNext ? btnNext.textContent : 'Enviar';
-        if(btnNext){
-          btnNext.disabled = true;
-          btnNext.textContent = 'Enviando...';
-        }
-        if(stepNote) stepNote.textContent = 'Enviando...';
-
-        const payload = buildBriefingPayload();
-        const workspaceResult = await submitToVisuWorkspace(payload);
-        window.__visuWorkspaceLastAttempt = { payload, workspaceResult };
-
-        if(workspaceResult.ok){
-          window.location.href = THANK_YOU_URL;
-          return;
-        }
-
-        if(workspaceResult.status >= 400 && workspaceResult.status < 500){
-          isFinalSubmitting = false;
-          resetCaptchaWidget();
-          if(btnNext){
-            btnNext.disabled = false;
-            btnNext.textContent = originalLabel;
-          }
-
-          const backendMessage = parseWorkspaceErrorMessage(workspaceResult.errorBody);
-          const responseMessage = backendMessage.toLowerCase();
-          if(responseMessage.includes('captcha')){
-            if(stepNote) stepNote.textContent = 'A validacao de seguranca expirou ou foi recusada pelo app. Marque o captcha novamente e tente enviar.';
-            return;
-          }
-
-          console.error('VISU Workspace recusou o envio.', { status: workspaceResult.status, backendMessage, workspaceResult, payload });
-          if(stepNote) stepNote.textContent = backendMessage ? `App recusou o envio (${workspaceResult.status}): ${backendMessage}` : `App recusou o envio (${workspaceResult.status}). Confira os dados e tente novamente.`;
-          return;
-        }
-
-        const fallbackSubmitted = submitViaFormSubmitFallback(form);
-        if(fallbackSubmitted) return;
-
-        isFinalSubmitting = false;
-        if(btnNext){
-          btnNext.disabled = false;
-          btnNext.textContent = originalLabel;
-        }
-        if(stepNote) stepNote.textContent = 'Nao foi possivel concluir o envio agora. Tente novamente em instantes.';
-      }
-=======
->>>>>>> parent of e6d44d3 (Novo Captcha do Google)
-=======
->>>>>>> parent of e6d44d3 (Novo Captcha do Google)
 
       // Centraliza o preenchimento dos campos hidden antes do envio
       function buildBriefingPayload(){
@@ -2360,96 +2132,8 @@ function applyPackageLocks(){
           const el = document.getElementById(id);
           return el ? (el.value ?? '').trim() : '';
         };
-        const companyValue = getVal('company');
-        const roleValue = getVal('role');
-        const nameValue = getVal('name');
-        const emailValue = getVal('email');
-        const whatsValue = getVal('whats');
-        const dateValue = getVal('date');
-        const sourcesTypesValue = state.sourcesTypes || getVal('sourcesTypes');
-        const contextValue = getVal('context');
-        const dashTop2Value = (state.dashTop2 || []).join(' | ');
-        const dashColorsValue = (state.dashColors || []).join(' | ');
-        const autoGoalValue = (state.autoGoal || []).join(' | ');
-        const autoIntegrationsValue = (state.autoIntegrations || []).join(' | ');
-        const autoAlertChannelsValue = (state.autoAlertChannels || []).join(' | ');
-        const autoExamplesValue = (state.autoExamples || []).join(' | ');
-        const orgExamplesValue = (state.orgExamples || []).join(' | ');
-        const featuresValue = (state.features || []).join(' | ');
-        const pricingMemoryValue = JSON.stringify(pricing);
 
         return {
-<<<<<<< HEAD
-<<<<<<< HEAD
-          source: 'visu_express_site',
-          lead_source_type: 'manual',
-          lead_origin_manual: 'Site / VISU Express',
-          leadSourceType: 'manual',
-          leadOriginManual: 'Site / VISU Express',
-          captcha_token: getCaptchaToken(),
-          captchaToken: getCaptchaToken(),
-          pacote: state.pacote || '',
-          cenario: state.scenario || '',
-          scenario: state.scenario || '',
-          resultado_desejado: state.output || '',
-          output: state.output || '',
-          nivel_intervencao: state.intervention || '',
-          intervention: state.intervention || '',
-          fontes_quantidade: Number(state.sourcesCount || 0),
-          sources_count: Number(state.sourcesCount || 0),
-          quantidade_ciclos: Number(state.cyclesCount || 0),
-          cycles_count: Number(state.cyclesCount || 0),
-          fontes_tipo: sourcesTypesValue,
-          sources_types: sourcesTypesValue,
-          contexto: contextValue,
-          context: contextValue,
-          company: companyValue,
-          cargo: roleValue,
-          role: roleValue,
-          nome: nameValue,
-          name: nameValue,
-          email: emailValue,
-          whatsapp: whatsValue,
-          data: dateValue,
-          preferred_date: dateValue,
-          empresa: companyValue,
-          nome_contato: nameValue,
-          email_contato: emailValue,
-          whatsapp_contato: whatsValue,
-          cargo_contato: roleValue,
-          dashboard_referencias_top2: dashTop2Value,
-          dashboard_tema: state.dashTheme || '',
-          dashboard_cores: dashColorsValue,
-          automacao_objetivo: autoGoalValue,
-          automacao_onde: state.autoWhere || '',
-          automacao_funcionamento: state.autoMode || '',
-          automacao_frequencia: state.autoFreq || '',
-          automacao_programa: state.autoTool || '',
-          automacao_programa_custo: state.autoToolCost || '',
-          automacao_plataforma: state.autoPlatform || '',
-          automacao_integracoes: autoIntegrationsValue,
-          automacao_alertas_canais: autoAlertChannelsValue,
-          automacao_scraping_tipo: state.autoScraping || '',
-          automacao_exemplos: autoExamplesValue,
-          org_goal: state.orgGoal || '',
-          org_where: state.orgWhere || '',
-          org_folders: state.orgFolders || '',
-          org_folder_platform: state.orgFolderPlatform || '',
-          org_rules: state.orgRules || '',
-          org_integration: state.orgIntegration || '',
-          org_integration_detail: state.orgIntegrationDetail || '',
-          org_intervention: state.orgIntervention || '',
-          org_examples: orgExamplesValue,
-          features: featuresValue,
-          pacote_recomendado: state.recommended || '',
-          complexidade_score: Number(state.score || 0),
-          preco_total_estimado: Number(pricing.totalFinal || 0),
-          preco_memoria_calculo: pricingMemoryValue,
-          total_estimado: Number(pricing.totalFinal || 0),
-=======
->>>>>>> parent of e6d44d3 (Novo Captcha do Google)
-=======
->>>>>>> parent of e6d44d3 (Novo Captcha do Google)
           meta: {
             source: 'compra.html',
             submittedAt: new Date().toISOString(),
@@ -2463,8 +2147,8 @@ function applyPackageLocks(){
             intervention: state.intervention || '',
             sourcesCount: Number(state.sourcesCount || 0),
             cyclesCount: Number(state.cyclesCount || 0),
-            sourcesTypes: sourcesTypesValue,
-            context: contextValue
+            sourcesTypes: state.sourcesTypes || getVal('sourcesTypes'),
+            context: getVal('context')
           },
           dashboard: {
             dashTop2: Array.isArray(state.dashTop2) ? state.dashTop2 : [],
@@ -2507,12 +2191,12 @@ function applyPackageLocks(){
           },
           pricing: pricing,
           contact: {
-            company: companyValue,
-            role: roleValue,
-            name: nameValue,
-            email: emailValue,
-            whats: whatsValue,
-            date: dateValue
+            company: getVal('company'),
+            role: getVal('role'),
+            name: getVal('name'),
+            email: getVal('email'),
+            whats: getVal('whats'),
+            date: getVal('date')
           }
         };
       }
