@@ -2348,6 +2348,23 @@ function applyPackageLocks(){
           const el = document.getElementById(id);
           return el ? (el.value ?? '').trim() : '';
         };
+        const companyValue = getVal('company');
+        const roleValue = getVal('role');
+        const nameValue = getVal('name');
+        const emailValue = getVal('email');
+        const whatsValue = getVal('whats');
+        const dateValue = getVal('date');
+        const sourcesTypesValue = state.sourcesTypes || getVal('sourcesTypes');
+        const contextValue = getVal('context');
+        const dashTop2Value = (state.dashTop2 || []).join(' | ');
+        const dashColorsValue = (state.dashColors || []).join(' | ');
+        const autoGoalValue = (state.autoGoal || []).join(' | ');
+        const autoIntegrationsValue = (state.autoIntegrations || []).join(' | ');
+        const autoAlertChannelsValue = (state.autoAlertChannels || []).join(' | ');
+        const autoExamplesValue = (state.autoExamples || []).join(' | ');
+        const orgExamplesValue = (state.orgExamples || []).join(' | ');
+        const featuresValue = (state.features || []).join(' | ');
+        const pricingMemoryValue = JSON.stringify(pricing);
 
         return {
           source: 'visu_express_site',
@@ -2358,19 +2375,62 @@ function applyPackageLocks(){
           captcha_token: getCaptchaToken(),
           captchaToken: getCaptchaToken(),
           pacote: state.pacote || '',
+          cenario: state.scenario || '',
           scenario: state.scenario || '',
+          resultado_desejado: state.output || '',
           output: state.output || '',
+          nivel_intervencao: state.intervention || '',
           intervention: state.intervention || '',
+          fontes_quantidade: Number(state.sourcesCount || 0),
           sources_count: Number(state.sourcesCount || 0),
+          quantidade_ciclos: Number(state.cyclesCount || 0),
           cycles_count: Number(state.cyclesCount || 0),
-          sources_types: state.sourcesTypes || getVal('sourcesTypes'),
-          context: getVal('context'),
-          company: getVal('company'),
-          role: getVal('role'),
-          name: getVal('name'),
-          email: getVal('email'),
-          whatsapp: getVal('whats'),
-          preferred_date: getVal('date'),
+          fontes_tipo: sourcesTypesValue,
+          sources_types: sourcesTypesValue,
+          contexto: contextValue,
+          context: contextValue,
+          company: companyValue,
+          cargo: roleValue,
+          role: roleValue,
+          nome: nameValue,
+          name: nameValue,
+          email: emailValue,
+          whatsapp: whatsValue,
+          data: dateValue,
+          preferred_date: dateValue,
+          empresa: companyValue,
+          nome_contato: nameValue,
+          email_contato: emailValue,
+          whatsapp_contato: whatsValue,
+          cargo_contato: roleValue,
+          dashboard_referencias_top2: dashTop2Value,
+          dashboard_tema: state.dashTheme || '',
+          dashboard_cores: dashColorsValue,
+          automacao_objetivo: autoGoalValue,
+          automacao_onde: state.autoWhere || '',
+          automacao_funcionamento: state.autoMode || '',
+          automacao_frequencia: state.autoFreq || '',
+          automacao_programa: state.autoTool || '',
+          automacao_programa_custo: state.autoToolCost || '',
+          automacao_plataforma: state.autoPlatform || '',
+          automacao_integracoes: autoIntegrationsValue,
+          automacao_alertas_canais: autoAlertChannelsValue,
+          automacao_scraping_tipo: state.autoScraping || '',
+          automacao_exemplos: autoExamplesValue,
+          org_goal: state.orgGoal || '',
+          org_where: state.orgWhere || '',
+          org_folders: state.orgFolders || '',
+          org_folder_platform: state.orgFolderPlatform || '',
+          org_rules: state.orgRules || '',
+          org_integration: state.orgIntegration || '',
+          org_integration_detail: state.orgIntegrationDetail || '',
+          org_intervention: state.orgIntervention || '',
+          org_examples: orgExamplesValue,
+          features: featuresValue,
+          pacote_recomendado: state.recommended || '',
+          complexidade_score: Number(state.score || 0),
+          preco_total_estimado: Number(pricing.totalFinal || 0),
+          preco_memoria_calculo: pricingMemoryValue,
           total_estimado: Number(pricing.totalFinal || 0),
           meta: {
             source: 'compra.html',
@@ -2385,8 +2445,8 @@ function applyPackageLocks(){
             intervention: state.intervention || '',
             sourcesCount: Number(state.sourcesCount || 0),
             cyclesCount: Number(state.cyclesCount || 0),
-            sourcesTypes: state.sourcesTypes || getVal('sourcesTypes'),
-            context: getVal('context')
+            sourcesTypes: sourcesTypesValue,
+            context: contextValue
           },
           dashboard: {
             dashTop2: Array.isArray(state.dashTop2) ? state.dashTop2 : [],
@@ -2429,12 +2489,12 @@ function applyPackageLocks(){
           },
           pricing: pricing,
           contact: {
-            company: getVal('company'),
-            role: getVal('role'),
-            name: getVal('name'),
-            email: getVal('email'),
-            whats: getVal('whats'),
-            date: getVal('date')
+            company: companyValue,
+            role: roleValue,
+            name: nameValue,
+            email: emailValue,
+            whats: whatsValue,
+            date: dateValue
           }
         };
       }
